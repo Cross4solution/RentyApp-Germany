@@ -1,0 +1,8 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/_core_exports.dart';
+
+abstract class AuthenticationRepo {
+  Future<Either<Failure, void>> googleSignIn();
+
+  Future<Either<Failure, void>> signOut();
+}

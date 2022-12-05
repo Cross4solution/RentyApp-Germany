@@ -46,7 +46,7 @@ class ProfileCard extends StatelessWidget {
                   ],
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {Go.to.page(PageRoutes.profileEditPage);},
                   child: Container(
                     alignment: Alignment.center,
                     height: 35,

@@ -15,7 +15,7 @@ class CategoryCard extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: image.length,
+        itemCount: imageList.length,
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -32,7 +32,7 @@ class CategoryCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(32),
                   child: CachedNetworkImage(
-                    imageUrl: image[index],
+                    imageUrl: imageList[index],
                     fit: BoxFit.cover,
                   ),
                 ),

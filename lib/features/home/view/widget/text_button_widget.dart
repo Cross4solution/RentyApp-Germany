@@ -5,7 +5,8 @@ class TextButtonWidget extends StatelessWidget {
   final String text;
   final Color textColor;
   final Color color;
-  final IconData? icon;
+  final IconData? iconLeft;
+  final IconData? iconRight;
   final Color? iconColor;
 
   const TextButtonWidget({
@@ -14,7 +15,8 @@ class TextButtonWidget extends StatelessWidget {
     required this.textColor,
     required this.color,
     this.onTap,
-    this.icon,
+    this.iconLeft,
+    this.iconRight,
     this.iconColor,
   }) : super(key: key);
 
@@ -33,8 +35,8 @@ class TextButtonWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (icon != null) ...[
-                Icon(icon, color: iconColor,),
+              if (iconLeft != null) ...[
+                Icon(iconLeft, color: iconColor,),
                 const SizedBox(
                   width: 8,
                 )
@@ -43,6 +45,13 @@ class TextButtonWidget extends StatelessWidget {
                 text,
                 style: TextStyle(color: textColor, fontWeight: FontWeight.w600),
               ),
+              if (iconRight != null) ...[
+                const SizedBox(
+                  width: 8,
+                ),
+                Icon(iconRight, color: iconColor,),
+                
+              ],
             ],
           ),
         ),

@@ -7,8 +7,8 @@ class SearchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenSize.init(context);
     return Container(
-      height: 225,
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border(
@@ -18,7 +18,7 @@ class SearchCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
@@ -37,27 +37,74 @@ class SearchCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  width: 4,
+                ),
                 Column(
-                  children: const [
-                    Text('Kiralama ücretleri'),
-                    Text('5.00\$ /saatlik'),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          height: 32,
+                          width: 32,
+                          decoration: const BoxDecoration(
+                              color: Colors.red, shape: BoxShape.circle),
+                          child: const Text(
+                            'Y K',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        const SizedBox(
+                          width: 90,
+                          child: Text(
+                            'Yasin Karacan',
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    const Text('İstanbul / Kadıköy'),
+                    Row(
+                    
+                      children: const [
+                        Icon(Icons.location_on),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text('1 km'),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Text('Kiralama ücretleri'),
+                    const Text('\$5.00 /saatlik', style: TextStyle(fontWeight: FontWeight.bold),),
                   ],
                 ),
-                const SizedBox.shrink(),
               ],
+            ),
+            const SizedBox(
+              height: 6,
             ),
             const Text(
               'Dağ Bisikleti',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Row(
-              children: const [
-                Icon(Icons.location_on),
-                SizedBox(
-                  width: 4,
-                ),
-                Text('1 km')
-              ],
+            const SizedBox(
+              height: 6,
             ),
             const Text(
                 'Ürün açıklamalarının bulunduğu kısım.Ürün açıklamalarının bulunduğu kısım.Ürün açıklamalarının bulunduğu kısım.Ürün açıklamalarının bulunduğu kısım.',

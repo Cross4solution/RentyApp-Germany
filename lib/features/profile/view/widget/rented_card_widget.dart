@@ -15,7 +15,7 @@ class RentedCard extends StatelessWidget {
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: image.length,
+          itemCount: imageList.length,
           itemBuilder: (context, index) {
             return Container(
               margin: const EdgeInsets.symmetric(
@@ -37,7 +37,7 @@ class RentedCard extends StatelessWidget {
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: CachedNetworkImage(imageUrl: image[index]),
+                    child: CachedNetworkImage(imageUrl: imageList[index]),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),

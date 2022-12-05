@@ -73,7 +73,7 @@ class _ProductPageState extends State<ProductPage> {
                               onTap: (() {
                                 homeController.datePickerBeginSettings(context);
                               }),
-                              icon: Icons.calendar_month_rounded,
+                              iconLeft: Icons.calendar_month_rounded,
                               text: homeController.formattingBeginDate,
                               textColor: Colors.black,
                               color: const Color.fromARGB(255, 142, 223, 144)),
@@ -81,7 +81,7 @@ class _ProductPageState extends State<ProductPage> {
                               onTap: (() {
                                 homeController.datePickerEndSettings(context);
                               }),
-                              icon: Icons.calendar_month_rounded,
+                              iconLeft: Icons.calendar_month_rounded,
                               text: homeController.formattingEndDate,
                               textColor: Colors.black,
                               color: const Color.fromARGB(255, 142, 223, 144)),
@@ -91,11 +91,10 @@ class _ProductPageState extends State<ProductPage> {
                         height: 12,
                       ),
                       if (homeController.rangeTime != null) ...[
-                        Text(
-                          '${homeController.rangeTime}' +
-                              ' x 5\$ = ' +
-                              '${homeController.rangeTime! * 5}' +
-                              '\$',
+                        Text('Toplam (${homeController.rangeTime}) gün : ''\$'
+                         
+                              '${homeController.rangeTime! * 5}' ,
+                              
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
                         )
@@ -105,7 +104,7 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                       TextButtonWidget(
                           onTap: () {},
-                          icon: Icons.send,
+                          iconRight: Icons.send,
                           iconColor: Colors.white,
                           text: 'Kiralama isteği gönder',
                           textColor: Colors.white,

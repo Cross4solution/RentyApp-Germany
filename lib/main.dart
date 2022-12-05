@@ -13,14 +13,15 @@ import 'core/_core_exports.dart';
 import 'features/auth/view/page/verify_page.dart';
 import 'features/bottom_navigation_bar/view/pages/bottom_navigation_page.dart';
 import 'features/message/view/page/message_page.dart';
+import 'features/profile/view/page/profile_edit_page.dart';
 
-void main() async{
-    WidgetsFlutterBinding.ensureInitialized();
-    await locator.init();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await locator.init();
   runApp(
     MultiProvider(
       providers: MainProviderList.getMainProviderList(),
-      child:  const RentyApp(),
+      child: const RentyApp(),
     ),
   );
 }
@@ -35,19 +36,16 @@ class RentyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-
       debugShowCheckedModeBanner: false,
       onGenerateRoute: generateRoute,
       navigatorKey: GlobalContextKey.instance.globalKey,
-
       localizationsDelegates: const [
         AppStrings.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-
-       supportedLocales: const [
+      supportedLocales: const [
         Locale('tr', ''),
         Locale('de', ''),
       ],

@@ -1,3 +1,7 @@
+import 'package:dio/dio.dart';
+import 'package:rent_app_germany/core/utils/remote_data_source/data/repository/network_manager.dart';
+import 'package:rent_app_germany/core/utils/remote_data_source/dio_manager.dart';
+import 'package:rent_app_germany/core/utils/remote_data_source/domain/repository/i_network_manager.dart';
 import 'package:rent_app_germany/features/home/controller/home_controller.dart';
 
 import '../../features/auth/controller/register_controller.dart';
@@ -15,8 +19,8 @@ Future<void> init() async {
   // //! Core
   // //? Shared Preferences
   // //* Repo
-  // sl.registerLazySingleton<SharedPreferencesRepository>(
-  //     () => SharedPreferencesRepositoryImpl(sl()));
+  sl.registerLazySingleton<Dio>(() => DioManager.getDio());
+  sl.registerLazySingleton<INetworkManager>(() => NetworkManager(sl<Dio>()));
   // sl.registerLazySingleton(() => AuthenticationRepoImpl());
   // //* Use Case
   // sl.registerLazySingleton(() => GetDataFromKey(sl()));

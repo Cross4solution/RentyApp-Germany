@@ -16,9 +16,9 @@ class ProfilePage extends StatelessWidget {
       appBar: const ProfileAppBar(),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             ProfileCard(),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 12, bottom: 8),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -28,8 +28,8 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-            const RentedCard(),
-            const Padding(
+            RentedCard(),
+            Padding(
               padding: EdgeInsets.only(left: 12, bottom: 8),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -39,7 +39,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-            const RentedHistoryCard()
+            RentedHistoryCard()
           ],
         ),
       ),

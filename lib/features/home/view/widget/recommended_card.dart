@@ -58,7 +58,8 @@ class _RecommendedCardState extends State<RecommendedCard> {
                                 topRight: Radius.circular(16),
                               ),
                               child: CachedNetworkImage(
-                                imageUrl: ProductList().productList[index].imageURL,
+                                imageUrl:
+                                    ProductList().productList[index].imageURL,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -78,17 +79,23 @@ class _RecommendedCardState extends State<RecommendedCard> {
                                 height: 25,
                                 width: 25,
                                 decoration: BoxDecoration(
-                                    color: ProductList().productList[index].isTab! ? Colors.red : Colors.white,
+                                    color:
+                                        ProductList().productList[index].isTab!
+                                            ? Colors.red
+                                            : Colors.white,
                                     shape: BoxShape.circle),
-                                child: Icon(Icons.heart_broken,
+                                child: Icon(Icons.favorite,
                                     size: 18,
-                                    color: ProductList().productList[index].isTab! ? Colors.white : Colors.red),
+                                    color:
+                                        ProductList().productList[index].isTab!
+                                            ? Colors.white
+                                            : Colors.red),
                               ),
                             ),
                           ),
                         ],
                       ),
-                       Text(
+                      Text(
                         ProductList().productList[index].name,
                         style: TextStyle(fontSize: 15),
                       ),

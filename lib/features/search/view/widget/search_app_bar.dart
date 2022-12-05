@@ -9,7 +9,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       backgroundColor: Colors.red,
       centerTitle: true,
-      title: const Text('Ara'),
+      title: const Text('İlan Ara'),
     );
   }
 

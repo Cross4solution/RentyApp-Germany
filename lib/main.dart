@@ -4,6 +4,7 @@ import 'package:rent_app_germany/features/auth/view/page/register_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/splash_page.dart';
 import 'package:rent_app_germany/features/home/view/page/product_page.dart';
 import 'package:rent_app_germany/features/profile/view/page/profile_page.dart';
+import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 
 import '/core/init/injection_container.dart' as locator;
 import 'package:provider/provider.dart';
@@ -50,7 +51,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home: BottomNavigationPage(),
+      home: const BottomNavigationPage(),
     );
   }
 }

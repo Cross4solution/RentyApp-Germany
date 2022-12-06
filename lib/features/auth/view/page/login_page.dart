@@ -1,4 +1,5 @@
 import 'package:rent_app_germany/core/shared_widgets/app_text_form_field.dart';
+import 'package:rent_app_germany/features/auth/controller/register_controller.dart';
 
 import '../../../../core/_core_exports.dart';
 
@@ -30,16 +31,32 @@ class LoginPage extends StatelessWidget {
                     height: ScreenSize().getHeightPercent(.1),
                   ),
                   AppTextFormField.standart(
-                    hintText: 'email',
+                    controller: sl<RegisterController>().usernameController,
+                    hintText: 'Username',
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Lütfen gerekli alanları doldurunuz';
+                      }
+
+                      return null;
+                    },
                     prefixIcon: const Icon(
-                      Icons.mail,
+                      Icons.person_outline,
                     ),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
                   AppTextFormField.obscure(
-                    hintText: 'password',
+                    controller: sl<RegisterController>().passwordController,
+                    hintText: 'Password',
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Lütfen gerekli alanları doldurunuz';
+                      }
+
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 8,
@@ -47,7 +64,6 @@ class LoginPage extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: GestureDetector(
-
                       onTap: () {
                         Go.to.page(PageRoutes.forgotPassword);
                       },
@@ -63,7 +79,11 @@ class LoginPage extends StatelessWidget {
                     height: ScreenSize().getHeightPercent(.07),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      sl<RegisterController>().login();
+
+
+                    },
                     child: Container(
                       alignment: Alignment.center,
                       height: 45,
@@ -94,7 +114,6 @@ class LoginPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-
                           Go.to.page(PageRoutes.registerPage);
                         },
                         child: Text(

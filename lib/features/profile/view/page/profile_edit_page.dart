@@ -18,16 +18,14 @@ class ProfileEditPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Spacer(),
-              AppTextFormField.standart(
+              AppTextFormField.obscure(
                 hintText: 'Eski şifrenizi giriniz...',
-                prefixIcon: const Icon(Icons.lock),
               ),
               const SizedBox(
                 height: 16,
               ),
-              AppTextFormField.standart(
+              AppTextFormField.obscure(
                 hintText: 'Yeni şifrenizi giriniz...',
-                prefixIcon: const Icon(Icons.lock),
               ),
               const Spacer(),
               AppButton.standart(onTap: () {}, buttonText: 'Kaydet')

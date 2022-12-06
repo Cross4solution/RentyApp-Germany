@@ -15,7 +15,7 @@ class SellerCheckBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Checkbox(
-              value: registerController.isChecked,
+              value: registerController.isSeller,
               checkColor: Colors.white,
               fillColor: MaterialStateProperty.all(Colors.red),
               activeColor: Colors.red,

@@ -49,7 +49,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home: const BottomNavigationPage(),
+      home:  LoginPage(),
     );
   }
 }

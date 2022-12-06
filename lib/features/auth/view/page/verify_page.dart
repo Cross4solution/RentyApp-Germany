@@ -1,3 +1,5 @@
+import 'package:rent_app_germany/features/auth/controller/register_controller.dart';
+
 import '../../../../core/_core_exports.dart';
 import '../../../../core/shared_widgets/app_button.dart';
 
@@ -31,7 +33,7 @@ class _VerifyPageState extends State<VerifyPage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Consumer(
-          builder: (context, LoginController loginController, child) {
+          builder: (context, RegisterController registerController, child) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -63,7 +65,8 @@ class _VerifyPageState extends State<VerifyPage> {
                           length: 6,
                           showCursor: true,
                           onChanged: (value) {
-                            loginController.code = value;
+                            registerController.verifyCodeController.text =
+                                value;
                           },
                         ),
                       ],
@@ -71,39 +74,6 @@ class _VerifyPageState extends State<VerifyPage> {
                   ),
                 ),
                 SizedBox(height: ScreenSize().getHeightPercent(.1)),
-                //TODO:düzeltilecek
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Checkbox(
-                //       value: authController.isChecked,
-                //       checkColor: ColorHelper.white,
-                //       fillColor: MaterialStateProperty.all(Colors.blue),
-                //       activeColor: ColorHelper.white,
-                //       onChanged: (value) {
-                //         authController.isTermsAndConditionAccept(value!);
-                //       },
-                //     ),
-                //     Text('I agree with our '),
-                //     GestureDetector(
-                //       onTap: () {},
-                //       child: AppText(
-                //         'Terms ',
-                //         style: const TextStyle(
-                //             color: Colors.blue, fontWeight: FontWeight.bold),
-                //       ),
-                //     ),
-                //     AppText('and '),
-                //     GestureDetector(
-                //       onTap: () {},
-                //       child: AppText(
-                //         'Conditions',
-                //         style: const TextStyle(
-                //             color: Colors.blue, fontWeight: FontWeight.bold),
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 const Spacer(),
                 const Text('Resend code in ${45} second'),
                 const SizedBox(
@@ -116,7 +86,7 @@ class _VerifyPageState extends State<VerifyPage> {
                 ),
                 AppButton.standart(
                     onTap: () {
-                      // loginController.emailVerify();
+                       registerController.verifyEmail();
                     },
                     buttonText: 'Verify'),
               ],

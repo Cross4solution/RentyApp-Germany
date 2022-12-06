@@ -29,9 +29,10 @@ class NetworkManager extends INetworkManager {
       if (response.statusCode == 200) {
         return Right(response.data);
       } else {
-        print('error');
+        return Left(InternalFailure());
       }
-    } catch (e) {}
-    throw UnimplementedError();
+    } catch (e) {
+      return Left(InternalFailure());
+    }
   }
 }

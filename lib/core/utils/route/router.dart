@@ -3,6 +3,7 @@ import 'package:rent_app_germany/features/add/view/page/add_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/forgot_password_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/login_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/register_page.dart';
+import 'package:rent_app_germany/features/auth/view/page/verify_page.dart';
 import 'package:rent_app_germany/features/bottom_navigation_bar/view/pages/bottom_navigation_page.dart';
 import 'package:rent_app_germany/features/home/view/page/home_page.dart';
 import 'package:rent_app_germany/features/home/view/page/product_page.dart';
@@ -24,6 +25,7 @@ class PageRoutes {
   static const String registerPage = "/registerPage";
   static const String forgotPassword = "/forgotPassword";
   static const String profileEditPage = "/profileEditPage";
+  static const String verifyPage = "/verifyPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -49,6 +51,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case PageRoutes.registerPage:
       return CupertinoPageRoute(builder: (_) => RegisterPage());
+    case PageRoutes.verifyPage:
+      return CupertinoPageRoute(builder: (_) => const VerifyPage());
     case PageRoutes.forgotPassword:
       return CupertinoPageRoute(builder: (_) => const ForgotPasswordPage());
     case PageRoutes.profileEditPage:

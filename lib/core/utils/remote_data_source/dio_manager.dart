@@ -4,7 +4,7 @@ class DioManager {
   static Dio getDio() {
     Dio dio = Dio();
 
-//TODO: enviroment araştıtılacak ve eklenecek,  base url enviromenttan çağrılacak, enviroment classı oluşturulacak, 
+//TODO: enviroment araştıtılacak ve eklenecek,  base url enviromenttan çağrılacak, enviroment classı oluşturulacak,
 
 //TODO: socket interceptor araştırılacaktır
 
@@ -12,22 +12,18 @@ class DioManager {
 
     dio.options.headers = {
       'Accept': 'application/json',
+
       //TODO: token eklenebilir
     };
 
     dio.options.queryParameters = {
-      
-
       //TODO: dil desteği için kullanılabilir.
-
-
-
     };
 
     dio.options.responseType = ResponseType.plain;
 
-
-
+    // dio.interceptors.add(
+    //     LogInterceptor(requestBody: true, error: true, responseBody: true));
 
     return dio;
   }

@@ -6,7 +6,7 @@ class ColorHelper {
   static const Color secondaryColor = Color(0xFF0A142F);
   static const Color blackColor = Color(0xFF000000);
 
-  static const Color backgroundColor = Color(0xFFEBEEF4);
+  // static const Color backgroundColor = Color(0xFFEBEEF4);
   static const Color lineerBlueColor = Color(0xFF384CFF);
   static const Color lineerPinkColor = Color(0xFFFF228D);
   static const Color darkGreyColor = Color(0xFF262626);

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:rent_app_germany/features/add/view/page/add_page.dart';
+import 'package:rent_app_germany/features/add_product/view/page/add_product_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/forgot_password_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/login_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/register_page.dart';
@@ -19,7 +19,7 @@ class PageRoutes {
   static const String messagePage = "/messagePage";
   static const String profilePage = "/profilePage";
   static const String productPage = "/productPage";
-  static const String addPage = "/addPage";
+  static const String addProductPage = "/addProductPage";
   static const String bottomNavigationPage = "/bottomNavigationPage";
   static const String loginPage = "/loginPage";
   static const String registerPage = "/registerPage";
@@ -44,8 +44,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case PageRoutes.bottomNavigationPage:
       return CupertinoPageRoute(builder: (_) => const BottomNavigationPage());
-    case PageRoutes.addPage:
-      return CupertinoPageRoute(builder: (_) => const AddPage());
+    case PageRoutes.addProductPage:
+      return CupertinoPageRoute(builder: (_) => const AddProductPage());
     case PageRoutes.loginPage:
       return CupertinoPageRoute(builder: (_) => const LoginPage());
 

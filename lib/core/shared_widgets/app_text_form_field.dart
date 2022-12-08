@@ -105,20 +105,20 @@ class AppTextFormField extends StatelessWidget {
       height: height,
       controller: controller,
       hintText: hintText,
-      fillColor: ColorHelper.secondaryColor.withOpacity(.1),
+      // fillColor: ColorHelper.secondaryColor.withOpacity(.1),
       validator: validator,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
       onTap: onTap,
       width: width ?? ScreenSize().getWidthPercent(.9),
-      focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Colors.transparent),
-        borderRadius: BorderRadius.circular(24),
-      ),
-      enabledBorder: UnderlineInputBorder(
-        borderSide: const BorderSide(color: Colors.transparent),
-        borderRadius: BorderRadius.circular(24),
-      ),
+      // focusedBorder: OutlineInputBorder(
+      //   borderSide: const BorderSide(color: Colors.transparent),
+      //   borderRadius: BorderRadius.circular(24),
+      // ),
+      // enabledBorder: UnderlineInputBorder(
+      //   borderSide: const BorderSide(color: Colors.transparent),
+      //   borderRadius: BorderRadius.circular(24),
+      // ),
       maxLines: 6,
       textAlignVertical: TextAlignVertical.center,
     );

@@ -19,4 +19,5 @@ class AssetsPath {
   final String logoSplashSVG = 'assets/svg/logo_splash.svg';
   final String approvedSVG = 'assets/svg/approved.svg';
   final String forgotPasswordSVG = 'assets/svg/forgot_password.svg';
+  final String addProductSVG = 'assets/svg/add_Product.svg';
 }

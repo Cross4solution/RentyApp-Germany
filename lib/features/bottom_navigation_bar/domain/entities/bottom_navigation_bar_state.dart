@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:rent_app_germany/features/add/view/page/add_page.dart';
+import 'package:rent_app_germany/features/add_product/view/page/add_product_page.dart';
 import 'package:rent_app_germany/features/home/view/page/home_page.dart';
 import 'package:rent_app_germany/features/message/view/page/message_page.dart';
 import 'package:rent_app_germany/features/profile/view/page/profile_page.dart';
@@ -76,7 +76,7 @@ extension BottomNavigationBarStateExtension on BottomNavigationBarState {
       case BottomNavigationBarState.SEARCH:
         return const SearchPage();
       case BottomNavigationBarState.ADD:
-        return const AddPage();
+        return const AddProductPage();
       case BottomNavigationBarState.MESSAGE:
         return const MessagePage();
       case BottomNavigationBarState.PROFILE:
@@ -105,15 +105,15 @@ extension BottomNavigationBarStateExtension on BottomNavigationBarState {
   Color pageBackGroundColor() {
     switch (this) {
       case BottomNavigationBarState.HOME:
-        return ColorHelper.backgroundColor;
+        return Colors.white;
       case BottomNavigationBarState.SEARCH:
-        return ColorHelper.backgroundColor;
+        return Colors.white;
       case BottomNavigationBarState.ADD:
-        return ColorHelper.backgroundColor;
+        return Colors.white;
       case BottomNavigationBarState.MESSAGE:
-        return ColorHelper.backgroundColor;
+        return Colors.white;
       case BottomNavigationBarState.PROFILE:
-        return ColorHelper.backgroundColor;
+        return Colors.white;
     }
   }
 }

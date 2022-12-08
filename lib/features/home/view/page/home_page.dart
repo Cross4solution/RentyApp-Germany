@@ -17,25 +17,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
-      backgroundColor: ColorHelper.backgroundColor,
+      backgroundColor: Colors.white,
       appBar: const HomePageAppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
             SlidableTrendsCard(),
+            Divider(),
             Padding(
-              padding: EdgeInsets.only(left: 10, bottom: 8),
+              padding: EdgeInsets.only(left: 10, bottom: 12),
               child: Text(
                 'Kategoriler',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
             CategoryCard(),
+            Divider(),
             Padding(
-              padding: EdgeInsets.only(left: 10, bottom: 8),
+              padding: EdgeInsets.only(left: 10, bottom: 12),
               child: Text('Sizin İçin Önerilenler',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600)),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
             ),
             RecommendedCard(),
             RecommendedCard(),
@@ -46,8 +48,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
 
 List imageList = [
   'https://fdn2.gsmarena.com/vv/bigpic/vivo-iqoo11-pro-r.jpg',

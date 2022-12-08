@@ -35,7 +35,7 @@ class _RecommendedCardState extends State<RecommendedCard> {
                   horizontal: 8,
                 ),
                 height: 150,
-                width: 125,
+                width: 175,
                 decoration: BoxDecoration(
                   color: ColorHelper.whiteColor,
                   borderRadius: BorderRadius.circular(24),
@@ -51,7 +51,7 @@ class _RecommendedCardState extends State<RecommendedCard> {
                         children: [
                           SizedBox(
                             height: 120,
-                            width: 110,
+                            width: 175,
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(16),
@@ -97,28 +97,22 @@ class _RecommendedCardState extends State<RecommendedCard> {
                       ),
                       Text(
                         ProductList().productList[index].name,
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Text(
-                        'Açıklama',
-                        style: TextStyle(
-                            color: Colors.grey.shade700, fontSize: 12),
+                        style: const TextStyle(fontSize: 15),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(ProductList().productList[index].price),
-                          Container(
-                            alignment: Alignment.center,
-                            height: 22,
-                            width: 22,
-                            decoration: const BoxDecoration(
-                                color: Colors.black, shape: BoxShape.circle),
-                            child: const Icon(Icons.add,
-                                size: 18, color: Colors.white),
+
+                          const Icon(Icons.location_on, size: 18,),
+                          Text(
+                            'İstanbul / Kadıköy',
+                            style: TextStyle(
+                                color: Colors.grey.shade700, fontSize: 12),
                           ),
                         ],
-                      )
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(ProductList().productList[index].price))
                     ],
                   ),
                 ),

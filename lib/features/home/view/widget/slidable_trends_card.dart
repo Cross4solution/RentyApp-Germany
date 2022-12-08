@@ -34,6 +34,7 @@ class _SlidableTrendsCardState extends State<SlidableTrendsCard> {
                 borderRadius: BorderRadius.circular(24),
                 child: CachedNetworkImage(
                   imageUrl: imageList[index],
+                 
                   // fit: BoxFit.cover,
                 ),
               ),
@@ -41,9 +42,9 @@ class _SlidableTrendsCardState extends State<SlidableTrendsCard> {
           },
           options: CarouselOptions(
             height: 200,
-            autoPlay: true,
+            autoPlay: false,
             reverse: false,
-            autoPlayInterval: const Duration(seconds: 8),
+            autoPlayInterval: const Duration(seconds: 4),
             onPageChanged: (index, reason) {
               setState(() {
                 activeIndex = index;

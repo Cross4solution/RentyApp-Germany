@@ -18,7 +18,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           height: provider.isBottomBarVisible ? 55 : 0,
           width: ScreenSize().getWidthPercent(1),
           decoration: const BoxDecoration(
-            color: ColorHelper.backgroundColor,
+            color: Colors.white,
           ),
           curve: Curves.linear,
           duration: const Duration(

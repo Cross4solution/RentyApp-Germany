@@ -1,3 +1,4 @@
+import 'package:rent_app_germany/features/add_product/view/page/add_product_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/forgot_password_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/login_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/register_page.dart';
@@ -49,7 +50,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home:  LoginPage(),
+      home:  AddProductPage(),
     );
   }
 }

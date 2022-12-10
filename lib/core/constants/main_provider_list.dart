@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:rent_app_germany/features/home/controller/home_controller.dart';
+import '../../features/add_product/controller/product_controller.dart';
 import '../../features/auth/controller/auth_controller.dart';
 import '../../features/auth/controller/register_controller.dart';
 import '../../features/bottom_navigation_bar/view_model/bottom_navigation_bar_controller.dart';
@@ -13,6 +14,7 @@ class MainProviderList {
     ChangeNotifierProvider(create: (_) => sl<HomeController>()),
     ChangeNotifierProvider(create: (_) => sl<RegisterController>()),
     ChangeNotifierProvider(create: (_) => sl<LoginController>()),
+    ChangeNotifierProvider(create: (_) => sl<ProductController>()),
     // ChangeNotifierProvider(create: (_) => sl<AuthController>()),
   ];
 

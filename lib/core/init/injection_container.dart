@@ -4,6 +4,7 @@ import 'package:rent_app_germany/core/utils/remote_data_source/dio_manager.dart'
 import 'package:rent_app_germany/core/utils/remote_data_source/domain/repository/i_network_manager.dart';
 import 'package:rent_app_germany/features/home/controller/home_controller.dart';
 
+import '../../features/add_product/controller/product_controller.dart';
 import '../../features/auth/controller/register_controller.dart';
 import '../../features/auth/repo/impl/auth_repo_impl.dart';
 import '../../features/bottom_navigation_bar/view_model/bottom_navigation_bar_controller.dart';
@@ -23,4 +24,5 @@ Future<void> init() async {
   sl.registerLazySingleton(() => HomeController());
   sl.registerLazySingleton(() => RegisterController(authRepository: sl<AuthRepository>()));
   sl.registerLazySingleton(() => LoginController());
+  sl.registerLazySingleton(() => ProductController());
 }

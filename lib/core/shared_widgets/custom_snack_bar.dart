@@ -12,22 +12,19 @@ ScaffoldMessengerState customSnackBar({
   return ScaffoldMessenger.of(context)
     ..removeCurrentSnackBar()
     ..showSnackBar(
+      
       SnackBar(
+
         backgroundColor: color,
-        content: Row(
-          children: [
-            SvgPicture.asset(AssetsPath().logoSVG),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(text, textAlign: TextAlign.center, maxLines: 2),
-          ],
-        ),
+
+        content: Text(text, textAlign: TextAlign.center, ),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: borderRadius ?? BorderRadius.circular(8)),
         // padding: EdgeInsets.all(16),
         duration: duration ?? const Duration(seconds: 4),
         action: snackBarAction,
+
+
       ),
     );
 }

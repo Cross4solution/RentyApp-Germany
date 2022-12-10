@@ -1,13 +1,13 @@
 class ProductModel {
   final String name;
   final String imageURL;
-  bool? isTab;
+  bool isFavorite;
   final String price;
 
   ProductModel({
     required this.name,
     required this.imageURL,
-    this.isTab,
+    this.isFavorite = false,
     required this.price,
   });
 }

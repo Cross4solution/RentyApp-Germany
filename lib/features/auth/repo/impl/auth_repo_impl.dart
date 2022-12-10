@@ -20,10 +20,7 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       return register.fold((l) => Left(l), (data) {
-        if (jsonDecode(data)["error_code"] == 0) {
-          return const Right(null);
-        }
-        return Left(UserNotCreatedFailure());
+        return const Right(null);
       });
     } on Failure catch (failure) {
       return Left(failure);
@@ -43,10 +40,7 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       return register.fold((l) => Left(l), (data) {
-        if (jsonDecode(data)["error_code"] == 0) {
-          return const Right(null);
-        }
-        return Left(VerifyErrorFailure());
+        return const Right(null);
       });
     } on Failure catch (failure) {
       return Left(failure);
@@ -66,10 +60,7 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       return register.fold((l) => Left(l), (data) {
-        if (jsonDecode(data)["error_code"] == 0) {
-          return const Right(null);
-        }
-        return Left(VerifyErrorFailure());
+        return const Right(null);
       });
     } on Failure catch (failure) {
       return Left(failure);

@@ -6,9 +6,12 @@ import 'package:rent_app_germany/features/auth/controller/register_controller.da
 import 'package:rent_app_germany/features/auth/view/widget/seller_check_box.dart';
 
 import '../widget/add_app_bar.dart';
+import '../widget/add_product_picture.dart';
+import '../widget/damage_information_checkbox.dart';
+import '../widget/dropdown_category.dart';
 
 class AddProductPage extends StatelessWidget {
-  const AddProductPage({Key? key}) : super(key: key);
+  const AddProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class AddProductPage extends StatelessWidget {
     return AppContainer(
       child: Scaffold(
         appBar: const AddProductAppBar(),
-        body: sl<RegisterController>().isSeller
+        body: !sl<RegisterController>().isSeller
             ? SingleChildScrollView(
                 child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -51,31 +54,7 @@ class AddProductPage extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
-                    SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 6,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 175,
-                              width: 125,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: Colors.grey)),
-                              child: const Icon(
-                                Icons.add_a_photo,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    const AddProductPicture(),
                     const Divider(),
                     const Text(
                       'Ürün Başlığı',
@@ -94,7 +73,7 @@ class AddProductPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: AppTextFormField.standart(hintText: ''),
+                      child: AppTextFormField.chat(hintText: ''),
                     ),
                     const Divider(),
                     const Text(
@@ -102,10 +81,7 @@ class AddProductPage extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: AppTextFormField.standart(hintText: ''),
-                    ),
+                    DropdownCategory(),
                     const Divider(),
                     const Text(
                       'Hasar bilgisi',
@@ -115,78 +91,7 @@ class AddProductPage extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    Consumer(
-                      builder: (context, RegisterController registerController,
-                          child) {
-                        return Column(
-                          children: [
-                            Row(
-                              children: [
-                                Checkbox(
-                                  value: registerController.isSeller,
-                                  checkColor: Colors.white,
-                                  fillColor:
-                                      MaterialStateProperty.all(Colors.red),
-                                  activeColor: Colors.red,
-                                  onChanged: (value) {
-                                    registerController
-                                        .isTermsAndConditionAccept(value!);
-                                  },
-                                ),
-                                const Text(
-                                  'Hasarsız',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  value: registerController.isSeller,
-                                  checkColor: Colors.white,
-                                  fillColor:
-                                      MaterialStateProperty.all(Colors.red),
-                                  activeColor: Colors.red,
-                                  onChanged: (value) {
-                                    registerController
-                                        .isTermsAndConditionAccept(value!);
-                                  },
-                                ),
-                                const Text(
-                                  'Az hasarlı',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  value: registerController.isSeller,
-                                  checkColor: Colors.white,
-                                  fillColor:
-                                      MaterialStateProperty.all(Colors.red),
-                                  activeColor: Colors.red,
-                                  onChanged: (value) {
-                                    registerController
-                                        .isTermsAndConditionAccept(value!);
-                                  },
-                                ),
-                                const Text(
-                                  'Hasarlı',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+                    const DamageInformationCheckbox(),
                     const Divider(),
                     const Text(
                       'Renk',
@@ -208,10 +113,22 @@ class AddProductPage extends StatelessWidget {
                       child: AppTextFormField.standart(hintText: ''),
                     ),
                     const Divider(),
-                    const Text(
-                      'Fiyat',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: const [
+                        Text(
+                          'Fiyat',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 16),
+                        ),
+                        Text(
+                          '  *günlük',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 13,
+                              color: Colors.grey),
+                        ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),

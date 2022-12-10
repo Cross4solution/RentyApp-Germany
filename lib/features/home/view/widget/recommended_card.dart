@@ -1,4 +1,5 @@
 import 'package:rent_app_germany/core/constants/product_list.dart';
+import 'package:rent_app_germany/features/add_product/controller/product_controller.dart';
 import 'package:rent_app_germany/features/home/view/page/home_page.dart';
 
 import '../../../../core/_core_exports.dart';
@@ -68,9 +69,19 @@ class _RecommendedCardState extends State<RecommendedCard> {
                             right: 0,
                             child: InkWell(
                               onTap: () {
+
+
+                                sl<ProductController>().addFavorite(index);
+                               
+
                                 setState(() {
-                                  ProductList().productList[index].isTab = true;
-                                  print(ProductList().productList[index].isTab);
+
+
+
+                                  //  ProductList().productList[index].isFavorite =
+                                  //   !ProductList().productList[index].isFavorite;
+                                  // print(
+                                  //     ProductList().productList[index].isFavorite);
                                 });
                               },
                               child: Container(
@@ -80,14 +91,14 @@ class _RecommendedCardState extends State<RecommendedCard> {
                                 width: 25,
                                 decoration: BoxDecoration(
                                     color:
-                                        ProductList().productList[index].isTab!
+                                        ProductList().productList[index].isFavorite
                                             ? Colors.red
                                             : Colors.white,
                                     shape: BoxShape.circle),
                                 child: Icon(Icons.favorite,
                                     size: 18,
                                     color:
-                                        ProductList().productList[index].isTab!
+                                        ProductList().productList[index].isFavorite
                                             ? Colors.white
                                             : Colors.red),
                               ),
@@ -101,8 +112,10 @@ class _RecommendedCardState extends State<RecommendedCard> {
                       ),
                       Row(
                         children: [
-
-                          const Icon(Icons.location_on, size: 18,),
+                          const Icon(
+                            Icons.location_on,
+                            size: 18,
+                          ),
                           Text(
                             'İstanbul / Kadıköy',
                             style: TextStyle(
@@ -111,8 +124,8 @@ class _RecommendedCardState extends State<RecommendedCard> {
                         ],
                       ),
                       Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(ProductList().productList[index].price))
+                          alignment: Alignment.centerRight,
+                          child: Text(ProductList().productList[index].price))
                     ],
                   ),
                 ),

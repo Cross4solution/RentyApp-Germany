@@ -35,8 +35,7 @@ class RentyApp extends StatelessWidget {
     return MaterialApp(
       title: 'renty',
       theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+          primarySwatch: Colors.red, scaffoldBackgroundColor: Colors.white),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: generateRoute,
       navigatorKey: GlobalContextKey.instance.globalKey,
@@ -50,7 +49,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home:  AddProductPage(),
+      home: LoginPage(),
     );
   }
 }

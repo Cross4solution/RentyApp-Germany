@@ -18,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final int? maxLines;
   final TextAlignVertical? textAlignVertical;
+  final EdgeInsetsGeometry? contentPadding;
 
   const AppTextFormField._({
     Key? key,
@@ -36,6 +37,7 @@ class AppTextFormField extends StatelessWidget {
     this.enabledBorder,
     this.maxLines,
     this.textAlignVertical,
+    this.contentPadding,
   }) : super(key: key);
 
   factory AppTextFormField.standart({
@@ -47,6 +49,8 @@ class AppTextFormField extends StatelessWidget {
     void Function(String)? onChanged,
     double? height,
     TextAlignVertical? textAlignVertical,
+    InputBorder? enabledBorder,
+    EdgeInsetsGeometry? contentPadding
   }) {
     return AppTextFormField._(
       controller: controller,
@@ -57,6 +61,7 @@ class AppTextFormField extends StatelessWidget {
       suffixIcon: suffixIcon,
       height: 46,
       textAlignVertical: TextAlignVertical.center,
+      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
     );
   }
 
@@ -75,7 +80,7 @@ class AppTextFormField extends StatelessWidget {
       validator: validator,
       controller: controller,
       height: 46,
-      textAlignVertical: TextAlignVertical.center,
+      textAlignVertical: TextAlignVertical.bottom,
       prefixIcon: const Icon(
         Icons.lock,
       ),
@@ -100,6 +105,7 @@ class AppTextFormField extends StatelessWidget {
     InputBorder? focusedBorder,
     InputBorder? enabledBorder,
     TextAlignVertical? textAlignVertical,
+    EdgeInsetsGeometry? contentPadding
   }) {
     return AppTextFormField._(
       height: height,
@@ -121,32 +127,46 @@ class AppTextFormField extends StatelessWidget {
       // ),
       maxLines: 6,
       textAlignVertical: TextAlignVertical.center,
+      contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      // color: Colors.amber,
      
       height: height,
-      constraints: const BoxConstraints(minHeight: 55, maxHeight: 200),
+      constraints: const BoxConstraints( maxHeight: 200),
       child: TextFormField(
+        
         controller: controller,
         onChanged: onChanged,
         obscureText: isObscure,
         validator: validator,
         textAlignVertical: textAlignVertical,
         decoration: InputDecoration(
+
+          contentPadding: contentPadding,
+        
           hintText: hintText,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           filled: true,
           fillColor: fillColor ?? ColorHelper.whiteColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          focusedBorder: focusedBorder,
-          enabledBorder: enabledBorder,
+          // border: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(8),
+          //   borderSide: BorderSide(color: Colors.green)
+           
+          // ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.red.shade400)),
+          enabledBorder: OutlineInputBorder(
+
+            borderRadius: BorderRadius.circular(12),
+            
+            borderSide: BorderSide(color: Colors.grey.shade400)),
         ),
         keyboardType: TextInputType.multiline,
         textInputAction: TextInputAction.send,

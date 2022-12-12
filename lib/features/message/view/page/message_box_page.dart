@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:rent_app_germany/core/shared_widgets/app_text_form_field.dart';
 import 'package:rent_app_germany/core/utils/screen_size.dart';
 import 'package:rent_app_germany/features/home/view/widget/text_button_widget.dart';
-import 'package:rent_app_germany/features/message/view/widget/message_app_bar.dart';
+import 'package:rent_app_germany/features/message/view/widget/message_box_bar.dart';
 
 import '../../../../core/shared_widgets/remove_focus_and_bottom_top_padding_container.dart';
 import '../widget/message_card.dart';
 
-class MessagePage extends StatelessWidget {
-  const MessagePage({Key? key}) : super(key: key);
+class MessageBoxPage extends StatelessWidget {
+  const MessageBoxPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return AppContainer(
       child: Scaffold(
-        appBar: const MessageAppBar(),
+        appBar: const MessageBoxAppBar(),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 16, left: 16, right: 16),

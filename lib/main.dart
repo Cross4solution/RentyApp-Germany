@@ -13,7 +13,8 @@ import 'package:rent_app_germany/features/home/view/page/home_page.dart';
 import 'core/_core_exports.dart';
 import 'features/auth/view/page/verify_page.dart';
 import 'features/bottom_navigation_bar/view/pages/bottom_navigation_page.dart';
-import 'features/message/view/page/message_page.dart';
+import 'features/message/view/page/chat_page.dart';
+import 'features/message/view/page/message_box_page.dart';
 import 'features/profile/view/page/profile_edit_page.dart';
 
 void main() async {
@@ -49,7 +50,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home: LoginPage(),
+      home: BottomNavigationPage(),
     );
   }
 }

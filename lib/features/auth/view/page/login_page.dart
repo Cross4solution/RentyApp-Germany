@@ -81,8 +81,6 @@ class LoginPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       sl<RegisterController>().login();
-
-
                     },
                     child: Container(
                       alignment: Alignment.center,

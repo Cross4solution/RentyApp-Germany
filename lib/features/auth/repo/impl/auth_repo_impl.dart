@@ -3,6 +3,7 @@ import 'package:rent_app_germany/core/error/failures/failure.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/data/repository/network_manager.dart';
+import 'package:rent_app_germany/core/utils/remote_data_source/domain/entites/main_endpoint.dart';
 
 import '../../../../core/init/injection_container.dart';
 import '../../../../core/utils/remote_data_source/domain/repository/i_network_manager.dart';
@@ -15,7 +16,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       final register = await sl<INetworkManager>().basePost(
-        endPoint: 'api/user/register',
+        endPoint: MainEndpoints.register,
         requestBody: userModel.toMap(),
       );
 
@@ -32,7 +33,7 @@ class AuthRepositoryImpl implements AuthRepository {
       {required String email, required String code}) async {
     try {
       final register = await sl<INetworkManager>().basePost(
-        endPoint: 'api/user/email-verify',
+        endPoint: MainEndpoints.verifyEmail,
         requestBody: {
           'email': email,
           'code': code,
@@ -52,7 +53,7 @@ class AuthRepositoryImpl implements AuthRepository {
       {required String username, required String password}) async {
     try {
       final register = await sl<INetworkManager>().basePost(
-        endPoint: 'api/user/login',
+        endPoint: MainEndpoints.login,
         requestBody: {
           'username': username,
           'password': password,

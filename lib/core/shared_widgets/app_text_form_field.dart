@@ -137,6 +137,7 @@ class AppTextFormField extends StatelessWidget {
       // color: Colors.amber,
      
       height: height,
+      width: width,
       constraints: const BoxConstraints( maxHeight: 200),
       child: TextFormField(
         

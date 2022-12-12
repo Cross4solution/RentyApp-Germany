@@ -2,7 +2,7 @@
 
 import 'package:rent_app_germany/features/add_product/view/page/add_product_page.dart';
 import 'package:rent_app_germany/features/home/view/page/home_page.dart';
-import 'package:rent_app_germany/features/message/view/page/message_page.dart';
+import 'package:rent_app_germany/features/message/view/page/message_box_page.dart';
 import 'package:rent_app_germany/features/profile/view/page/profile_page.dart';
 import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 import '../../../../core/_core_exports.dart';
@@ -78,7 +78,7 @@ extension BottomNavigationBarStateExtension on BottomNavigationBarState {
       case BottomNavigationBarState.ADD:
         return const AddProductPage();
       case BottomNavigationBarState.MESSAGE:
-        return const MessagePage();
+        return const MessageBoxPage();
       case BottomNavigationBarState.PROFILE:
         return const ProfilePage();
     }

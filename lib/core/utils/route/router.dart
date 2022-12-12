@@ -7,7 +7,8 @@ import 'package:rent_app_germany/features/auth/view/page/verify_page.dart';
 import 'package:rent_app_germany/features/bottom_navigation_bar/view/pages/bottom_navigation_page.dart';
 import 'package:rent_app_germany/features/home/view/page/home_page.dart';
 import 'package:rent_app_germany/features/home/view/page/product_page.dart';
-import 'package:rent_app_germany/features/message/view/page/message_page.dart';
+import 'package:rent_app_germany/features/message/view/page/chat_page.dart';
+import 'package:rent_app_germany/features/message/view/page/message_box_page.dart';
 import 'package:rent_app_germany/features/profile/view/page/profile_page.dart';
 import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 
@@ -16,7 +17,7 @@ import '../../../features/profile/view/page/profile_edit_page.dart';
 class PageRoutes {
   static const String homePage = "/homePage";
   static const String searchPage = "/searchPage";
-  static const String messagePage = "/messagePage";
+  static const String messageBoxPage = "/messageBoxPage";
   static const String profilePage = "/profilePage";
   static const String productPage = "/productPage";
   static const String addProductPage = "/addProductPage";
@@ -26,6 +27,7 @@ class PageRoutes {
   static const String forgotPassword = "/forgotPassword";
   static const String profileEditPage = "/profileEditPage";
   static const String verifyPage = "/verifyPage";
+  static const String chatPage = "/chatPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -35,8 +37,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case PageRoutes.searchPage:
       return CupertinoPageRoute(builder: (_) => const SearchPage());
-    case PageRoutes.messagePage:
-      return CupertinoPageRoute(builder: (_) => const MessagePage());
+    case PageRoutes.messageBoxPage:
+      return CupertinoPageRoute(builder: (_) => const MessageBoxPage());
     case PageRoutes.profilePage:
       return CupertinoPageRoute(builder: (_) => const ProfilePage());
     case PageRoutes.productPage:
@@ -57,6 +59,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const ForgotPasswordPage());
     case PageRoutes.profileEditPage:
       return CupertinoPageRoute(builder: (_) => const ProfileEditPage());
+
+    case PageRoutes.chatPage:
+      return CupertinoPageRoute(builder: (_) => const ChatPage());
 
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());

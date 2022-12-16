@@ -1,7 +1,17 @@
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
+import 'package:rent_app_germany/core/entities/product_category.dart';
+import 'package:rent_app_germany/features/home/repo/home_repository.dart';
+
+import '../../../core/entities/get_product_model.dart';
 
 class HomeController extends ChangeNotifier {
+  final HomeRepository homeRepository;
+
+  HomeController({
+    required this.homeRepository,
+  });
+
   String formattingBeginDate = "Başlangıç tarihi";
   String formattingEndDate = "Bitiş tarihi";
 
@@ -62,4 +72,33 @@ class HomeController extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  List<CategoryArticles> categories = [];
+
+  Future<void> fetchCategory() async {
+    final requestCategoryResult = await homeRepository.getCategories(
+        categoryModel: CategoryModel(categories: categories));
+
+    requestCategoryResult.fold((failure) => failure, (data) {
+      categories = data.categories;
+
+      notifyListeners();
+    });
+  }
+
+
+    List<ProductFeatures> productFeatures = [];
+
+  Future<void> fetchProducts() async {
+    final requestCategoryResult = await homeRepository.getProducts(
+        getProductModel: GetProductModel(products: Products(data:productFeatures ) ));
+
+    requestCategoryResult.fold((failure) => failure, (data) {
+      productFeatures = data.products.data;
+
+      notifyListeners();
+    });
+  }
+
+
 }

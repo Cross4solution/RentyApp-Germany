@@ -1,7 +1,8 @@
 import '../_core_exports.dart';
 
 class CustomMessenger extends StatelessWidget {
-  const CustomMessenger({Key? key, required this.state, required this.content}) : super(key: key);
+  const CustomMessenger({Key? key, required this.state, required this.content})
+      : super(key: key);
   final CustomMessengerState state;
   final String content;
   @override
@@ -16,38 +17,29 @@ class CustomMessenger extends StatelessWidget {
         ],
         border: Border.all(
           color: state.getColor(),
-          width: .5,
+          width: 1,
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(16),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Container(
-                height: 32,
-                width: 4,
-                decoration: BoxDecoration(
-                  color: state.getColor(),
-                  borderRadius: const BorderRadius.horizontal(
-                    right: Radius.circular(4),
-                  ),
-                ),
-              ),
               const SizedBox(width: 8),
-              Icon(state.getIcon(), color: state.getColor()),
+              Icon(state.getIcon(), color: state.getColor(), size: 32),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   content,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 16
                   ),
                   maxLines: 3,
                 ),

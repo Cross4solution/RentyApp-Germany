@@ -49,9 +49,13 @@ class RegisterController extends ChangeNotifier {
 
   Future<void> login() async {
     try {
-      await authRepository.login(
+      var loginCheck = await authRepository.login(
           username: usernameController.text, password: passwordController.text);
-      Go.to.page(PageRoutes.bottomNavigationPage);
+
+      loginCheck.fold((l) => l.showErrorSnackBar(), (r) {
+        Go.to.page(PageRoutes.bottomNavigationPage);
+        showCustomMessenger(CustomMessengerState.SUCCESS, 'Hoşgeldiniz');
+      });
     } catch (e) {
       print(e.toString());
     }

@@ -4,6 +4,7 @@ import 'package:rent_app_germany/core/error/failures/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/data/repository/network_manager.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/domain/entites/main_endpoint.dart';
+import 'package:rent_app_germany/core/utils/remote_data_source/domain/entites/status_code_enums.dart';
 
 import '../../../../core/init/injection_container.dart';
 import '../../../../core/utils/remote_data_source/domain/repository/i_network_manager.dart';
@@ -40,7 +41,10 @@ class AuthRepositoryImpl implements AuthRepository {
         },
       );
 
-      return register.fold((l) => Left(l), (data) {
+      return register.fold((l) {
+        showCustomMessenger(CustomMessengerState.WARNING, 'content');
+        return Left(l);
+      }, (data) {
         return const Right(null);
       });
     } on Failure catch (failure) {
@@ -60,7 +64,9 @@ class AuthRepositoryImpl implements AuthRepository {
         },
       );
 
-      return register.fold((l) => Left(l), (data) {
+      return register.fold((l) {
+        return Left(l);
+      }, (data) {
         return const Right(null);
       });
     } on Failure catch (failure) {

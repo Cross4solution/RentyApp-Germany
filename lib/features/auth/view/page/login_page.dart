@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
                       return null;
                     },
                     prefixIcon: const Icon(
-                      Icons.person_outline,
+                      Icons.person,
                     ),
                   ),
                   const SizedBox(
@@ -76,7 +76,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: ScreenSize().getHeightPercent(.07),
+                    height: ScreenSize().getHeightPercent(.1),
                   ),
                   GestureDetector(
                     onTap: () {

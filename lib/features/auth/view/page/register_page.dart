@@ -46,7 +46,7 @@ class RegisterPage extends StatelessWidget {
                           return null;
                         },
                         prefixIcon: const Icon(
-                          Icons.person_outline,
+                          Icons.person,
                         ),
                       ),
                       const SizedBox(height: 8),
@@ -61,7 +61,7 @@ class RegisterPage extends StatelessWidget {
                           return null;
                         },
                         prefixIcon: const Icon(
-                          Icons.person_outline,
+                          Icons.person,
                         ),
                       ),
                       const SizedBox(height: 8),

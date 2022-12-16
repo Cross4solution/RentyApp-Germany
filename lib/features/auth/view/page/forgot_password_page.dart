@@ -30,8 +30,8 @@ class ForgotPasswordPage extends StatelessWidget {
                   AppTextFormField.standart(
                     hintText: 'Enter your email adress...',
                     prefixIcon: const Icon(
-                      Icons.alternate_email,
-                      color: ColorHelper.blackColor,
+                      Icons.email,
+                     
                     ),
                   ),
                   const SizedBox(height: 25),

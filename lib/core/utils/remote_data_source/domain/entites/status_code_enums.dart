@@ -5,7 +5,7 @@
 import '../../../../error/failures/base_response_status_failures.dart';
 import '../../../../error/failures/failure.dart';
 
-enum StatusCodeEnums {
+ enum StatusCodeEnums {
   StatusCode200, //* OK
   StatusCode201, //* Created
   StatusCode204, //* No Content
@@ -18,7 +18,7 @@ enum StatusCodeEnums {
 }
 
 extension StatusCodeEnumsExtension on StatusCodeEnums {
-  StatusCodeEnums statusCodeToEnum(int? statusCode) {
+static  StatusCodeEnums statusCodeToEnum(int? statusCode) {
     switch (statusCode) {
       case 200:
         return StatusCodeEnums.StatusCode200;

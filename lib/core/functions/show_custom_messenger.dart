@@ -26,13 +26,13 @@ extension CustomMessengerHelper on CustomMessengerState {
   IconData getIcon() {
     switch (this) {
       case CustomMessengerState.SUCCESS:
-        return Icons.check_outlined;
+        return Icons.check_circle;
       case CustomMessengerState.INFO:
-        return Icons.priority_high;
+        return Icons.warning_rounded;
       case CustomMessengerState.WARNING:
-        return Icons.priority_high;
+        return Icons.warning_rounded;
       case CustomMessengerState.ERROR:
-        return Icons.priority_high;
+        return Icons.warning_rounded;
     }
   }
 }
@@ -40,7 +40,7 @@ extension CustomMessengerHelper on CustomMessengerState {
 void showCustomMessenger(CustomMessengerState messengerState, String content) {
   ScaffoldMessenger.of(GlobalContextKey.instance.globalKey.currentContext!).showSnackBar(
     SnackBar(
-      margin: const EdgeInsets.only(bottom: 32),
+      margin: const EdgeInsets.only(bottom: 24),
       backgroundColor: Colors.transparent,
       content: CustomMessenger(state: messengerState, content: content),
       behavior: SnackBarBehavior.floating,

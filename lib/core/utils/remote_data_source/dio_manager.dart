@@ -10,6 +10,11 @@ class DioManager {
 
     dio.options.baseUrl = 'https://api.testsoftware.site/';
 
+
+    dio.options.validateStatus = (status) {
+      return true;
+    };
+
     dio.options.headers = {
       'Accept': 'application/json',
 

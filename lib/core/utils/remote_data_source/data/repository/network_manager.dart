@@ -10,8 +10,25 @@ class NetworkManager extends INetworkManager {
 
   @override
   Future<Either<Failure, String>> baseGet(
-      {required MainEndpoints endPoint, Map<String, dynamic>? queryParameters}) {
-    throw UnimplementedError();
+      {required MainEndpoints endPoint,
+      Map<String, dynamic>? queryParameters}) async {
+    try {
+      Response response = await dio.get(
+        endPoint.path,
+        queryParameters: queryParameters,
+      );
+
+      final statusCode =
+           StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
+
+      if (statusCode.isSuccess()) {
+        return Right(response.data);
+      } else {
+        return Left(statusCode.stateToFailure() ?? NotFoundFailure());
+      }
+    } catch (e) {
+      return Left(NotFoundFailure());
+    }
   }
 
   @override
@@ -27,12 +44,23 @@ class NetworkManager extends INetworkManager {
       );
 
       final statusCode =
-          StatusCodeEnums.values.first.statusCodeToEnum(response.statusCode);
+         StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
 
       if (statusCode.isSuccess()) {
         return Right(response.data);
       } else {
-        return Left(statusCode.stateToFailure() ?? NotFoundFailure());
+     Failure result =  statusCode.stateToFailure() ?? NotFoundFailure() ;
+
+     if(statusCode == StatusCodeEnums.StatusCode401){
+      result.errorMessage = 'Girdiğiniz bigiler hatalıdır';
+     }
+
+     if(statusCode == StatusCodeEnums.StatusCode200){
+
+      showCustomMessenger(CustomMessengerState.SUCCESS, 'content');
+     
+     }
+        return Left(result);
       }
     } catch (e) {
       return Left(NotFoundFailure());

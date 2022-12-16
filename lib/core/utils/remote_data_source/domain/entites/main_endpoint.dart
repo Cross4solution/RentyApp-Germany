@@ -2,6 +2,8 @@ enum MainEndpoints {
   register,
   verifyEmail,
   login,
+  getAllProducts,
+  category,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -13,6 +15,10 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/user/email-verify';
       case MainEndpoints.login:
         return 'api/user/login';
+      case MainEndpoints.getAllProducts:
+        return 'api/product/all';
+      case MainEndpoints.category:
+        return 'api/service/category/top-categories';
     }
   }
 }

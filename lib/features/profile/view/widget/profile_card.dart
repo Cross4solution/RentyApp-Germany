@@ -1,4 +1,5 @@
 import '../../../../core/_core_exports.dart';
+import '../../../auth/controller/register_controller.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
@@ -7,6 +8,8 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    UserModel user = sl<RegisterController>().userInfo;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Row(
@@ -30,8 +33,8 @@ class ProfileCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Text(
-                  'Yasin Karacan',
+                 Text(
+                  user.user!.username,
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
                 ),
                 Row(

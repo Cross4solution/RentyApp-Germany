@@ -3,7 +3,7 @@ import '../../../../core/_core_exports.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, void>> register({
-    required UserModel userModel,
+    required User userModel,
   });
 
   Future<Either<Failure, void>> verifyEmail({
@@ -11,9 +11,8 @@ abstract class AuthRepository {
     required String code,
   });
   
-    Future<Either<Failure, void>> login({
-    required String username,
-    required String password,
+    Future<Either<Failure, UserModel>> login({
+    required User user,
   });
 
   // Future<Either<Failure, void>> signOut();

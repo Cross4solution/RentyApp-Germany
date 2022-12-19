@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
+import 'package:rent_app_germany/features/home/controller/home_controller.dart';
+import 'package:rent_app_germany/features/home/repo/impl/home_repo_impl.dart';
 import 'package:rent_app_germany/features/home/view/widget/home_page_app_bar.dart';
 import 'package:rent_app_germany/features/home/view/widget/recommended_card.dart';
 import '../widget/category_card.dart';
@@ -22,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             SlidableTrendsCard(),
             Divider(),
             Padding(
@@ -36,12 +38,34 @@ class _HomePageState extends State<HomePage> {
             Divider(),
             Padding(
               padding: EdgeInsets.only(left: 10, bottom: 12),
-              child: Text('Sizin İçin Önerilenler',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text('Sizin İçin Önerilenler',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: GestureDetector(
+                      onTap: () {
+
+                        Go.to.page(PageRoutes.allProductsPage);
+                        
+                      },
+                      child: Text('Tümünü Gör',
+                          style:
+                              TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.red)),
+                    ),
+                  ),
+                ],
+              ),
             ),
             RecommendedCard(),
-            RecommendedCard(),
-            RecommendedCard(),
+            // RecommendedCard(),
+            // RecommendedCard(),
+
+        
           ],
         ),
       ),

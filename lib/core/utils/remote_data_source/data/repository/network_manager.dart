@@ -47,6 +47,7 @@ class NetworkManager extends INetworkManager {
          StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
 
       if (statusCode.isSuccess()) {
+        
         return Right(response.data);
       } else {
      Failure result =  statusCode.stateToFailure() ?? NotFoundFailure() ;

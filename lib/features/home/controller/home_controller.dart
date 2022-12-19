@@ -1,6 +1,7 @@
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/entities/product_category.dart';
+import 'package:rent_app_germany/features/home/domain/entities/get_product_arguments.dart';
 import 'package:rent_app_germany/features/home/repo/home_repository.dart';
 
 import '../../../core/entities/get_product_model.dart';
@@ -10,7 +11,14 @@ class HomeController extends ChangeNotifier {
 
   HomeController({
     required this.homeRepository,
-  });
+  }) {
+    // fecthNextProductsPage();
+    // loadingController();
+  }
+
+  final GetProductArguments getProductArguments = GetProductArguments();
+
+  ScrollController scroolController = ScrollController();
 
   String formattingBeginDate = "Başlangıç tarihi";
   String formattingEndDate = "Bitiş tarihi";
@@ -86,19 +94,51 @@ class HomeController extends ChangeNotifier {
     });
   }
 
+  List<ProductFeatures> productFeatures = [];
 
-    List<ProductFeatures> productFeatures = [];
 
-  Future<void> fetchProducts() async {
-    final requestCategoryResult = await homeRepository.getProducts(
-        getProductModel: GetProductModel(products: Products(data:productFeatures ) ));
+  bool isLastPage = false;
 
-    requestCategoryResult.fold((failure) => failure, (data) {
-      productFeatures = data.products.data;
+  Future<void> refreshProductsPage() async {
+    productFeatures.clear();
+    getProductArguments.page = 1;
 
-      notifyListeners();
+    isLastPage = false;
+
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 1), () {
+      fecthNextProductsPage();
     });
   }
 
+  Future<void> fecthNextProductsPage() async {
 
+    if (!isLastPage) {
+      final requestFetchProducts = await homeRepository.getProducts(
+        getProductModel: GetProductModel(
+          products: Products(data: productFeatures),
+        ),
+        getProductArguments: getProductArguments,
+      );
+
+      requestFetchProducts.fold((failure) {
+        failure.errorMessage;
+
+        print('sayfa sonu');
+
+        isLastPage = true;
+      }, (data) {
+        productFeatures.addAll(data.products.data);
+        getProductArguments.page++;
+
+        print('çalisti');
+        print(productFeatures.length);
+
+        notifyListeners();
+      });
+      notifyListeners();
+    }
+    
+  }
 }

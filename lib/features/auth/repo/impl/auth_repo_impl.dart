@@ -13,7 +13,7 @@ import '../auth_repository.dart';
 class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> register({
-    required UserModel userModel,
+    required User userModel,
   }) async {
     try {
       final register = await sl<INetworkManager>().basePost(
@@ -53,21 +53,21 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> login(
-      {required String username, required String password}) async {
+  Future<Either<Failure, UserModel>> login(
+      {required User user}) async {
     try {
       final register = await sl<INetworkManager>().basePost(
         endPoint: MainEndpoints.login,
         requestBody: {
-          'username': username,
-          'password': password,
+          'username': user.username,
+          'password': user.password,
         },
       );
 
       return register.fold((l) {
         return Left(l);
       }, (data) {
-        return const Right(null);
+        return Right(UserModel());
       });
     } on Failure catch (failure) {
       return Left(failure);

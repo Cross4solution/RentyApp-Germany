@@ -12,6 +12,7 @@ import 'package:rent_app_germany/features/message/view/page/message_box_page.dar
 import 'package:rent_app_germany/features/profile/view/page/profile_page.dart';
 import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 
+import '../../../features/home/view/page/all_products_page.dart';
 import '../../../features/profile/view/page/profile_edit_page.dart';
 
 class PageRoutes {
@@ -28,6 +29,7 @@ class PageRoutes {
   static const String profileEditPage = "/profileEditPage";
   static const String verifyPage = "/verifyPage";
   static const String chatPage = "/chatPage";
+  static const String allProductsPage = "/allProductsPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -62,6 +64,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case PageRoutes.chatPage:
       return CupertinoPageRoute(builder: (_) => const ChatPage());
+    case PageRoutes.allProductsPage:
+      return CupertinoPageRoute(builder: (_) => const AllProductsPage());
 
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());

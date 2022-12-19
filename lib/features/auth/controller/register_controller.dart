@@ -1,7 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
 
 class RegisterController extends ChangeNotifier {
   final AuthRepository authRepository;
+  final SharedPreferences? prefs;
+  final SaveDataFromKey saveDataFromKey;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -18,11 +21,14 @@ class RegisterController extends ChangeNotifier {
 
   RegisterController({
     required this.authRepository,
+    this.prefs,
+    required this.saveDataFromKey,
+  
   });
 
   Future<void> register() async {
     if (formGlobalKey.currentState!.validate()) {
-      UserModel userModel = UserModel(
+      User userModel = User(
         name: nameController.text,
         email: emailController.text,
         isSeller: isSeller,
@@ -47,13 +53,28 @@ class RegisterController extends ChangeNotifier {
     }
   }
 
+
+ UserModel userInfo = UserModel();
+
   Future<void> login() async {
     try {
-      var loginCheck = await authRepository.login(
-          username: usernameController.text, password: passwordController.text);
+      final loginCheck = await authRepository.login(
+          user: User(
+              username: usernameController.text,
+              password: passwordController.text));
 
-      loginCheck.fold((l) => l.showErrorSnackBar(), (r) {
-        Go.to.page(PageRoutes.bottomNavigationPage);
+      loginCheck.fold((l) => l.showErrorSnackBar(), (data) {
+        userInfo = data;
+
+        print(userInfo.user?.name);
+
+        saveDataFromKey(
+          SharedPreferenceKeyWithValueParams(
+              key: SharedPreferencesKeys.CACHE_USER_INFO,
+              value: userInfo.toJson()),
+        );
+
+        Go.to.pageAndRemoveUntil(PageRoutes.bottomNavigationPage);
         showCustomMessenger(CustomMessengerState.SUCCESS, 'Hoşgeldiniz');
       });
     } catch (e) {

@@ -15,7 +15,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     Future.delayed(
-      const Duration(seconds: 7),
+      const Duration(seconds: 2),
       () {
         Go.to.pageAndRemoveUntil(PageRoutes.bottomNavigationPage);
       },

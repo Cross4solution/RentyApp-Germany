@@ -19,6 +19,18 @@ Future<void> init() async {
   sl.registerFactory<Dio>(() => DioManager.getDio());
   sl.registerLazySingleton<INetworkManager>(() => NetworkManager(sl<Dio>()));
 
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
+
+  //* Repo
+  sl.registerLazySingleton<SharedPreferencesRepository>(
+      () => SharedPreferencesRepositoryImpl(sl()));
+
+  //* Use Case
+  sl.registerLazySingleton(() => GetDataFromKey(sl()));
+  sl.registerLazySingleton(() => RemoveDataFromKey(sl()));
+  sl.registerLazySingleton(() => SaveDataFromKey(sl()));
+
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(),
   );
@@ -28,8 +40,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(() => BottomNavigationBarProvider());
 
-  sl.registerLazySingleton(
-      () => RegisterController(authRepository: sl<AuthRepository>()));
+  sl.registerLazySingleton(() => RegisterController(
+      authRepository: sl<AuthRepository>(),
+      saveDataFromKey: sl<SaveDataFromKey>()));
   sl.registerLazySingleton(
       () => HomeController(homeRepository: sl<HomeRepository>()));
   sl.registerLazySingleton(() => LoginController());

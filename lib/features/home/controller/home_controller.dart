@@ -96,6 +96,8 @@ class HomeController extends ChangeNotifier {
 
   List<ProductFeatures> productFeatures = [];
 
+  
+
 
   bool isLastPage = false;
 
@@ -130,6 +132,8 @@ class HomeController extends ChangeNotifier {
         isLastPage = true;
       }, (data) {
         productFeatures.addAll(data.products.data);
+      
+
         getProductArguments.page++;
 
         print('çalisti');

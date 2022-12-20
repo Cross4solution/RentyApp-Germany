@@ -23,6 +23,31 @@ extension CustomMessengerHelper on CustomMessengerState {
     }
   }
 
+  Color getIconColor() {
+    switch (this) {
+      case CustomMessengerState.SUCCESS:
+        return Colors.white;
+      case CustomMessengerState.INFO:
+        return Colors.blue;
+      case CustomMessengerState.WARNING:
+        return Colors.orange;
+      case CustomMessengerState.ERROR:
+        return Colors.white;
+    }
+  }
+    Color getTextColor() {
+    switch (this) {
+      case CustomMessengerState.SUCCESS:
+        return Colors.white;
+      case CustomMessengerState.INFO:
+        return Colors.blue;
+      case CustomMessengerState.WARNING:
+        return Colors.orange;
+      case CustomMessengerState.ERROR:
+        return Colors.white;
+    }
+  }
+
   IconData getIcon() {
     switch (this) {
       case CustomMessengerState.SUCCESS:
@@ -41,10 +66,10 @@ void showCustomMessenger(CustomMessengerState messengerState, String content) {
   ScaffoldMessenger.of(GlobalContextKey.instance.globalKey.currentContext!).showSnackBar(
     SnackBar(
       margin: const EdgeInsets.only(bottom: 24),
-      backgroundColor: Colors.transparent,
+      backgroundColor:  Colors.transparent,
       content: CustomMessenger(state: messengerState, content: content),
       behavior: SnackBarBehavior.floating,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 10),
       elevation: 0,
     ),
   );

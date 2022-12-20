@@ -6,6 +6,7 @@ import '../../features/auth/controller/auth_controller.dart';
 import '../../features/auth/controller/register_controller.dart';
 import '../../features/bottom_navigation_bar/view_model/bottom_navigation_bar_controller.dart';
 import '../../features/message/controller/message_controller.dart';
+import '../../features/profile/controller/profile_controller.dart';
 import '../init/injection_container.dart';
 
 class MainProviderList {
@@ -17,6 +18,7 @@ class MainProviderList {
     ChangeNotifierProvider(create: (_) => sl<LoginController>()),
     ChangeNotifierProvider(create: (_) => sl<ProductController>()),
     ChangeNotifierProvider(create: (_) => sl<MessageController>()),
+    ChangeNotifierProvider(create: (_) => sl<ProfileController>()),
     // ChangeNotifierProvider(create: (_) => sl<AuthController>()),
   ];
 

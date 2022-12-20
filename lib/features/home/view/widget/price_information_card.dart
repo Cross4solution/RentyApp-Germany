@@ -1,8 +1,11 @@
 import '../../../../core/_core_exports.dart';
+import '../../../../core/entities/get_product_model.dart';
 
 class PriceInformationCard extends StatelessWidget {
+
+ final ProductFeatures productFeatures;
   const PriceInformationCard({
-    Key? key,
+    Key? key, required this.productFeatures,
   }) : super(key: key);
 
   @override
@@ -26,9 +29,9 @@ class PriceInformationCard extends StatelessWidget {
                     right: BorderSide(width: 1, color: Colors.grey.shade400))),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Text(
-                '\$5.00',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+               Text(
+                '\$''${productFeatures.rentalPrice}',
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 3,
@@ -48,8 +51,8 @@ class PriceInformationCard extends StatelessWidget {
                     right: BorderSide(width: 1, color: Colors.grey.shade400))),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Text(
-                '\$30.00',
+               Text(
+                '\$''${productFeatures.price}',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(

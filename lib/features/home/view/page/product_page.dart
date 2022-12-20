@@ -1,13 +1,16 @@
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/features/home/controller/home_controller.dart';
 import 'package:rent_app_germany/features/home/view/widget/text_button_widget.dart';
+import '../../../../core/entities/get_product_model.dart';
 import '../widget/price_information_card.dart';
 import '../widget/product_seller_person_widget.dart';
 import '../widget/select_price_card.dart';
 import '../widget/slidable_trends_card.dart';
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({Key? key}) : super(key: key);
+  final ProductFeatures productFeatures;
+  const ProductPage({Key? key, required this.productFeatures})
+      : super(key: key);
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -19,7 +22,6 @@ class _ProductPageState extends State<ProductPage> {
     ScreenSize.init(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      
       body: SafeArea(
         child: SingleChildScrollView(
           child: Consumer(
@@ -54,12 +56,12 @@ class _ProductPageState extends State<ProductPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              'Profesyonel Paten',
+                            Text(
+                              widget.productFeatures.productName!,
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 22),
                             ),
-      
+
                             Icon(Icons.favorite_border_rounded)
                             // TextButtonWidget(
                             //     onTap: () {},
@@ -71,22 +73,26 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(
                           height: 8,
                         ),
-                        const ProductSellerPerson(),
+                        ProductSellerPerson(
+                            productFeatures: widget.productFeatures),
                         // SelectPriceCard(),
-      
-                        const PriceInformationCard(),
-      
+
+                        PriceInformationCard(
+                            productFeatures: widget.productFeatures),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             TextButtonWidget(
                                 onTap: (() {
-                                  homeController.datePickerBeginSettings(context);
+                                  homeController
+                                      .datePickerBeginSettings(context);
                                 }),
                                 iconLeft: Icons.calendar_month_rounded,
                                 text: homeController.formattingBeginDate,
                                 textColor: Colors.black,
-                                color: const Color.fromARGB(255, 142, 223, 144)),
+                                color:
+                                    const Color.fromARGB(255, 142, 223, 144)),
                             TextButtonWidget(
                                 onTap: (() {
                                   homeController.datePickerEndSettings(context);
@@ -94,7 +100,8 @@ class _ProductPageState extends State<ProductPage> {
                                 iconLeft: Icons.calendar_month_rounded,
                                 text: homeController.formattingEndDate,
                                 textColor: Colors.black,
-                                color: const Color.fromARGB(255, 142, 223, 144)),
+                                color:
+                                    const Color.fromARGB(255, 142, 223, 144)),
                           ],
                         ),
                         const SizedBox(
@@ -122,8 +129,8 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(
                           height: 8,
                         ),
-                        Text(
-                            'Profesyonel patenin özelliklerinin bulunduğu kısım '),
+                        Text(widget.productFeatures.productDescription
+                            .toString()),
                         Text(
                             'Profesyonel patenin özelliklerinin bulunduğu kısım '),
                         const SizedBox(

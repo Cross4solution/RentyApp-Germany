@@ -77,9 +77,15 @@ class _AllProductsCardState extends State<AllProductsCard> {
                                         topLeft: Radius.circular(16),
                                         topRight: Radius.circular(16),
                                       ),
-                                      // child: Image.network(
-
-                                      //   homeController.productFeatures[index].productImages.images[0])
+                                      // child: homeController
+                                      //             .productFeatures[index]
+                                      //             .productImages!
+                                      //             .images !=
+                                      //         null
+                                      //     ? Image.network(
+                                      //         "https://api.testsoftware.site/${homeController.productFeatures[index].productImages!.images[0]}",
+                                      //       )
+                                      //     : SizedBox.shrink(),
                                     ),
                                   ),
                                   Positioned(
@@ -120,11 +126,11 @@ class _AllProductsCardState extends State<AllProductsCard> {
                               ),
                               Text(
                                 homeController.productFeatures[index]
-                                            .productName.length >
+                                            .productName!.length >
                                         16
-                                    ? '${homeController.productFeatures[index].productName.substring(0, 16)}...'
+                                    ? '${homeController.productFeatures[index].productName!.substring(0, 16)}...'
                                     : homeController
-                                        .productFeatures[index].productName,
+                                        .productFeatures[index].productName!,
                                 style: const TextStyle(fontSize: 15),
                               ),
                               Row(
@@ -217,7 +223,8 @@ class ShimmerWidget extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 8,
-                ),Container(
+                ),
+                Container(
                   height: 15,
                   width: 115,
                   decoration: const BoxDecoration(

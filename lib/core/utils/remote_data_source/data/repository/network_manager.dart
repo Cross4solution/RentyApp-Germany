@@ -19,7 +19,7 @@ class NetworkManager extends INetworkManager {
       );
 
       final statusCode =
-           StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
+          StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
 
       if (statusCode.isSuccess()) {
         return Right(response.data);
@@ -44,24 +44,45 @@ class NetworkManager extends INetworkManager {
       );
 
       final statusCode =
-         StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
+          StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
 
       if (statusCode.isSuccess()) {
-        
         return Right(response.data);
       } else {
-     Failure result =  statusCode.stateToFailure() ?? NotFoundFailure() ;
+        Failure result = statusCode.stateToFailure() ?? NotFoundFailure();
 
-     if(statusCode == StatusCodeEnums.StatusCode401){
-      result.errorMessage = 'Girdiğiniz bigiler hatalıdır';
-     }
+        if (statusCode == StatusCodeEnums.StatusCode401) {
+          result.errorMessage = 'Girdiğiniz bigiler hatalıdır';
+        }
 
-     if(statusCode == StatusCodeEnums.StatusCode200){
-
-      showCustomMessenger(CustomMessengerState.SUCCESS, 'content');
-     
-     }
+        if (statusCode == StatusCodeEnums.StatusCode200) {
+          showCustomMessenger(CustomMessengerState.SUCCESS, 'content');
+        }
         return Left(result);
+      }
+    } catch (e) {
+      return Left(NotFoundFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> baseDelete(
+      {required MainEndpoints endPoint,
+      Map<String, dynamic>? queryParameters,
+      Map<String, dynamic>? requestBody}) async {
+    try {
+      Response response = await dio.delete(
+        endPoint.path,
+        queryParameters: queryParameters,
+      );
+
+      final statusCode =
+          StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
+
+      if (statusCode.isSuccess()) {
+        return Right(response.data);
+      } else {
+        return Left(statusCode.stateToFailure() ?? NotFoundFailure());
       }
     } catch (e) {
       return Left(NotFoundFailure());

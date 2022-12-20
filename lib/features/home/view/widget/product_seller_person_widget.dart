@@ -1,8 +1,13 @@
+
 import '../../../../core/_core_exports.dart';
+import '../../../../core/entities/get_product_model.dart';
 
 class ProductSellerPerson extends StatelessWidget {
+
+ final ProductFeatures productFeatures;
+
   const ProductSellerPerson({
-    Key? key,
+    Key? key,required this.productFeatures,
   }) : super(key: key);
 
   @override
@@ -27,9 +32,9 @@ class ProductSellerPerson extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Yasin Karacan',
-              style: TextStyle(fontWeight: FontWeight.w700),
+             Text(
+              productFeatures.userUsername.toString(),
+              style: const TextStyle(fontWeight: FontWeight.w700),
             ),
             const SizedBox(
               height: 8,

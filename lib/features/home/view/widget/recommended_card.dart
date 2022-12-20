@@ -1,11 +1,15 @@
+import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/_core_exports.dart';
+import '../../../../core/entities/get_product_model.dart';
 import '../../controller/home_controller.dart';
 
 class RecommendedCard extends StatefulWidget {
-  const RecommendedCard({
+  RecommendedCard({
     Key? key,
   }) : super(key: key);
+
+  // final ProductFeatures  productFeatures;
 
   @override
   State<RecommendedCard> createState() => _RecommendedCardState();
@@ -22,6 +26,7 @@ class _RecommendedCardState extends State<RecommendedCard> {
 
   @override
   Widget build(BuildContext context) {
+    final ProductFeatures productFeatures;
     return Consumer(
       builder: (context, HomeController homeController, child) {
         return GridView.builder(
@@ -37,9 +42,11 @@ class _RecommendedCardState extends State<RecommendedCard> {
             //   homeController.fecthNextProductsPage();
             // }
 
+            final productFeatures = homeController.productFeatures[index];
+
             return GestureDetector(
               onTap: () {
-                Go.to.page(PageRoutes.productPage);
+                Go.to.page(PageRoutes.productPage, arguments: productFeatures);
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -57,8 +64,8 @@ class _RecommendedCardState extends State<RecommendedCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Stack(
-                        children: const [
-                          SizedBox(
+                        children: [
+                          const SizedBox(
                             height: 120,
                             width: 175,
                             child: ClipRRect(
@@ -66,55 +73,41 @@ class _RecommendedCardState extends State<RecommendedCard> {
                                 topLeft: Radius.circular(16),
                                 topRight: Radius.circular(16),
                               ),
-                              // child: Image.network(
+                              //   child:productFeatures.productImages!.images[0] != null ?
 
-                              //   homeController.productFeatures[index].productImages.images[0])
+                              //    Image.network(
+                              //  "https://api.testsoftware.site/${productFeatures.productImages!.images[index][0]}"
+
+                              //    ): SizedBox.shrink()
                             ),
                           ),
-                          // Positioned(
-                          //   right: 0,
-                          //   child: InkWell(
-                          //     onTap: () {
-                          //       sl<ProductController>().addFavorite(index);
-
-                          //       // setState(() {
-                          //       //   //  ProductList().productList[index].isFavorite =
-                          //       //   //   !ProductList().productList[index].isFavorite;
-                          //       //   // print(
-                          //       //   //     ProductList().productList[index].isFavorite);
-                          //       // });
-                          //     },
-                          //     child: Container(
-                          //       margin: const EdgeInsets.all(6.0),
-                          //       alignment: Alignment.center,
-                          //       height: 25,
-                          //       width: 25,
-                          //       decoration: BoxDecoration(
-                          //           color: homeController.productFeatures[index]
-                          //                   .
-                          //               ? Colors.red
-                          //               : Colors.white,
-                          //           shape: BoxShape.circle),
-                          //       child: Icon(Icons.favorite,
-                          //           size: 18,
-                          //           color: ProductList()
-                          //                   .productList[index]
-                          //                   .isFavorite
-                          //               ? Colors.white
-                          //               : Colors.red),
-                          //     ),
-                          //   ),
-                          // ),
+                          Positioned(
+                            right: 0,
+                            child: InkWell(
+                              onTap: () {
+                                sl<ProfileController>().addId = productFeatures.id!;
+                                sl<ProfileController>()
+                                    .addFavorites();
+                              },
+                              child: Container(
+                                  margin: EdgeInsets.all(6.0),
+                                  alignment: Alignment.center,
+                                  height: 25,
+                                  width: 25,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      shape: BoxShape.circle),
+                                  child: Icon(Icons.favorite,
+                                      size: 18, color: Colors.white)),
+                            ),
+                          ),
                         ],
                       ),
                       Text(
-                        homeController
-                                    .productFeatures[index].productName.length >
-                                16
-                            ? homeController.productFeatures[index].productName
-                                    .substring(0, 16) +
+                        productFeatures.productName!.length > 16
+                            ? productFeatures.productName!.substring(0, 16) +
                                 '...'
-                            : homeController.productFeatures[index].productName,
+                            : productFeatures.productName!,
                         style: const TextStyle(fontSize: 15),
                       ),
                       Row(
@@ -132,8 +125,7 @@ class _RecommendedCardState extends State<RecommendedCard> {
                       ),
                       Align(
                           alignment: Alignment.centerRight,
-                          child: Text(
-                              '\$${homeController.productFeatures[index].rentalPrice}.00'))
+                          child: Text('\$${productFeatures.rentalPrice}.00'))
                     ],
                   ),
                 ),

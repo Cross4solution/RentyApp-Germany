@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/shared_widgets/app_button.dart';
 import 'package:rent_app_germany/core/shared_widgets/app_text_form_field.dart';
+import 'package:rent_app_germany/features/add_product/controller/product_controller.dart';
 import 'package:rent_app_germany/features/auth/controller/register_controller.dart';
 import 'package:rent_app_germany/features/auth/view/widget/seller_check_box.dart';
 
@@ -63,7 +64,7 @@ class AddProductPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: AppTextFormField.standart(hintText: ''),
+                      child: AppTextFormField.standart(hintText: '', controller: sl<ProductController>().productNameController),
                     ),
                     const Divider(),
                     const Text(
@@ -73,7 +74,7 @@ class AddProductPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: AppTextFormField.chat(hintText: ''),
+                      child: AppTextFormField.chat(hintText: '', controller: sl<ProductController>().productDescriptionController),
                     ),
                     const Divider(),
                     const Text(
@@ -100,7 +101,7 @@ class AddProductPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: AppTextFormField.standart(hintText: ''),
+                      child: AppTextFormField.standart(hintText: '',controller: sl<ProductController>().productFeaturesController,),
                     ),
                     const Divider(),
                     const Text(
@@ -132,12 +133,17 @@ class AddProductPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: AppTextFormField.standart(hintText: ''),
+                      child: AppTextFormField.standart(hintText: '', controller: sl<ProductController>().productPriceController),
                     ),
                     const SizedBox(
                       height: 4,
                     ),
-                    AppButton.standart(onTap: () {}, buttonText: 'Kaydet'),
+                    AppButton.standart(onTap: () {
+
+                      sl<ProductController>().addProduct();
+
+
+                    }, buttonText: 'Kaydet'),
                     const SizedBox(
                       height: 16,
                     )

@@ -14,6 +14,7 @@ import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 
 import '../../../features/home/view/page/all_products_page.dart';
 import '../../../features/profile/view/page/profile_edit_page.dart';
+import '../../entities/get_product_model.dart';
 
 class PageRoutes {
   static const String homePage = "/homePage";
@@ -44,7 +45,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case PageRoutes.profilePage:
       return CupertinoPageRoute(builder: (_) => const ProfilePage());
     case PageRoutes.productPage:
-      return CupertinoPageRoute(builder: (_) => const ProductPage());
+      final ProductFeatures productFeatures =
+          settings.arguments as ProductFeatures;
+      return CupertinoPageRoute(
+          builder: (_) => ProductPage(
+                productFeatures: productFeatures,
+              ));
 
     case PageRoutes.bottomNavigationPage:
       return CupertinoPageRoute(builder: (_) => const BottomNavigationPage());

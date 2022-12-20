@@ -34,8 +34,8 @@ class ProfileCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                  Text(
-                  user.user!.username,
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                  'user.user!.username,',
+                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
                 ),
                 Row(
                   children: const [

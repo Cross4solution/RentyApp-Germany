@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:image_picker/image_picker.dart';
+
 class GetProductModel {
   GetProductModel({
     required this.products,
@@ -44,22 +46,27 @@ class Products {
 
 class ProductFeatures {
   ProductFeatures({
-    required this.id,
-    required this.productName,
-    required this.price,
-    required this.rentalPrice,
-    required this.productImages,
-    required this.categoryName,
-    required this.userUsername,
+    this.id,
+     this.productName,
+     this.productDescription,
+     this.productFeatures,
+     this.price,
+     this.rentalPrice,
+     this.productImages,
+  
+     this.categoryId,
+     this.userUsername,
   });
 
-  final int id;
-  final String productName;
-  final int price;
-  final int rentalPrice;
-  final ProductImages productImages;
-  final String categoryName;
-  final String userUsername;
+  final int? id;
+  final String? productName;
+  final String? productDescription;
+  final String? productFeatures;
+  final int? price;
+  final int? rentalPrice;
+  final ProductImages? productImages;
+  final String? categoryId;
+  final String? userUsername;
 
   factory ProductFeatures.fromJson(String str) =>
       ProductFeatures.fromMap(json.decode(str));
@@ -71,19 +78,21 @@ class ProductFeatures {
         productName: json["product_name"],
         price: json["price"],
         rentalPrice: json["rental_price"],
+        productFeatures: json["productFeatures"],
+        productDescription: json["productDescription"],
         productImages: ProductImages.fromMap(json["product_images"]),
-        categoryName: json["category_name"],
+        categoryId: json["category_name"],
         userUsername: json["user_username"],
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "product_name": productName,
+        "name": productName,
+        "productDescription": productDescription,
         "price": price,
         "rental_price": rentalPrice,
-        "product_images": productImages.toMap(),
-        "category_name": categoryName,
-        "user_username": userUsername,
+        "category_id": categoryId,
+        "productFeatures": productFeatures,
+        "images": productImages!.toMap(),
       };
 }
 
@@ -100,7 +109,7 @@ class ProductImages {
   String toJson() => json.encode(toMap());
 
   factory ProductImages.fromMap(Map<String, dynamic> json) => ProductImages(
-        images: List<String>.from(json["images"].map((x) => x)),
+        images: List<String>.from(json["images"].map((x) => x) ?? []),
       );
 
   Map<String, dynamic> toMap() => {

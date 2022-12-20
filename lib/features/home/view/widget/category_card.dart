@@ -30,6 +30,7 @@ class _CategoryCardState extends State<CategoryCard> {
       child: Consumer(
         builder: (context, HomeController homeController, child) {
           return ListView.builder(
+            physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: homeController.categories.length,

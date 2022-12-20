@@ -21,30 +21,33 @@ class CustomMessenger extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              const SizedBox(width: 8),
-              Icon(state.getIcon(), color: state.getColor(), size: 32),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  content,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color:state.getColor(),
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                const SizedBox(width: 8),
+                Icon(state.getIcon(), color: state.getIconColor(), size: 32),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    content,
+                    style:  TextStyle(
+                      color: state.getTextColor(),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16
+                    ),
+                    maxLines: 3,
                   ),
-                  maxLines: 3,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

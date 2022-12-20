@@ -1,17 +1,31 @@
 import 'package:rent_app_germany/features/add_product/controller/product_controller.dart';
+import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 
 import '../../../../core/_core_exports.dart';
 
-class FavoriteProducts extends StatelessWidget {
+class FavoriteProducts extends StatefulWidget {
   const FavoriteProducts({Key? key}) : super(key: key);
 
+  @override
+  State<FavoriteProducts> createState() => _FavoriteProductsState();
+}
+
+class _FavoriteProductsState extends State<FavoriteProducts> {
+  @override
+  void initState() {
+      //  sl<ProfileController>().getFavorites();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      sl<ProfileController>().getFavorites();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Consumer(
-        builder: (context, ProductController productController, child) {
-          return productController.favoriteList.isEmpty
+        builder: (context, ProfileController profileController, child) {
+          return profileController.favoriteList.isEmpty
               ? Column(
                   children: [
                     SvgPicture.asset(
@@ -33,11 +47,12 @@ class FavoriteProducts extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: productController.favoriteList.length,
+                    itemCount: profileController.favoriteList.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          Go.to.page(PageRoutes.productPage);
+                          Go.to.page(PageRoutes.productPage,
+                              arguments: profileController.favoriteList[index]);
                         },
                         child: Container(
                           margin: const EdgeInsets.symmetric(
@@ -46,7 +61,7 @@ class FavoriteProducts extends StatelessWidget {
                           height: 150,
                           width: 175,
                           decoration: BoxDecoration(
-                            color: ColorHelper.whiteColor,
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(24),
                             border: Border.all(
                                 color: Colors.grey.shade300, width: 2),
@@ -59,27 +74,31 @@ class FavoriteProducts extends StatelessWidget {
                               children: [
                                 Stack(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 120,
                                       width: 175,
                                       child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
+                                        borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(16),
                                           topRight: Radius.circular(16),
                                         ),
-                                        child: CachedNetworkImage( //TODO: shared widgetsa taşınacak
-                                          imageUrl: productController
-                                              .favoriteList[index].imageURL,
-                                          fit: BoxFit.cover,
-                                        ),
+                                        // child: CachedNetworkImage( //TODO: shared widgetsa taşınacak
+                                        //   imageUrl: productController
+                                        //       .favoriteList[index].imageURL,
+                                        //   fit: BoxFit.cover,
+                                        // ),
                                       ),
                                     ),
                                     Positioned(
                                       right: 0,
                                       child: InkWell(
                                         onTap: () {
-                                          productController
-                                              .removeFavorite(index);
+                                          profileController.removeId =
+                                              profileController
+                                                  .favoriteList[index].id!;
+
+                                          profileController
+                                              .removeFavorites(index);
                                         },
                                         child: Container(
                                           margin: const EdgeInsets.all(6.0),
@@ -87,26 +106,18 @@ class FavoriteProducts extends StatelessWidget {
                                           height: 25,
                                           width: 25,
                                           decoration: BoxDecoration(
-                                              color: productController
-                                                      .favoriteList[index]
-                                                      .isFavorite
-                                                  ? Colors.red
-                                                  : Colors.white,
+                                              color: Colors.red,
                                               shape: BoxShape.circle),
                                           child: Icon(Icons.cancel,
-                                              size: 18,
-                                              color: productController
-                                                      .favoriteList[index]
-                                                      .isFavorite
-                                                  ? Colors.white
-                                                  : Colors.red),
+                                              size: 25, color: Colors.white),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 Text(
-                                  productController.favoriteList[index].name,
+                                  profileController
+                                      .favoriteList[index].product!.name,
                                   style: const TextStyle(fontSize: 15),
                                 ),
                                 Row(
@@ -125,8 +136,11 @@ class FavoriteProducts extends StatelessWidget {
                                 ),
                                 Align(
                                     alignment: Alignment.centerRight,
-                                    child: Text(productController
-                                        .favoriteList[index].price))
+                                    child: Text(profileController
+                                        .favoriteList[index]
+                                        .product!
+                                        .rentalPrice
+                                        .toString()))
                               ],
                             ),
                           ),

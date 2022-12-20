@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: const HomePageAppBar(),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

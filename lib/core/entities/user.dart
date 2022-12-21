@@ -2,20 +2,27 @@ import '../_core_exports.dart';
 
 class UserModel {
   UserModel({
-     this.errorCode,
-     this.accessToken,
-     this.tokenType,
-     this.user,
+    this.errorCode,
+    this.accessToken,
+    this.tokenType,
+    this.user,
   });
 
-  final int? errorCode;
-  final String? accessToken;
-  final String? tokenType;
-  final User? user;
+  int? errorCode;
+  String? accessToken;
+  String? tokenType;
+  User? user = User();
 
   factory UserModel.fromJson(String str) => UserModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
+
+  updateUserModelData(UserModel userModel) {
+    errorCode = userModel.errorCode;
+    accessToken = userModel.accessToken;
+    user = userModel.user;
+    tokenType = userModel.tokenType;
+  }
 
   factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
         errorCode: json["error_code"],
@@ -34,26 +41,28 @@ class UserModel {
 
 class User {
   User({
-     this.uuid,
-     this.name,
-     required this.username,
-     this.email,
-     this.storeId,
-     this.phoneNumber,
-     this.isSeller,
-     this.status,
-     required this.password,
+    this.uuid,
+    this.name,
+    this.username,
+    this.email,
+    this.storeId,
+    this.phoneNumber,
+    this.isSeller,
+    this.status,
+    this.password,
+    this.isLogin = false,
   });
 
   final String? uuid;
   final String? name;
-  final String username;
+  final String? username;
   final String? email;
   final dynamic storeId;
   final String? phoneNumber;
   final bool? isSeller;
   final bool? status;
-  final String password;
+  final String? password;
+  bool isLogin = false;
 
   factory User.fromJson(String str) => User.fromMap(json.decode(str));
 
@@ -68,7 +77,7 @@ class User {
         phoneNumber: json["phoneNumber"],
         isSeller: json["isSeller"],
         status: json["status"],
-        password: json["password"],
+        isLogin: true,
       );
 
   Map<String, dynamic> toMap() => {

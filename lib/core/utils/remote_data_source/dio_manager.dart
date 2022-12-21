@@ -18,7 +18,7 @@ class DioManager {
     dio.options.headers = {
       "Content-Type": "application/json",
       // "Authorization": "Bearer $token",
-      "Authorization": "Bearer 104|JEMCLg5z0QfgJ6CLWt44obgEP1vfimk7CRDn4w3ZVHXgGRgpmydJS5F75cbg6NALCZcgxziO3pQ1C6UX3oCaPD4mLEpl7I67qCq91s08TA6TDAfQmbM6Fa0Wo0dTgXKx",
+      
 
       //TODO: token eklenebilir
     };

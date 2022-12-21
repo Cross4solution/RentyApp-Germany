@@ -1,8 +1,8 @@
-
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
+import 'package:rent_app_germany/core/utils/remote_data_source/domain/entites/main_endpoint.dart';
 import 'package:rent_app_germany/features/add_product/repo/product_repo.dart';
 import 'package:rent_app_germany/features/home/domain/data/product_model.dart';
 
@@ -61,52 +61,73 @@ class ProductController extends ChangeNotifier {
   TextEditingController productRentalPriceController = TextEditingController();
 
   Future<void> addProduct() async {
+    FormData formData = FormData();
 
-
-
-
-
-    List<String> filename = [];
-
-    
-
-   
-
-    for (int i = 0; i < imageFileList!.length -1; i++) {
-
-      filename.add(imageFileList![i].path.split('/').last);
+    for (int i = 0; i < imageFileList!.length ; i++) {
+      File file = File(imageFileList![i].path);
+      String fileName = file.path.split('/').last;
+      final MultipartFile multipartFile =
+          await MultipartFile.fromFile(file.path, filename: fileName, );
+      formData.files.add(MapEntry("images[]", multipartFile));
     }
 
-     print(filename);
-  
+    ProductFeatures productFeatures = ProductFeatures(
+      productName: 'productNameController.text',
+      productDescription: 'productDescriptionController.text',
+      price: 2,
+      rentalPrice: 3,
+      categoryId: '1', // bottom sheet alanındaki kategoriyi alıcak
+      productFeatures: 'productFeaturesController.text',
+      // productImages: ProductImages(images: imageFileList!),
+    );
 
-   FormData data = FormData.fromMap({
-      "product_images":  await MultipartFile.fromFile(
-        imageFileList![0].path,
-        filename: filename[0],
-      ),
+    productFeatures.toMap().forEach((final key, final value) {
+      formData.fields.add(MapEntry(key, value.toString()));
     });
 
-    print(data.files);
+   
+   
+   
+    // File file = File(imageFileList![0].path);
 
-    // ProductFeatures productFeatures = ProductFeatures(
-    //   productName: productNameController.text,
-    //   productDescription: productDescriptionController.text,
-    //   price: 2,
-    //   rentalPrice: 3,
-    //   categoryId: '2', // bottom sheet alanındaki kategoriyi alıcak
-    //   productFeatures: productFeaturesController.text,
-    //   productImages: ProductImages(images: imageFileList!),
-    // );
+    //  String fileName = file.path.split('/').last;
 
-    // try {
-    //   await productRepository.addProduct(productModel: productFeatures);
 
-    //   print('eklendi');
-    // } catch (e) {
-    //   if (kDebugMode) {
-    //     print(e.toString());
-    //   }
-    // }
+
+    try {
+      // await productRepository.addProduct(productModel: productFeatures);
+
+      // FormData formData = FormData.fromMap({
+      //   "name": "nisssdce",
+      //   "description": "deneme",
+      //   "price": 45,
+      //   "rental_price": 45,
+      //   "category_id": 1,
+      //   "features": "fsdfsdfsdf",
+        
+      //     "images[]": 
+      //       await MultipartFile.fromFile(file.path, filename: fileName)
+          
+       
+      // });
+
+      Response response = await sl<Dio>().post(MainEndpoints.addProduct.path,
+          data: formData,
+          options: Options(
+            headers: {"Authorization": "Bearer ${sl<UserModel>().accessToken}"},
+
+            responseType: ResponseType.plain,
+
+            //  contentType: "multipart/form-data",
+          ));
+
+      print(response);
+
+      print(sl<UserModel>().accessToken);
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
   }
 }

@@ -103,7 +103,7 @@ class HomeController extends ChangeNotifier {
 
   Future<void> refreshProductsPage() async {
     productFeatures.clear();
-    getProductArguments.page = 1;
+    getProductArguments.page = 5;
 
     isLastPage = false;
 
@@ -132,6 +132,8 @@ class HomeController extends ChangeNotifier {
         isLastPage = true;
       }, (data) {
         productFeatures.addAll(data.products.data);
+
+        productFeatures = productFeatures.reversed.toList();
       
 
         getProductArguments.page++;

@@ -23,7 +23,6 @@ class RegisterController extends ChangeNotifier {
     required this.authRepository,
     this.prefs,
     required this.saveDataFromKey,
-  
   });
 
   Future<void> register() async {
@@ -53,8 +52,7 @@ class RegisterController extends ChangeNotifier {
     }
   }
 
-
- UserModel userInfo = UserModel();
+  UserModel userInfo = UserModel();
 
   Future<void> login() async {
     try {
@@ -66,13 +64,14 @@ class RegisterController extends ChangeNotifier {
       loginCheck.fold((l) => l.showErrorSnackBar(), (data) {
         userInfo = data;
 
-        print(userInfo.user?.name);
-
         saveDataFromKey(
           SharedPreferenceKeyWithValueParams(
-              key: SharedPreferencesKeys.CACHE_USER_INFO,
-              value: userInfo.toJson()),
+            key: SharedPreferencesKeys.CACHE_USER_INFO,
+            value: userInfo.toJson(),
+          ),
         );
+
+        sl<UserModel>().updateUserModelData(userInfo);
 
         Go.to.pageAndRemoveUntil(PageRoutes.bottomNavigationPage);
         showCustomMessenger(CustomMessengerState.SUCCESS, 'Hoşgeldiniz');

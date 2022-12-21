@@ -12,10 +12,10 @@ enum MainEndpoints {
   addFavorites,
   deleteFavorites,
   getFavorites,
+  searchProduct,
 }
 
 extension MainEndPointExtension on MainEndpoints {
-  
   String get path {
     switch (this) {
       case MainEndpoints.register:
@@ -39,6 +39,8 @@ extension MainEndPointExtension on MainEndpoints {
 
       case MainEndpoints.getFavorites:
         return 'api/favorite/my-favorites/';
+      case MainEndpoints.searchProduct:
+        return 'api/product/search';
     }
   }
 }

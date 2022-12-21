@@ -69,7 +69,7 @@ void showCustomMessenger(CustomMessengerState messengerState, String content) {
       backgroundColor:  Colors.transparent,
       content: CustomMessenger(state: messengerState, content: content),
       behavior: SnackBarBehavior.floating,
-      duration: const Duration(seconds: 10),
+      duration: const Duration(seconds: 2),
       elevation: 0,
     ),
   );

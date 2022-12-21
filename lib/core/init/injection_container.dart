@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/data/repository/network_manager.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/dio_manager.dart';
@@ -36,6 +37,20 @@ Future<void> init() async {
   sl.registerLazySingleton(() => RemoveDataFromKey(sl()));
   sl.registerLazySingleton(() => SaveDataFromKey(sl()));
 
+  sl.registerSingletonAsync<UserModel>(() async {
+    final getDataFormKey = sl<GetDataFromKey>();
+
+    final data = await getDataFormKey(
+      SharedPreferenceKeyParams(
+        key: SharedPreferencesKeys.CACHE_USER_INFO,
+      ),
+    );
+
+    return data.fold((l) => UserModel(), (jsonData) {
+      return UserModel.fromJson(jsonData);
+    });
+  });
+
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(),
   );
@@ -56,18 +71,13 @@ Future<void> init() async {
       authRepository: sl<AuthRepository>(),
       saveDataFromKey: sl<SaveDataFromKey>()));
 
-      
   sl.registerLazySingleton(
       () => HomeController(homeRepository: sl<HomeRepository>()));
 
-
   sl.registerLazySingleton(() => LoginController());
-
 
   sl.registerLazySingleton(
       () => ProfileController(profileRepository: sl<ProfileRepository>()));
-
-
 
   sl.registerLazySingleton(
       () => ProductController(productRepository: sl<ProductRepository>()));

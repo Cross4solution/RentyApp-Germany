@@ -51,7 +51,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home: BottomNavigationPage(),
+      home: SplashPage(),
     );
   }
 }

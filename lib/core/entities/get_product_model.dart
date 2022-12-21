@@ -87,12 +87,12 @@ class ProductFeatures {
 
   Map<String, dynamic> toMap() => {
         "name": productName,
-        "productDescription": productDescription,
+        "description": productDescription,
         "price": price,
         "rental_price": rentalPrice,
         "category_id": categoryId,
-        "productFeatures": productFeatures,
-        "images": productImages!.toMap(),
+        "features": productFeatures,
+        // "images": productImages!.toMap(),
       };
 }
 

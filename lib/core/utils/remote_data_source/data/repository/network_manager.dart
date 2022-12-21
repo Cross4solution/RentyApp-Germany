@@ -16,6 +16,12 @@ class NetworkManager extends INetworkManager {
       Response response = await dio.get(
         endPoint.path,
         queryParameters: queryParameters,
+        options: Options(
+          headers: {
+            "Authorization":
+                "Bearer ${sl<UserModel>().accessToken}"
+          },
+        ),
       );
 
       final statusCode =
@@ -41,6 +47,12 @@ class NetworkManager extends INetworkManager {
         endPoint.path,
         queryParameters: queryParameters,
         data: jsonEncode(requestBody),
+        options: Options(
+          headers: {
+            "Authorization":
+                "Bearer ${sl<UserModel>().accessToken}"
+          },
+        ),
       );
 
       final statusCode =
@@ -74,6 +86,12 @@ class NetworkManager extends INetworkManager {
       Response response = await dio.delete(
         endPoint.path,
         queryParameters: queryParameters,
+        options: Options(
+          headers: {
+            "Authorization":
+                "Bearer ${sl<UserModel>().accessToken}"
+          },
+        ),
       );
 
       final statusCode =

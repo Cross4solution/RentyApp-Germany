@@ -2,7 +2,7 @@ class GetProductArguments {
   int page;
 
   GetProductArguments({
-    this.page = 1,
+    this.page = 5,
   });
 
   Map<String, dynamic> toMap() {

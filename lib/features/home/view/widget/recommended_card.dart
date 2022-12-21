@@ -65,7 +65,7 @@ class _RecommendedCardState extends State<RecommendedCard> {
                     children: [
                       Stack(
                         children: [
-                          const SizedBox(
+                           SizedBox(
                             height: 120,
                             width: 175,
                             child: ClipRRect(
@@ -73,12 +73,12 @@ class _RecommendedCardState extends State<RecommendedCard> {
                                 topLeft: Radius.circular(16),
                                 topRight: Radius.circular(16),
                               ),
-                              //   child:productFeatures.productImages!.images[0] != null ?
+                                child:productFeatures.productImages!.images.isEmpty ?
 
-                              //    Image.network(
-                              //  "https://api.testsoftware.site/${productFeatures.productImages!.images[index][0]}"
+                                 Image.network(
+                               "https://api.testsoftware.site/${productFeatures.productImages!.images[0]}"
 
-                              //    ): SizedBox.shrink()
+                                 ): SizedBox.shrink()
                             ),
                           ),
                           Positioned(

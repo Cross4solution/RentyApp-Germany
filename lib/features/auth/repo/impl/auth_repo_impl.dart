@@ -53,9 +53,8 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserModel>> login(
-      {required User user}) async {
-    try {
+  Future<Either<Failure, UserModel>> login({required User user}) async {
+    
       final register = await sl<INetworkManager>().basePost(
         endPoint: MainEndpoints.login,
         requestBody: {
@@ -67,11 +66,11 @@ class AuthRepositoryImpl implements AuthRepository {
       return register.fold((l) {
         return Left(l);
       }, (data) {
-        return Right(UserModel());
+        final userInfo = UserModel.fromJson(data);
+
+        return Right(userInfo);
       });
-    } on Failure catch (failure) {
-      return Left(failure);
-    }
+   
   }
 
   // @override

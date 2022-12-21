@@ -4,6 +4,7 @@ import 'package:rent_app_germany/features/home/view/widget/text_button_widget.da
 import '../../../../core/entities/get_product_model.dart';
 import '../widget/price_information_card.dart';
 import '../widget/product_seller_person_widget.dart';
+import '../widget/product_slidable_images.dart';
 import '../widget/select_price_card.dart';
 import '../widget/slidable_trends_card.dart';
 
@@ -30,7 +31,7 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   Stack(
                     children: [
-                      const SlidableTrendsCard(),
+                      ProductSlidableImages(productFeatures:widget.productFeatures ),
                       Positioned(
                         left: 12,
                         top: 12,

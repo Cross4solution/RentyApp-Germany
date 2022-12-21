@@ -12,6 +12,7 @@ abstract class INetworkManager {
   Future<Either<Failure, String>> baseGet({
     required MainEndpoints endPoint,
     Map<String, dynamic>? queryParameters,
+    
   });
   Future<Either<Failure, String>> basePost({
     required MainEndpoints endPoint,

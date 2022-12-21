@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/shared_widgets/app_text_form_field.dart';
 import 'package:rent_app_germany/core/utils/screen_size.dart';
+import 'package:rent_app_germany/features/search/controller/search_controller.dart';
 import 'package:rent_app_germany/features/search/view/widget/search_card.dart';
 import '../widget/search_app_bar.dart';
 
@@ -23,6 +24,12 @@ class SearchPage extends StatelessWidget {
                 child: AppTextFormField.standart(
                   hintText: 'Ara',
                   prefixIcon: const Icon(Icons.search_outlined, size: 28),
+                  controller: sl<SearchController>().searchTextController,
+                  onChanged: (value) {
+                    sl<SearchController>().searchTextController.text = value;
+
+                    sl<SearchController>().searchProduct();
+                  },
                 ),
               ),
               ListView.builder(

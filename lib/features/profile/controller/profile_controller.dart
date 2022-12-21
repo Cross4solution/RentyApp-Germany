@@ -29,13 +29,11 @@ class ProfileController extends ChangeNotifier {
   Future<void> getFavorites() async {
     favoriteList.clear();
     try {
-      final getFavorites = await profileRepository.getFavorites(
-          favoriteProductsModel:
-              FavoriteProductsModel(favorites: favoriteList));
+      final getFavorites = await profileRepository.getFavorites();
 
       getFavorites.fold((l) => Left(l), (data) {
         favoriteList.addAll(data.favorites!);
-       favoriteList = favoriteList.reversed.toList();
+        favoriteList = favoriteList.reversed.toList();
         notifyListeners();
       });
     } catch (e) {
@@ -45,14 +43,11 @@ class ProfileController extends ChangeNotifier {
 
   Future<void> removeFavorites(int index) async {
     try {
-      final getFavorites = await profileRepository.removeFavorites(
-          favoriteProductsModel:
-              FavoriteProductsModel(favorites: favoriteList));
+      final getFavorites = await profileRepository.removeFavorites();
 
       getFavorites.fold((l) => Left(l), (data) {
         favoriteList.removeAt(index);
         notifyListeners();
-        // addAll(data.favorites!);
       });
     } catch (e) {
       print(e.toString());

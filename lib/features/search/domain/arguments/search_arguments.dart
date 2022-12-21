@@ -1,5 +1,5 @@
 class SearchArguments {
-  final String keyword;
+   String keyword;
 
   SearchArguments({required this.keyword});
 

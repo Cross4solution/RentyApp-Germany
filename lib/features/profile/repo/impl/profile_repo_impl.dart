@@ -40,12 +40,10 @@ class ProfileRepoImpl implements ProfileRepository {
   }
 
   @override
-  Future<Either<Failure, FavoriteProductsModel>> getFavorites(
-      {required FavoriteProductsModel favoriteProductsModel}) async {
+  Future<Either<Failure, FavoriteProductsModel>> getFavorites() async {
     try {
       final getFavorites = await sl<INetworkManager>().baseGet(
         endPoint: MainEndpoints.getFavorites,
-        // queryParameters: favoriteProductsModel.toMap(),
       );
 
       return getFavorites.fold((l) {
@@ -63,8 +61,7 @@ class ProfileRepoImpl implements ProfileRepository {
   }
 
   @override
-  Future<Either<Failure, void>> removeFavorites(
-      {required FavoriteProductsModel favoriteProductsModel}) async {
+  Future<Either<Failure, void>> removeFavorites() async {
     try {
       final addFavorites = await sl<INetworkManager>().baseDelete(
         endPoint: MainEndpoints.deleteFavorites,

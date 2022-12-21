@@ -10,13 +10,7 @@ abstract class ProfileRepository {
     required ProductFeatures productFeatures,
   });
 
-    Future<Either<Failure, void>> removeFavorites({
-    required FavoriteProductsModel favoriteProductsModel,
-  });
+  Future<Either<Failure, void>> removeFavorites();
 
-
-    Future<Either<Failure, FavoriteProductsModel>> getFavorites({
-    required FavoriteProductsModel favoriteProductsModel,
-  });
-
+  Future<Either<Failure, FavoriteProductsModel>> getFavorites();
 }

@@ -45,6 +45,7 @@ class _FavoriteProductsState extends State<FavoriteProducts> {
               : SizedBox(
                   height: 210,
                   child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: profileController.favoriteList.length,

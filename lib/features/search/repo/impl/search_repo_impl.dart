@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:rent_app_germany/core/error/failures/failure.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:dartz/dartz.dart';
@@ -10,8 +12,10 @@ import '../../domain/arguments/search_arguments.dart';
 
 class SearchRepoImpl implements SearchRepository {
   @override
-  Future<Either<Failure, GetProductModel>> searchProduct(
-      {required SearchArguments searchArguments}) async {
+  Future<Either<Failure, GetProductModel>> searchProduct({
+    required SearchArguments searchArguments,
+    // required GetProductModel products,
+  }) async {
     try {
       final getFavorites = await sl<INetworkManager>().baseGet(
         endPoint: MainEndpoints.searchProduct,
@@ -21,9 +25,13 @@ class SearchRepoImpl implements SearchRepository {
       return getFavorites.fold((l) {
         return Left(l);
       }, (data) {
-        GetProductModel productsModel = GetProductModel.fromJson(data);
+        // final decodedData = jsonDecode(data)["products"]["data"];
+        final decodedData = GetProductModel.fromJson(data);
+        // print(decodedData);
 
-        return Right(productsModel);
+        // final productsModel = Products.fromJson(decodedData);
+
+        return Right(decodedData);
       });
     } on Failure catch (failure) {
       return Left(failure);

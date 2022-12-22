@@ -21,4 +21,6 @@ class AssetsPath {
   final String forgotPasswordSVG = 'assets/svg/forgot_password.svg';
   final String addProductSVG = 'assets/svg/add_Product.svg';
   final String emptyFavoriteSVG = 'assets/svg/empty_favorite.svg';
+  final String searchEmptySVG = 'assets/svg/search_emty.svg';
+  final String searchNotFoundSVG = 'assets/svg/search_not_found.svg';
 }

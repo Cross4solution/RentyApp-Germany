@@ -1,8 +1,10 @@
 import '../../../../core/_core_exports.dart';
+import '../../../../core/entities/get_product_model.dart';
 
 class SearchCard extends StatelessWidget {
-  const SearchCard({
-    Key? key,
+  ProductFeatures searchItem;
+   SearchCard({
+    Key? key, required this.searchItem
   }) : super(key: key);
 
   @override
@@ -63,10 +65,10 @@ class SearchCard extends StatelessWidget {
                         const SizedBox(
                           width: 4,
                         ),
-                        const SizedBox(
+                         SizedBox(
                           width: 90,
                           child: Text(
-                            'Yasin Karacan',
+                            searchItem.userUsername.toString(),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
@@ -91,7 +93,7 @@ class SearchCard extends StatelessWidget {
                       height: 16,
                     ),
                     const Text('Kiralama ücretleri'),
-                    const Text('\$5.00 /saatlik', style: TextStyle(fontWeight: FontWeight.bold),),
+                     Text('\$${searchItem.rentalPrice} /saatlik', style: TextStyle(fontWeight: FontWeight.bold),),
                   ],
                 ),
               ],
@@ -99,8 +101,8 @@ class SearchCard extends StatelessWidget {
             const SizedBox(
               height: 6,
             ),
-            const Text(
-              'Dağ Bisikleti',
+             Text(
+              searchItem.productName.toString(),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(

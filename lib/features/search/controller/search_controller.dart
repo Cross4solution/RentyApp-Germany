@@ -4,7 +4,7 @@ import 'package:rent_app_germany/features/search/domain/arguments/search_argumen
 import 'package:rent_app_germany/features/search/repo/search_repository.dart';
 
 import '../../../core/entities/get_product_model.dart';
-import '../../../core/shared_widgets/debouncer.dart';
+
 
 class SearchController extends ChangeNotifier {
   SearchRepository searchRepository;

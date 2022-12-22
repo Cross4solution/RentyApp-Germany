@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:rent_app_germany/core/shared_widgets/full_photo_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../core/_core_exports.dart';
@@ -6,7 +7,7 @@ import '../../../../core/entities/get_product_model.dart';
 import '../page/home_page.dart';
 
 class ProductSlidableImages extends StatefulWidget {
-    final ProductFeatures productFeatures;
+  final ProductFeatures productFeatures;
   const ProductSlidableImages({super.key, required this.productFeatures});
 
   @override
@@ -32,11 +33,17 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(24),
-                child: CachedNetworkImage(
-                  imageUrl:"https://api.testsoftware.site/${widget.productFeatures.productImages!.images[index]}"
-                
+                child: GestureDetector(
+                  onTap: () {
+                    Go.to.page(PageRoutes.fullPhotoWidget,
+                        arguments: widget.productFeatures);
+                  },
+                  child: CachedNetworkImage(
+                      imageUrl:
+                          "https://api.testsoftware.site/${widget.productFeatures.productImages!.images[index]}"
 
-                  // fit: BoxFit.cover,
+                      // fit: BoxFit.cover,
+                      ),
                 ),
               ),
             );

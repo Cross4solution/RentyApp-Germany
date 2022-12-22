@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:rent_app_germany/core/shared_widgets/full_photo_widget.dart';
 import 'package:rent_app_germany/features/add_product/view/page/add_product_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/forgot_password_page.dart';
 import 'package:rent_app_germany/features/auth/view/page/login_page.dart';
@@ -31,6 +32,7 @@ class PageRoutes {
   static const String verifyPage = "/verifyPage";
   static const String chatPage = "/chatPage";
   static const String allProductsPage = "/allProductsPage";
+  static const String fullPhotoWidget = "/fullPhotoWidget";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -72,6 +74,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const ChatPage());
     case PageRoutes.allProductsPage:
       return CupertinoPageRoute(builder: (_) => const AllProductsPage());
+
+    case PageRoutes.fullPhotoWidget:
+      final ProductFeatures productFeatures =
+          settings.arguments as ProductFeatures;
+      return CupertinoPageRoute(
+          builder: (_) => FullPhotoWidget(
+                productFeatures: productFeatures,
+              ));
 
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());

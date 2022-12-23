@@ -1,5 +1,5 @@
 import 'package:rent_app_germany/core/shared_widgets/app_text_form_field.dart';
-import 'package:rent_app_germany/features/auth/controller/register_controller.dart';
+import 'package:rent_app_germany/features/auth/controller/auth_controller.dart';
 
 import '../../../../core/_core_exports.dart';
 
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
                     height: ScreenSize().getHeightPercent(.1),
                   ),
                   AppTextFormField.standart(
-                    controller: sl<RegisterController>().usernameController,
+                    controller: sl<AuthController>().usernameController,
                     hintText: 'Username',
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
@@ -48,7 +48,7 @@ class LoginPage extends StatelessWidget {
                     height: 16,
                   ),
                   AppTextFormField.obscure(
-                    controller: sl<RegisterController>().passwordController,
+                    controller: sl<AuthController>().passwordController,
                     hintText: 'Password',
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
@@ -80,7 +80,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      sl<RegisterController>().login();
+                      sl<AuthController>().login();
                     },
                     child: Container(
                       alignment: Alignment.center,

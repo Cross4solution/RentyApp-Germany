@@ -23,8 +23,6 @@ class _SplashPageState extends State<SplashPage> {
         } else {
           Go.to.pageAndRemoveUntil(PageRoutes.loginPage);
         }
-
-        Go.to.pageAndRemoveUntil(PageRoutes.bottomNavigationPage);
       },
     );
   }

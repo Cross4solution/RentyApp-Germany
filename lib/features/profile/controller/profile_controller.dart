@@ -4,20 +4,24 @@ import 'package:rent_app_germany/core/entities/favorite_products.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:rent_app_germany/features/profile/repo/profile_repo.dart';
 
+import '../../../core/entities/adress_model.dart';
+
 class ProfileController extends ChangeNotifier {
   ProfileRepository profileRepository;
 
   ProfileController({required this.profileRepository}) {
     // getFavorites();
+    // getAdress();
   }
 
-  late int addId;
-  late int removeId;
+  late int addFavoriteId;
+  late int removeFavoriteId;
+  late int removeAdressId;
 
   Future<void> addFavorites() async {
     try {
       await profileRepository.addFavorites(
-        productFeatures: ProductFeatures(id: addId),
+        productFeatures: ProductFeatures(id: addFavoriteId),
       );
     } catch (e) {
       print(e.toString());
@@ -47,6 +51,60 @@ class ProfileController extends ChangeNotifier {
 
       getFavorites.fold((l) => Left(l), (data) {
         favoriteList.removeAt(index);
+        notifyListeners();
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  TextEditingController adressTitle = TextEditingController();
+  TextEditingController adressCity = TextEditingController();
+  TextEditingController adressDetail = TextEditingController();
+  TextEditingController adressPostalCode = TextEditingController();
+
+  Future<void> addAdress() async {
+    final userLocation = UserLocation(
+        title: adressTitle.text,
+        city: adressCity.text,
+        address: adressDetail.text,
+        postalCode: adressPostalCode.text);
+    try {
+      await profileRepository.addAdress(userLocation: userLocation);
+    } catch (e) {
+      print(e.toString());
+    }
+    adressTitle.clear();
+    adressCity.clear();
+    adressDetail.clear();
+    adressPostalCode.clear();
+
+  }
+
+  List<UserLocation> adressList = [];
+
+  Future<void> getAdress() async {
+    adressList.clear();
+    try {
+      final getAdress = await profileRepository.getAdressList();
+
+      getAdress.fold((l) => Left(l), (data) {
+        adressList.addAll(data.userLocation!);
+
+        notifyListeners();
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+
+    Future<void> removeAdress(int index) async {
+    try {
+      final removeAdress = await profileRepository.removeAdress();
+
+      removeAdress.fold((l) => Left(l), (data) {
+        adressList.removeAt(index);
         notifyListeners();
       });
     } catch (e) {

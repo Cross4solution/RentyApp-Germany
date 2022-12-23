@@ -3,7 +3,7 @@ import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/shared_widgets/app_button.dart';
 import 'package:rent_app_germany/core/shared_widgets/app_text_form_field.dart';
 import 'package:rent_app_germany/features/add_product/controller/product_controller.dart';
-import 'package:rent_app_germany/features/auth/controller/register_controller.dart';
+import 'package:rent_app_germany/features/auth/controller/auth_controller.dart';
 import 'package:rent_app_germany/features/auth/view/widget/seller_check_box.dart';
 
 import '../widget/add_app_bar.dart';
@@ -20,7 +20,7 @@ class AddProductPage extends StatelessWidget {
     return AppContainer(
       child: Scaffold(
         appBar: const AddProductAppBar(),
-        body: !sl<RegisterController>().isSeller
+        body: !sl<AuthController>().isSeller
             ? SingleChildScrollView(
                 child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),

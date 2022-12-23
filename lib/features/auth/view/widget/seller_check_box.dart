@@ -1,5 +1,5 @@
 import '../../../../core/_core_exports.dart';
-import '../../controller/register_controller.dart';
+import '../../controller/auth_controller.dart';
 
 class SellerCheckBox extends StatelessWidget {
   const SellerCheckBox({
@@ -9,7 +9,7 @@ class SellerCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, RegisterController registerController,
+      builder: (context, AuthController registerController,
           child) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,

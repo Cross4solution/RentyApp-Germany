@@ -103,7 +103,7 @@ class HomeController extends ChangeNotifier {
 
   Future<void> refreshProductsPage() async {
     productFeatures.clear();
-    getProductArguments.page = 5;
+    getProductArguments.page = 4;
 
     isLastPage = false;
 

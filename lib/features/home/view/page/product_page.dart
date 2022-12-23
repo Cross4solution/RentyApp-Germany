@@ -1,6 +1,7 @@
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/features/home/controller/home_controller.dart';
 import 'package:rent_app_germany/features/home/view/widget/text_button_widget.dart';
+import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 import '../../../../core/entities/get_product_model.dart';
 import '../widget/price_information_card.dart';
 import '../widget/product_seller_person_widget.dart';
@@ -19,6 +20,13 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   @override
+  void initState() {
+    sl<ProfileController>().getAdress();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
     return Scaffold(
@@ -31,7 +39,8 @@ class _ProductPageState extends State<ProductPage> {
                 children: [
                   Stack(
                     children: [
-                      ProductSlidableImages(productFeatures:widget.productFeatures ),
+                      ProductSlidableImages(
+                          productFeatures: widget.productFeatures),
                       Positioned(
                         left: 12,
                         top: 12,
@@ -117,6 +126,89 @@ class _ProductPageState extends State<ProductPage> {
                                 fontSize: 18, fontWeight: FontWeight.w600),
                           )
                         ],
+                        const SizedBox(
+                          height: 12,
+                        ),
+
+                        Text(
+                          'Teslimat adresi seçiniz. ',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey.shade800),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Consumer(
+                          builder: (context, value, child) {
+                            return SizedBox(
+                              height: 48,
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemCount:
+                                    sl<ProfileController>().adressList.length,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 46,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.grey.shade400, width: 2),
+                                            // color: Colors.amber,
+                                            borderRadius:
+                                                BorderRadius.circular(24),
+                                          ),
+                                          child: Text(
+                                            sl<ProfileController>()
+                                                .adressList[index]
+                                                .title,
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                      ),
+                                      Visibility(
+                                          visible: index ==
+                                              sl<ProfileController>()
+                                                      .adressList
+                                                      .length -
+                                                  1,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              Go.to.page(PageRoutes.adressPage);
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 16),
+                                              child: Container(
+                                                  alignment: Alignment.center,
+                                                  height: 46,
+                                                  width: 46,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.amber,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24),
+                                                  ),
+                                                  child: const Icon(Icons.add)),
+                                            ),
+                                          )),
+                                    ],
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
                         const SizedBox(
                           height: 12,
                         ),

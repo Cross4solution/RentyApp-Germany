@@ -94,7 +94,7 @@ class _FavoriteProductsState extends State<FavoriteProducts> {
                                       right: 0,
                                       child: InkWell(
                                         onTap: () {
-                                          profileController.removeId =
+                                          profileController.removeFavoriteId =
                                               profileController
                                                   .favoriteList[index].id!;
 

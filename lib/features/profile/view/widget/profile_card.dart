@@ -1,5 +1,5 @@
 import '../../../../core/_core_exports.dart';
-import '../../../auth/controller/register_controller.dart';
+import '../../../auth/controller/auth_controller.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
@@ -9,7 +9,7 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    UserModel user = sl<RegisterController>().userInfo;
+    UserModel user = sl<AuthController>().userInfo;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
       child: Row(

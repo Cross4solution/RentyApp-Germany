@@ -15,5 +15,5 @@ abstract class AuthRepository {
     required User user,
   });
 
-  // Future<Either<Failure, void>> signOut();
+  Future<Either<Failure, void>> logout();
 }

@@ -66,13 +66,13 @@ class FullPhotoWidget extends StatelessWidget {
               onTap: () => Go.to.back(),
               child: CircleAvatar(
                 backgroundColor: Colors.grey.shade300,
-                child: Padding(
-                  padding: const EdgeInsets.all(1.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(1.0),
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Center(
-                      child: const Icon(
-                        Icons.arrow_back_ios_new,
+                      child: Icon(
+                        Icons.cancel_outlined,size: 28,
                         color: Colors.grey,
                       ),
                     ),

@@ -1,5 +1,5 @@
 import '../../../../core/_core_exports.dart';
-import '../../../auth/controller/register_controller.dart';
+import '../../../auth/controller/auth_controller.dart';
 
 class DamageInformationCheckbox extends StatelessWidget {
   const DamageInformationCheckbox({
@@ -9,7 +9,7 @@ class DamageInformationCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, RegisterController registerController,
+      builder: (context, AuthController registerController,
           child) {
         return Column(
           children: [

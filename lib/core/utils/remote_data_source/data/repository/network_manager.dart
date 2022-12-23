@@ -19,10 +19,13 @@ class NetworkManager extends INetworkManager {
         options: Options(
           headers: {
             "Authorization":
+                // "Bearer 49|UKafgNkDt1RR77Iy1ClShvo5uYfxEhyrFa8C4ty5y9nX1DTPvf0GVYWIMHcs11L3p0yQIHyz6oevSVGaDWuUWDMQt3z7h8O3tgtM7KLzNitrFXUXEGMSbn46imi18vMy"
                 "Bearer ${sl<UserModel>().accessToken}"
           },
         ),
       );
+
+
 
       final statusCode =
           StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);

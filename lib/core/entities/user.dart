@@ -11,7 +11,7 @@ class UserModel {
   int? errorCode;
   String? accessToken;
   String? tokenType;
-  User? user = User();
+  User? user;
 
   factory UserModel.fromJson(String str) => UserModel.fromMap(json.decode(str));
 

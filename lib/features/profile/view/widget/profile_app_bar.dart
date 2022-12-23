@@ -1,3 +1,5 @@
+import 'package:rent_app_germany/features/auth/controller/auth_controller.dart';
+
 import '../../../../core/_core_exports.dart';
 
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,8 +16,10 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: GestureDetector(
-            onTap: () {},
-            child: const Icon(Icons.settings),
+            onTap: () {
+              sl<AuthController>().logout();
+            },
+            child: const Icon(Icons.output_rounded, size: 30),
           ),
         ),
       ],

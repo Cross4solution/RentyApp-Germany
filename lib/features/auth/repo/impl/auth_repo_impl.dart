@@ -54,36 +54,35 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, UserModel>> login({required User user}) async {
-    
-      final register = await sl<INetworkManager>().basePost(
-        endPoint: MainEndpoints.login,
-        requestBody: {
-          'username': user.username,
-          'password': user.password,
-        },
-      );
+    final register = await sl<INetworkManager>().basePost(
+      endPoint: MainEndpoints.login,
+      requestBody: {
+        'username': user.username,
+        'password': user.password,
+      },
+    );
 
-      return register.fold((l) {
-        return Left(l);
-      }, (data) {
-        final userInfo = UserModel.fromJson(data);
+    return register.fold((l) {
+      return Left(l);
+    }, (data) {
+      final userInfo = UserModel.fromJson(data);
 
-        return Right(userInfo);
-      });
-   
+      return Right(userInfo);
+    });
   }
 
-  // @override
-  // Future<Either<Failure, void>> signOut() async{
-  //   try {
-  //     sl<NetworkManager>().basePost(endPoint: endPoint);
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      final register = await sl<INetworkManager>().basePost(
+        endPoint: MainEndpoints.logout,
+      );
 
-  //   } on Failure catch (failure) {
-
-  //     return Left(failure);
-
-  //   }
-
-  // }
-
+      return register.fold((l) => Left(l), (data) {
+        return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:rent_app_germany/core/_core_exports.dart';
+import 'package:rent_app_germany/core/entities/adress_model.dart';
 import 'package:rent_app_germany/core/error/failures/failure.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:dartz/dartz.dart';
@@ -47,7 +48,6 @@ class ProfileRepoImpl implements ProfileRepository {
       );
 
       return getFavorites.fold((l) {
-        showCustomMessenger(CustomMessengerState.ERROR, 'eklenmedi');
         return Left(l);
       }, (data) {
         FavoriteProductsModel productsModel =
@@ -73,6 +73,71 @@ class ProfileRepoImpl implements ProfileRepository {
       }, (data) {
         showCustomMessenger(
             CustomMessengerState.SUCCESS, 'İlan favorlerinizden kaldırıldı.');
+
+        return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, AdressModel>> getAdressList() async {
+    try {
+      final getAdress = await sl<INetworkManager>().baseGet(
+        endPoint: MainEndpoints.getAdress,
+      );
+
+      return getAdress.fold((l) {
+        return Left(l);
+      }, (data) {
+        AdressModel adressModel = AdressModel.fromJson(data);
+
+        return Right(adressModel);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> addAdress(
+      {required UserLocation userLocation}) async {
+    try {
+      final addFavorites = await sl<INetworkManager>().basePost(
+        endPoint: MainEndpoints.addAdress,
+        requestBody: userLocation.toMap(),
+      );
+
+      return addFavorites.fold((l) {
+        showCustomMessenger(
+            CustomMessengerState.ERROR, 'Adres eklenirken bir sorun oluştu.');
+        return Left(l);
+      }, (data) {
+        if (jsonDecode(data)["error_code"] == 0) {
+          showCustomMessenger(
+              CustomMessengerState.SUCCESS, 'Adres başarıyla eklendi.');
+        }
+
+        return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeAdress() async {
+    try {
+      final addFavorites = await sl<INetworkManager>().baseDelete(
+        endPoint: MainEndpoints.deleteAdress,
+      );
+
+      return addFavorites.fold((l) {
+        showCustomMessenger(CustomMessengerState.ERROR, 'hata');
+        return Left(l);
+      }, (data) {
+        showCustomMessenger(CustomMessengerState.SUCCESS, 'Adres kaldırıldı.');
 
         return const Right(null);
       });

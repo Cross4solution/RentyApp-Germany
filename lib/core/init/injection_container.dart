@@ -13,7 +13,7 @@ import 'package:rent_app_germany/features/search/repo/search_repository.dart';
 import '../../features/add_product/controller/product_controller.dart';
 import '../../features/add_product/repo/impl/product_repo_impl.dart';
 import '../../features/add_product/repo/product_repo.dart';
-import '../../features/auth/controller/register_controller.dart';
+import '../../features/auth/controller/auth_controller.dart';
 import '../../features/auth/repo/impl/auth_repo_impl.dart';
 import '../../features/bottom_navigation_bar/view_model/bottom_navigation_bar_controller.dart';
 import '../../features/home/repo/home_repository.dart';
@@ -73,7 +73,7 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(() => BottomNavigationBarProvider());
 
-  sl.registerLazySingleton(() => RegisterController(
+  sl.registerLazySingleton(() => AuthController(
       authRepository: sl<AuthRepository>(),
       saveDataFromKey: sl<SaveDataFromKey>()));
 
@@ -82,7 +82,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
       () => SearchController(searchRepository: sl<SearchRepository>()));
 
-  sl.registerLazySingleton(() => LoginController());
+
 
   sl.registerLazySingleton(
       () => ProfileController(profileRepository: sl<ProfileRepository>()));

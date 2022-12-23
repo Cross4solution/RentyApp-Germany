@@ -14,7 +14,9 @@ import 'package:rent_app_germany/features/profile/view/page/profile_page.dart';
 import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 
 import '../../../features/home/view/page/all_products_page.dart';
+import '../../../features/profile/view/page/adress_page.dart';
 import '../../../features/profile/view/page/profile_edit_page.dart';
+import '../../../features/profile/view/widget/adress_add_page.dart';
 import '../../entities/get_product_model.dart';
 
 class PageRoutes {
@@ -33,6 +35,8 @@ class PageRoutes {
   static const String chatPage = "/chatPage";
   static const String allProductsPage = "/allProductsPage";
   static const String fullPhotoWidget = "/fullPhotoWidget";
+  static const String adressAddPage = "/adressAddPage";
+  static const String adressPage = "/adressPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -82,7 +86,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (_) => FullPhotoWidget(
                 productFeatures: productFeatures,
               ));
-
+    case PageRoutes.adressAddPage:
+      return CupertinoPageRoute(builder: (_) => const AdressAddPage());
+    case PageRoutes.adressPage:
+      return CupertinoPageRoute(builder: (_) => const AdressPage());
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());
   }

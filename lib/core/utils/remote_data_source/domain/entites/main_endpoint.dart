@@ -13,6 +13,11 @@ enum MainEndpoints {
   deleteFavorites,
   getFavorites,
   searchProduct,
+  logout,
+  getAdress,
+  addAdress,
+  deleteAdress,
+  // editAdress,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -24,6 +29,8 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/user/email-verify';
       case MainEndpoints.login:
         return 'api/user/login';
+      case MainEndpoints.logout:
+        return 'api/user/logout';
       case MainEndpoints.getAllProducts:
         return 'api/product/all';
       case MainEndpoints.category:
@@ -32,15 +39,21 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/userproduct/add';
 
       case MainEndpoints.addFavorites:
-        return 'api/favorite/add/${sl<ProfileController>().addId.toString()}';
+        return 'api/favorite/add/${sl<ProfileController>().addFavoriteId.toString()}';
 
       case MainEndpoints.deleteFavorites:
-        return 'api/favorite/delete/${sl<ProfileController>().removeId.toString()}';
+        return 'api/favorite/delete/${sl<ProfileController>().removeFavoriteId.toString()}';
 
       case MainEndpoints.getFavorites:
         return 'api/favorite/my-favorites/';
       case MainEndpoints.searchProduct:
         return 'api/product/search';
+      case MainEndpoints.getAdress:
+        return 'api/user/location';
+      case MainEndpoints.addAdress:
+        return 'api/user/location/add';
+      case MainEndpoints.deleteAdress:
+        return 'api/user/location/delete/${sl<ProfileController>().removeAdressId.toString()}';
     }
   }
 }

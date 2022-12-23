@@ -1,4 +1,4 @@
-import 'package:rent_app_germany/features/auth/controller/register_controller.dart';
+import 'package:rent_app_germany/features/auth/controller/auth_controller.dart';
 
 import '../../../../core/_core_exports.dart';
 import '../../../../core/shared_widgets/app_button.dart';
@@ -33,7 +33,7 @@ class _VerifyPageState extends State<VerifyPage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Consumer(
-          builder: (context, RegisterController registerController, child) {
+          builder: (context, AuthController registerController, child) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

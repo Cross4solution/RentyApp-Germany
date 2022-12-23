@@ -16,7 +16,9 @@ import 'features/bottom_navigation_bar/view/pages/bottom_navigation_page.dart';
 import 'features/home/view/page/all_products_page.dart';
 import 'features/message/view/page/chat_page.dart';
 import 'features/message/view/page/message_box_page.dart';
+import 'features/profile/view/page/adress_page.dart';
 import 'features/profile/view/page/profile_edit_page.dart';
+import 'features/profile/view/widget/adress_add_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

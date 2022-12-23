@@ -85,7 +85,7 @@ class _RecommendedCardState extends State<RecommendedCard> {
                             right: 0,
                             child: InkWell(
                               onTap: () {
-                                sl<ProfileController>().addId = productFeatures.id!;
+                                sl<ProfileController>().addFavoriteId = productFeatures.id!;
                                 sl<ProfileController>()
                                     .addFavorites();
                               },

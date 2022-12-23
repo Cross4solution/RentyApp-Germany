@@ -1,6 +1,6 @@
 import '../../../../core/_core_exports.dart';
 import '../../../../core/shared_widgets/app_text_form_field.dart';
-import '../../controller/register_controller.dart';
+import '../../controller/auth_controller.dart';
 import '../widget/seller_check_box.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -24,7 +24,7 @@ class RegisterPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Consumer(
-        builder: (context, RegisterController registerController, child) {
+        builder: (context, AuthController registerController, child) {
           return SingleChildScrollView(
             child: AppContainer(
               child: Container(

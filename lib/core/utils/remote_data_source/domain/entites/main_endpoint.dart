@@ -18,6 +18,7 @@ enum MainEndpoints {
   addAdress,
   deleteAdress,
   // editAdress,
+  addCreditCard,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -54,6 +55,8 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/user/location/add';
       case MainEndpoints.deleteAdress:
         return 'api/user/location/delete/${sl<ProfileController>().removeAdressId.toString()}';
+      case MainEndpoints.addCreditCard:
+        return 'api/card/add';
     }
   }
 }

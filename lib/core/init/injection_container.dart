@@ -18,6 +18,7 @@ import '../../features/auth/repo/impl/auth_repo_impl.dart';
 import '../../features/bottom_navigation_bar/view_model/bottom_navigation_bar_controller.dart';
 import '../../features/home/repo/home_repository.dart';
 import '../../features/message/controller/message_controller.dart';
+import '../../features/profile/controller/credit_card_controller.dart';
 import '../../features/profile/controller/profile_controller.dart';
 import '../../features/search/controller/search_controller.dart';
 import '../_core_exports.dart';
@@ -72,6 +73,8 @@ Future<void> init() async {
     () => HomeRepoImpl(),
   );
   sl.registerLazySingleton(() => BottomNavigationBarProvider());
+  sl.registerLazySingleton(
+      () => CreditCardController(profileRepository: sl<ProfileRepository>()));
 
   sl.registerLazySingleton(() => AuthController(
       authRepository: sl<AuthRepository>(),
@@ -81,8 +84,6 @@ Future<void> init() async {
       () => HomeController(homeRepository: sl<HomeRepository>()));
   sl.registerLazySingleton(
       () => SearchController(searchRepository: sl<SearchRepository>()));
-
-
 
   sl.registerLazySingleton(
       () => ProfileController(profileRepository: sl<ProfileRepository>()));

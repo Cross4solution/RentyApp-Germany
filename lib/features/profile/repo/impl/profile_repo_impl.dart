@@ -1,5 +1,6 @@
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/entities/adress_model.dart';
+import 'package:rent_app_germany/core/entities/credit_cards_model.dart';
 import 'package:rent_app_germany/core/error/failures/failure.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:dartz/dartz.dart';
@@ -144,5 +145,32 @@ class ProfileRepoImpl implements ProfileRepository {
     } on Failure catch (failure) {
       return Left(failure);
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> addCreditCard({required CreditCardDetails creditCardDetails}) async{
+    {
+    try {
+      final addCreditCard = await sl<INetworkManager>().basePost(
+        endPoint: MainEndpoints.addCreditCard,
+        requestBody: creditCardDetails.toMap(),
+      );
+
+      return addCreditCard.fold((l) {
+        showCustomMessenger(
+            CustomMessengerState.ERROR, 'Kredi kartı eklenirken bir hata oluştu.');
+        return Left(l);
+      }, (data) {
+        if (jsonDecode(data)["error_code"] == 0) {
+          showCustomMessenger(
+              CustomMessengerState.SUCCESS, 'Kredi kartı başarıyla eklendi.');
+        }
+
+        return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
   }
 }

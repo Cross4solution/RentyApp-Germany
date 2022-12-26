@@ -16,7 +16,7 @@ import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 import '../../../features/home/view/page/all_products_page.dart';
 import '../../../features/profile/view/page/adress_page.dart';
 import '../../../features/profile/view/page/profile_edit_page.dart';
-import '../../../features/profile/view/widget/adress_add_page.dart';
+import '../../../features/profile/view/page/adress_add_page.dart';
 import '../../entities/get_product_model.dart';
 
 class PageRoutes {

@@ -32,4 +32,9 @@ abstract class ProfileRepository {
   Future<Either<Failure, void>> addCreditCard({
     required CreditCardDetails creditCardDetails,
   });
+
+   Future<Either<Failure, CreditCardsModel>> getCreditCardInfo();
+
+
+     Future<Either<Failure, void>> removeCreditCard();
 }

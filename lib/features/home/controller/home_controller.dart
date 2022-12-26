@@ -34,8 +34,8 @@ class HomeController extends ChangeNotifier {
           containerHeight: 200,
         ),
         showTitleActions: true,
-        minTime: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day),
+        minTime: DateTime.now(),
+           
         maxTime: DateTime(2025, 1, 1), onConfirm: (date) {
       formattingBeginDate = '${date.year} / ${date.month} / ${date.day}';
       startDate = date;

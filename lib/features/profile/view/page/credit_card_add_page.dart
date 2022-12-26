@@ -8,14 +8,14 @@ import 'package:rent_app_germany/features/profile/controller/credit_card_control
 
 import '../../../../core/_core_exports.dart';
 
-class MySample extends StatefulWidget {
-  const MySample({super.key});
+class AddCreditCardPage extends StatefulWidget {
+  const AddCreditCardPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => MySampleState();
+  State<AddCreditCardPage> createState() => _AddCreditCardPageState();
 }
 
-class MySampleState extends State<MySample> {
+class _AddCreditCardPageState extends State<AddCreditCardPage> {
   bool useGlassMorphism = false;
   bool useBackgroundImage = false;
   OutlineInputBorder? border;
@@ -27,15 +27,22 @@ class MySampleState extends State<MySample> {
     return AppContainer(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          leading: GestureDetector(
+              onTap: () {
+                Go.to.pageAndRemoveUntil(PageRoutes.creditCardShowPage);
+              },
+              child: const Icon(Icons.arrow_back_ios_new)),
+          title: const Text('Kart Ekle'),
+          centerTitle: true,
+          elevation: 0,
+        ),
         body: SafeArea(
           child: Consumer(
             builder:
                 (context, CreditCardController creditCardController, child) {
               return Column(
                 children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
                   CreditCardWidget(
                     glassmorphismConfig:
                         useGlassMorphism ? Glassmorphism.defaultConfig() : null,
@@ -78,9 +85,12 @@ class MySampleState extends State<MySample> {
                             isExpiryDateVisible: true,
                             cardHolderName: creditCardController.cardHolderName,
                             expiryDate: creditCardController.expiryDate,
-                            themeColor: Colors.blue,
+                            themeColor: Colors.red,
                             textColor: Colors.black,
                             cardNumberDecoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.credit_card),
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
                               labelText: 'Number',
                               hintText: 'XXXX XXXX XXXX XXXX',
                               hintStyle: const TextStyle(color: Colors.black),
@@ -88,52 +98,60 @@ class MySampleState extends State<MySample> {
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                   borderSide:
-                                      BorderSide(color: Colors.red.shade400)),
+                                      BorderSide(color: Colors.grey.shade100)),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                   borderSide:
-                                      BorderSide(color: Colors.grey.shade400)),
+                                      BorderSide(color: Colors.grey.shade100)),
                             ),
                             expiryDateDecoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.calendar_month),
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
                               hintStyle: const TextStyle(color: Colors.black),
                               labelStyle: const TextStyle(color: Colors.black),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                   borderSide:
-                                      BorderSide(color: Colors.red.shade400)),
+                                      BorderSide(color: Colors.grey.shade100)),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                   borderSide:
-                                      BorderSide(color: Colors.grey.shade400)),
+                                      BorderSide(color: Colors.grey.shade100)),
                               labelText: 'Expired Date',
                               hintText: 'XX/XX',
                             ),
                             cvvCodeDecoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.numbers_outlined),
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
                               hintStyle: const TextStyle(color: Colors.black),
                               labelStyle: const TextStyle(color: Colors.black),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                   borderSide:
-                                      BorderSide(color: Colors.red.shade400)),
+                                      BorderSide(color: Colors.grey.shade100)),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                   borderSide:
-                                      BorderSide(color: Colors.grey.shade400)),
+                                      BorderSide(color: Colors.grey.shade100)),
                               labelText: 'CVV',
                               hintText: 'XXX',
                             ),
                             cardHolderDecoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.person),
+                              fillColor: Colors.grey.shade200,
+                              filled: true,
                               hintStyle: const TextStyle(color: Colors.black),
                               labelStyle: const TextStyle(color: Colors.black),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
-                                  borderSide: BorderSide(
-                                    color: Colors.red.shade400,
-                                  )),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey.shade100)),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(24),
                                   borderSide:
-                                      BorderSide(color: Colors.grey.shade400)),
+                                      BorderSide(color: Colors.grey.shade100)),
                               labelText: 'Card Holder',
                             ),
                             onCreditCardModelChange:
@@ -169,7 +187,6 @@ class MySampleState extends State<MySample> {
                                 // print("20" +
                                 //     creditCardController.expiryDate
                                 //         .substring(3, 5));
-
 
                                 creditCardController.addCreditCard();
                               } else {

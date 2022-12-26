@@ -17,9 +17,9 @@ import 'features/home/view/page/all_products_page.dart';
 import 'features/message/view/page/chat_page.dart';
 import 'features/message/view/page/message_box_page.dart';
 import 'features/profile/view/page/adress_page.dart';
-import 'features/profile/view/page/credit_card_page.dart';
+
 import 'features/profile/view/page/credit_card_show_page.dart';
-import 'features/profile/view/page/deneme_page.dart';
+import 'features/profile/view/page/credit_card_add_page.dart';
 import 'features/profile/view/page/profile_edit_page.dart';
 import 'features/profile/view/page/adress_add_page.dart';
 
@@ -56,7 +56,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home: CreditCardShowPage(),
+      home: SplashPage(),
     );
   }
 }

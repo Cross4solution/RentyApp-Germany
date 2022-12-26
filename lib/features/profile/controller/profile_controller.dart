@@ -78,7 +78,6 @@ class ProfileController extends ChangeNotifier {
     adressCity.clear();
     adressDetail.clear();
     adressPostalCode.clear();
-
   }
 
   List<UserLocation> adressList = [];
@@ -98,8 +97,7 @@ class ProfileController extends ChangeNotifier {
     }
   }
 
-
-    Future<void> removeAdress(int index) async {
+  Future<void> removeAdress(int index) async {
     try {
       final removeAdress = await profileRepository.removeAdress();
 
@@ -110,5 +108,13 @@ class ProfileController extends ChangeNotifier {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  var expandedIndex;
+
+  void changeColor(int index) {
+    expandedIndex = index;
+
+    notifyListeners();
   }
 }

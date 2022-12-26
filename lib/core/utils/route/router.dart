@@ -15,6 +15,8 @@ import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 
 import '../../../features/home/view/page/all_products_page.dart';
 import '../../../features/profile/view/page/adress_page.dart';
+import '../../../features/profile/view/page/credit_card_add_page.dart';
+import '../../../features/profile/view/page/credit_card_show_page.dart';
 import '../../../features/profile/view/page/profile_edit_page.dart';
 import '../../../features/profile/view/page/adress_add_page.dart';
 import '../../entities/get_product_model.dart';
@@ -37,6 +39,8 @@ class PageRoutes {
   static const String fullPhotoWidget = "/fullPhotoWidget";
   static const String adressAddPage = "/adressAddPage";
   static const String adressPage = "/adressPage";
+  static const String addCreditCardPage = "/addCreditCardPage";
+  static const String creditCardShowPage = "/creditCardShowPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -90,6 +94,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const AdressAddPage());
     case PageRoutes.adressPage:
       return CupertinoPageRoute(builder: (_) => const AdressPage());
+    case PageRoutes.addCreditCardPage:
+      return CupertinoPageRoute(builder: (_) => const AddCreditCardPage());
+    case PageRoutes.creditCardShowPage:
+      return CupertinoPageRoute(builder: (_) => const CreditCardShowPage());
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());
   }

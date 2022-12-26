@@ -24,7 +24,7 @@ class AdressModel {
 
 class UserLocation {
   UserLocation({
-     this.id,
+    this.id,
     required this.title,
     required this.city,
     required this.address,

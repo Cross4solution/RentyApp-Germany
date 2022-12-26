@@ -1,5 +1,6 @@
 import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 
+import '../../../../../features/profile/controller/credit_card_controller.dart';
 import '../../../../init/injection_container.dart';
 
 enum MainEndpoints {
@@ -19,6 +20,8 @@ enum MainEndpoints {
   deleteAdress,
   // editAdress,
   addCreditCard,
+  showCreditCard,
+  deleteCreditCard,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -57,6 +60,10 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/user/location/delete/${sl<ProfileController>().removeAdressId.toString()}';
       case MainEndpoints.addCreditCard:
         return 'api/card/add';
+      case MainEndpoints.showCreditCard:
+        return 'api/card/show';
+      case MainEndpoints.deleteCreditCard:
+        return 'api/card/delete/${sl<CreditCardController>().removeCreditCardId.toString()}';
     }
   }
 }

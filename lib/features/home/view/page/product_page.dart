@@ -3,11 +3,10 @@ import 'package:rent_app_germany/features/home/controller/home_controller.dart';
 import 'package:rent_app_germany/features/home/view/widget/text_button_widget.dart';
 import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 import '../../../../core/entities/get_product_model.dart';
+import '../widget/adress_list_widget.dart';
 import '../widget/price_information_card.dart';
 import '../widget/product_seller_person_widget.dart';
 import '../widget/product_slidable_images.dart';
-import '../widget/select_price_card.dart';
-import '../widget/slidable_trends_card.dart';
 
 class ProductPage extends StatefulWidget {
   final ProductFeatures productFeatures;
@@ -19,13 +18,6 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  @override
-  void initState() {
-    sl<ProfileController>().getAdress();
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     ScreenSize.init(context);
@@ -46,10 +38,10 @@ class _ProductPageState extends State<ProductPage> {
                         top: 12,
                         child: GestureDetector(
                           onTap: () => Go.to.back(),
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Center(
-                              child: const Icon(
+                              child: Icon(
                                 Icons.arrow_back_ios_new,
                                 color: Colors.grey,
                               ),
@@ -140,74 +132,16 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(
                           height: 12,
                         ),
-                        Consumer(
-                          builder: (context, value, child) {
-                            return SizedBox(
-                              height: 48,
-                              child: ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount:
-                                    sl<ProfileController>().adressList.length,
-                                itemBuilder: (context, index) {
-                                  return Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 16),
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 46,
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.grey.shade400, width: 2),
-                                            // color: Colors.amber,
-                                            borderRadius:
-                                                BorderRadius.circular(24),
-                                          ),
-                                          child: Text(
-                                            sl<ProfileController>()
-                                                .adressList[index]
-                                                .title,
-                                            style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ),
-                                      Visibility(
-                                          visible: index ==
-                                              sl<ProfileController>()
-                                                      .adressList
-                                                      .length -
-                                                  1,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Go.to.page(PageRoutes.adressPage);
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 16),
-                                              child: Container(
-                                                  alignment: Alignment.center,
-                                                  height: 46,
-                                                  width: 46,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.amber,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            24),
-                                                  ),
-                                                  child: const Icon(Icons.add)),
-                                            ),
-                                          )),
-                                    ],
-                                  );
-                                },
-                              ),
-                            );
-                          },
+                        AdressListWidget(),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          'Ödeme yapacağınız kartı seçiniz.',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey.shade800),
                         ),
                         const SizedBox(
                           height: 12,
@@ -249,3 +183,4 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 }
+

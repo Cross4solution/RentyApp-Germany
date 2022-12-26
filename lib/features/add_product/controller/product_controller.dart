@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
+import 'package:rent_app_germany/core/entities/order_creat.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/domain/entites/main_endpoint.dart';
 import 'package:rent_app_germany/features/add_product/repo/product_repo.dart';
 import 'package:rent_app_germany/features/home/domain/data/product_model.dart';
@@ -63,19 +64,21 @@ class ProductController extends ChangeNotifier {
   Future<void> addProduct() async {
     FormData formData = FormData();
 
-    for (int i = 0; i < imageFileList!.length ; i++) {
+    for (int i = 0; i < imageFileList!.length; i++) {
       File file = File(imageFileList![i].path);
       String fileName = file.path.split('/').last;
-      final MultipartFile multipartFile =
-          await MultipartFile.fromFile(file.path, filename: fileName, );
+      final MultipartFile multipartFile = await MultipartFile.fromFile(
+        file.path,
+        filename: fileName,
+      );
       formData.files.add(MapEntry("images[]", multipartFile));
     }
 
     ProductFeatures productFeatures = ProductFeatures(
-      productName: 'productNameController.text',
-      productDescription: 'productDescriptionController.text',
-      price: 2,
-      rentalPrice: 3,
+      productName: 'deneme',
+      productDescription: 'deneme',
+      price: 500,
+      rentalPrice: 50,
       categoryId: '1', // bottom sheet alanındaki kategoriyi alıcak
       productFeatures: 'productFeaturesController.text',
       // productImages: ProductImages(images: imageFileList!),
@@ -85,14 +88,9 @@ class ProductController extends ChangeNotifier {
       formData.fields.add(MapEntry(key, value.toString()));
     });
 
-   
-   
-   
     // File file = File(imageFileList![0].path);
 
     //  String fileName = file.path.split('/').last;
-
-
 
     try {
       // await productRepository.addProduct(productModel: productFeatures);
@@ -104,11 +102,10 @@ class ProductController extends ChangeNotifier {
       //   "rental_price": 45,
       //   "category_id": 1,
       //   "features": "fsdfsdfsdf",
-        
-      //     "images[]": 
+
+      //     "images[]":
       //       await MultipartFile.fromFile(file.path, filename: fileName)
-          
-       
+
       // });
 
       Response response = await sl<Dio>().post(MainEndpoints.addProduct.path,
@@ -129,5 +126,61 @@ class ProductController extends ChangeNotifier {
         print(e.toString());
       }
     }
+  }
+
+  late int productId;
+  String startDate = '';
+  String endDate = '';
+   String adressId = '';
+   String cardId = '';
+
+  Future<void> orderCreat() async {
+    print("**************");
+    print(productId);
+    print(startDate);
+    print(endDate);
+    print(adressId);
+    print(cardId);
+    checkOrderItems();
+    final orderCreat = OrderModel(
+      productId: productId,
+      startDate: startDate,
+      endDate: endDate,
+      adressId: adressId,
+      cardId: cardId,
+    );
+
+    try {
+      await productRepository.orderCreat(orderModel: orderCreat);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+
+  void checkOrderItems(){
+    if(productId == null){
+       showCustomMessenger(CustomMessengerState.ERROR,
+              'Ürün id değeri eksik girilmiştir.');
+    }
+    if(startDate == ''){
+       showCustomMessenger(CustomMessengerState.ERROR,
+              'Kiralama başlangıç tarihini giriniz.');
+    }
+    if(endDate == ''){
+       showCustomMessenger(CustomMessengerState.ERROR,
+              'Kiralama bitiş tarihini giriniz.');
+    }
+    if(adressId == ''){
+       showCustomMessenger(CustomMessengerState.ERROR,
+              'Lütfen adresinizi seçiniz.');
+    }
+    if(cardId == ''){
+       showCustomMessenger(CustomMessengerState.ERROR,
+              'Lütfen kredi kartı seçiniz.');
+    }
+    
+
+
   }
 }

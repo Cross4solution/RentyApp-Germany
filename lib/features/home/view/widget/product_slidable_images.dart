@@ -24,8 +24,8 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
           itemCount: widget.productFeatures.productImages!.images.length,
           itemBuilder: (context, index, realIndex) {
             return Container(
-              margin: const EdgeInsets.all(6),
-              height: 200,
+              margin: const EdgeInsets.all(4),
+              height: 275,
               width: double.infinity,
               decoration: BoxDecoration(
                 // color: Colors.red,
@@ -40,16 +40,17 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
                   },
                   child: CachedNetworkImage(
                       imageUrl:
-                          "https://api.testsoftware.site/${widget.productFeatures.productImages!.images[index]}"
+                          "https://api.testsoftware.site/${widget.productFeatures.productImages!.images[index]}",
+                         
 
-                      // fit: BoxFit.cover,
+                      fit: BoxFit.cover,
                       ),
                 ),
               ),
             );
           },
           options: CarouselOptions(
-            height: 200,
+            height: 275,
             autoPlay: false,
             reverse: false,
             autoPlayInterval: const Duration(seconds: 4),

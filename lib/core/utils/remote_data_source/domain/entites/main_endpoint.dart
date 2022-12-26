@@ -22,6 +22,7 @@ enum MainEndpoints {
   addCreditCard,
   showCreditCard,
   deleteCreditCard,
+  orderCreat,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -64,6 +65,9 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/card/show';
       case MainEndpoints.deleteCreditCard:
         return 'api/card/delete/${sl<CreditCardController>().removeCreditCardId.toString()}';
+
+      case MainEndpoints.orderCreat:
+        return 'api/order/creat';
     }
   }
 }

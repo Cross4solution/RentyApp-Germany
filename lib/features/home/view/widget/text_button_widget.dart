@@ -8,6 +8,9 @@ class TextButtonWidget extends StatelessWidget {
   final IconData? iconLeft;
   final IconData? iconRight;
   final Color? iconColor;
+  final double? height;
+  final double? width;
+  final double? fontSize;
 
   const TextButtonWidget({
     Key? key,
@@ -18,6 +21,9 @@ class TextButtonWidget extends StatelessWidget {
     this.iconLeft,
     this.iconRight,
     this.iconColor,
+    this.height,
+    this.width,
+    this.fontSize,
   }) : super(key: key);
 
   @override
@@ -25,10 +31,12 @@ class TextButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: height,
+        width: width,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -36,21 +44,26 @@ class TextButtonWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (iconLeft != null) ...[
-                Icon(iconLeft, color: iconColor,),
+                Icon(
+                  iconLeft,
+                  color: iconColor,
+                ),
                 const SizedBox(
                   width: 8,
                 )
               ],
               Text(
                 text,
-                style: TextStyle(color: textColor, fontWeight: FontWeight.w600),
+                style: TextStyle(color: textColor, fontWeight: FontWeight.w600, fontSize: fontSize),
               ),
               if (iconRight != null) ...[
                 const SizedBox(
-                  width: 8,
+                  width: 16,
                 ),
-                Icon(iconRight, color: iconColor,),
-                
+                Icon(
+                  iconRight,
+                  color: iconColor,
+                ),
               ],
             ],
           ),

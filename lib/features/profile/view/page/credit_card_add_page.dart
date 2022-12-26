@@ -30,7 +30,7 @@ class _AddCreditCardPageState extends State<AddCreditCardPage> {
         appBar: AppBar(
           leading: GestureDetector(
               onTap: () {
-                Go.to.pageAndRemoveUntil(PageRoutes.creditCardShowPage);
+                Go.to.pageAndReplace(PageRoutes.creditCardShowPage);
               },
               child: const Icon(Icons.arrow_back_ios_new)),
           title: const Text('Kart Ekle'),

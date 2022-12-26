@@ -1,22 +1,21 @@
 import 'package:rent_app_germany/features/add_product/controller/product_controller.dart';
+import 'package:rent_app_germany/features/profile/controller/credit_card_controller.dart';
 
 import '../../../../core/_core_exports.dart';
 import '../../../profile/controller/profile_controller.dart';
 
-class AdressListWidget extends StatefulWidget {
-  const AdressListWidget({
-    Key? key,
-  }) : super(key: key);
+class CardListWidget extends StatefulWidget {
+  const CardListWidget({super.key});
 
   @override
-  State<AdressListWidget> createState() => _AdressListWidgetState();
+  State<CardListWidget> createState() => _CardListWidgetState();
 }
 
-class _AdressListWidgetState extends State<AdressListWidget> {
+class _CardListWidgetState extends State<CardListWidget> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      sl<ProfileController>().getAdress();
+      sl<CreditCardController>().getCreditCardInfo();
     });
     super.initState();
   }
@@ -24,14 +23,14 @@ class _AdressListWidgetState extends State<AdressListWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, ProfileController profileController, child) {
+      builder: (context, CreditCardController creditCardController, child) {
         return SizedBox(
           height: 48,
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: profileController.adressList.length,
+            itemCount: creditCardController.creditCardList.length,
             itemBuilder: (context, index) {
               return Row(
                 children: [
@@ -39,20 +38,20 @@ class _AdressListWidgetState extends State<AdressListWidget> {
                     padding: const EdgeInsets.only(right: 16),
                     child: GestureDetector(
                       onTap: () {
-                        profileController.SelectAdress(index);
+                        creditCardController.SelectCard(index);
 
-                        sl<ProductController>().adressId =
-                            profileController.adressList[index].id!.toString();
+                        sl<ProductController>().cardId =
+                            creditCardController.creditCardList[index].id!.toString();
 
-                        print("adressId : "
-                            "${sl<ProductController>().adressId}");
+                        print("Credit Card Id : "
+                            "${sl<ProductController>().cardId}");
                       },
                       child: Container(
                         alignment: Alignment.center,
                         height: 46,
                         width: 100,
                         decoration: BoxDecoration(
-                          color: profileController.expandedAdressIndex == index
+                          color: creditCardController.expandedCardIndex == index
                               ? Colors.green
                               : Colors.white,
                           border:
@@ -61,7 +60,7 @@ class _AdressListWidgetState extends State<AdressListWidget> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                         child: Text(
-                          profileController.adressList[index].title,
+                          creditCardController.creditCardList[index].cardName!,
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),
@@ -69,10 +68,10 @@ class _AdressListWidgetState extends State<AdressListWidget> {
                     ),
                   ),
                   Visibility(
-                    visible: index == profileController.adressList.length - 1,
+                    visible: index ==  creditCardController.creditCardList.length - 1,
                     child: GestureDetector(
                       onTap: () {
-                        Go.to.page(PageRoutes.adressPage);
+                        Go.to.page(PageRoutes.creditCardShowPage);
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 16),

@@ -1,6 +1,7 @@
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/entities/product_category.dart';
+import 'package:rent_app_germany/features/add_product/controller/product_controller.dart';
 import 'package:rent_app_germany/features/home/domain/entities/get_product_arguments.dart';
 import 'package:rent_app_germany/features/home/repo/home_repository.dart';
 
@@ -35,9 +36,10 @@ class HomeController extends ChangeNotifier {
         ),
         showTitleActions: true,
         minTime: DateTime.now(),
-           
         maxTime: DateTime(2025, 1, 1), onConfirm: (date) {
       formattingBeginDate = '${date.year} / ${date.month} / ${date.day}';
+      sl<ProductController>().startDate =
+          '${date.year}-${date.month}-${date.day}';
       startDate = date;
       notifyListeners();
     }, currentTime: DateTime.now(), locale: LocaleType.tr);
@@ -56,6 +58,8 @@ class HomeController extends ChangeNotifier {
       maxTime: DateTime(2025, 1, 1),
       onConfirm: (date) {
         formattingEndDate = '${date.year} / ${date.month} / ${date.day}';
+        sl<ProductController>().endDate =
+            '${date.year}-${date.month}-${date.day}';
         endDate = date;
 
         dateTimeDifference();
@@ -96,9 +100,6 @@ class HomeController extends ChangeNotifier {
 
   List<ProductFeatures> productFeatures = [];
 
-  
-
-
   bool isLastPage = false;
 
   Future<void> refreshProductsPage() async {
@@ -115,7 +116,6 @@ class HomeController extends ChangeNotifier {
   }
 
   Future<void> fecthNextProductsPage() async {
-
     if (!isLastPage) {
       final requestFetchProducts = await homeRepository.getProducts(
         getProductModel: GetProductModel(
@@ -134,7 +134,6 @@ class HomeController extends ChangeNotifier {
         productFeatures.addAll(data.products.data);
 
         productFeatures = productFeatures.reversed.toList();
-      
 
         getProductArguments.page++;
 
@@ -145,6 +144,5 @@ class HomeController extends ChangeNotifier {
       });
       notifyListeners();
     }
-    
   }
 }

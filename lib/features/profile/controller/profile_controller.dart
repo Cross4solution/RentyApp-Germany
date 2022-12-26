@@ -110,11 +110,14 @@ class ProfileController extends ChangeNotifier {
     }
   }
 
-  var expandedIndex;
+  var expandedAdressIndex;
 
-  void changeColor(int index) {
-    expandedIndex = index;
+  void SelectAdress(int index) {
+    expandedAdressIndex = index;
 
     notifyListeners();
   }
+
+
+
 }

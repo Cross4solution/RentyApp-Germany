@@ -3,7 +3,9 @@ import 'package:rent_app_germany/features/home/controller/home_controller.dart';
 import 'package:rent_app_germany/features/home/view/widget/text_button_widget.dart';
 import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 import '../../../../core/entities/get_product_model.dart';
+import '../../../add_product/controller/product_controller.dart';
 import '../widget/adress_list_widget.dart';
+import '../widget/card_list_widget.dart';
 import '../widget/price_information_card.dart';
 import '../widget/product_seller_person_widget.dart';
 import '../widget/product_slidable_images.dart';
@@ -146,20 +148,30 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(
                           height: 12,
                         ),
+                        CardListWidget(),
+                        const SizedBox(
+                          height: 12,
+                        ),
                         TextButtonWidget(
-                            onTap: () {},
+
+                          height: 55,
+
+                            onTap: () {
+                              sl<ProductController>().orderCreat();
+                            },
                             iconRight: Icons.send,
                             iconColor: Colors.white,
                             text: 'Kiralama isteği gönder',
                             textColor: Colors.white,
-                            color: Colors.black),
+                            fontSize: 20,
+                            color: Colors.green.shade800),
                         const SizedBox(
                           height: 8,
                         ),
                         Text(widget.productFeatures.productDescription
                             .toString()),
                         Text(
-                            'Profesyonel patenin özelliklerinin bulunduğu kısım '),
+                            'Ürün özelliklerinin bulunduğu kısım '),
                         const SizedBox(
                           height: 12,
                         ),

@@ -1,3 +1,4 @@
+import 'package:rent_app_germany/core/entities/order_creat.dart';
 import 'package:rent_app_germany/core/error/failures/failure.dart';
 
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
@@ -18,15 +19,45 @@ class ProductRepositoryImpl implements ProductRepository {
       final register = await sl<INetworkManager>().basePost(
         endPoint: MainEndpoints.addProduct,
         requestBody: productModel.toMap(),
-        
       );
 
-      return register.fold((l){
-         showCustomMessenger(CustomMessengerState.ERROR, 'eklenmedi');
+      return register.fold((l) {
+        showCustomMessenger(CustomMessengerState.ERROR, 'eklenmedi');
         return Left(l);
-      } , (data) {
+      }, (data) {
+        showCustomMessenger(CustomMessengerState.SUCCESS, 'eklendi');
+        return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
 
-          showCustomMessenger(CustomMessengerState.SUCCESS, 'eklendi');
+  @override
+  Future<Either<Failure, void>> orderCreat(
+      {required OrderModel orderModel}) async {
+    try {
+      final register = await sl<INetworkManager>().basePost(
+        endPoint: MainEndpoints.orderCreat,
+        requestBody: orderModel.toMap(),
+      );
+
+      return register.fold((l) {
+        showCustomMessenger(CustomMessengerState.ERROR,
+            'Sipariş oluşturulurken bir hata ile karşılaşıldı.');
+        return Left(l);
+      }, (data) {
+        if (jsonDecode(data)["error_code"] == 4722) {
+          showCustomMessenger(CustomMessengerState.ERROR,
+              'Sipariş oluşturulurken eksik bilgi girildi.');
+        } else if (jsonDecode(data)["error_code"] == 500) {
+          showCustomMessenger(CustomMessengerState.ERROR,
+              'Amount must convert to at least 50 cents. 2.00 TL converts to approximately ');
+        } else {
+          showCustomMessenger(
+              CustomMessengerState.SUCCESS, 'Sipariş oluşturuldu.');
+        }
+
         return const Right(null);
       });
     } on Failure catch (failure) {

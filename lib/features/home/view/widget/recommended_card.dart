@@ -1,3 +1,4 @@
+import 'package:rent_app_germany/features/add_product/controller/product_controller.dart';
 import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/_core_exports.dart';
@@ -26,7 +27,6 @@ class _RecommendedCardState extends State<RecommendedCard> {
 
   @override
   Widget build(BuildContext context) {
-    final ProductFeatures productFeatures;
     return Consumer(
       builder: (context, HomeController homeController, child) {
         return GridView.builder(
@@ -47,6 +47,7 @@ class _RecommendedCardState extends State<RecommendedCard> {
             return GestureDetector(
               onTap: () {
                 Go.to.page(PageRoutes.productPage, arguments: productFeatures);
+                sl<ProductController>().productId = productFeatures.id!;
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -65,29 +66,27 @@ class _RecommendedCardState extends State<RecommendedCard> {
                     children: [
                       Stack(
                         children: [
-                           SizedBox(
+                          SizedBox(
                             height: 120,
                             width: 175,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(16),
-                                topRight: Radius.circular(16),
-                              ),
-                                child:productFeatures.productImages!.images.isEmpty ?
-
-                                 Image.network(
-                               "https://api.testsoftware.site/${productFeatures.productImages!.images[0]}"
-
-                                 ): SizedBox.shrink()
-                            ),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(16),
+                                  topRight: Radius.circular(16),
+                                ),
+                                child: productFeatures
+                                        .productImages!.images.isEmpty
+                                    ? Image.network(
+                                        "https://api.testsoftware.site/${productFeatures.productImages!.images[0]}", fit: BoxFit.cover,)
+                                    : const SizedBox.shrink()),
                           ),
                           Positioned(
                             right: 0,
                             child: InkWell(
                               onTap: () {
-                                sl<ProfileController>().addFavoriteId = productFeatures.id!;
-                                sl<ProfileController>()
-                                    .addFavorites();
+                                sl<ProfileController>().addFavoriteId =
+                                    productFeatures.id!;
+                                sl<ProfileController>().addFavorites();
                               },
                               child: Container(
                                   margin: EdgeInsets.all(6.0),

@@ -88,4 +88,12 @@ class CreditCardController extends ChangeNotifier {
       print(e.toString());
     }
   }
+
+      var expandedCardIndex;
+
+  void SelectCard(int index) {
+    expandedCardIndex = index;
+
+    notifyListeners();
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:rent_app_germany/core/_core_exports.dart';
+import 'package:rent_app_germany/core/shared_widgets/app_button.dart';
 import 'package:rent_app_germany/features/home/controller/home_controller.dart';
 import 'package:rent_app_germany/features/home/view/widget/text_button_widget.dart';
 import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
@@ -27,6 +28,7 @@ class _ProductPageState extends State<ProductPage> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Consumer(
             builder: (context, HomeController homeController, child) {
               return Column(
@@ -62,16 +64,10 @@ class _ProductPageState extends State<ProductPage> {
                           children: [
                             Text(
                               widget.productFeatures.productName!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 22),
                             ),
-
-                            Icon(Icons.favorite_border_rounded)
-                            // TextButtonWidget(
-                            //     onTap: () {},
-                            //     text: 'Mesaj Gönder',
-                            //     textColor: Colors.white,
-                            //     color: Colors.red)
+                            const Icon(Icons.favorite_border_rounded)
                           ],
                         ),
                         const SizedBox(
@@ -79,110 +75,31 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                         ProductSellerPerson(
                             productFeatures: widget.productFeatures),
-                        // SelectPriceCard(),
-
                         PriceInformationCard(
                             productFeatures: widget.productFeatures),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            TextButtonWidget(
-                                onTap: (() {
-                                  homeController
-                                      .datePickerBeginSettings(context);
-                                }),
-                                iconLeft: Icons.calendar_month_rounded,
-                                text: homeController.formattingBeginDate,
-                                textColor: Colors.black,
-                                color:
-                                    const Color.fromARGB(255, 142, 223, 144)),
-                            TextButtonWidget(
-                                onTap: (() {
-                                  homeController.datePickerEndSettings(context);
-                                }),
-                                iconLeft: Icons.calendar_month_rounded,
-                                text: homeController.formattingEndDate,
-                                textColor: Colors.black,
-                                color:
-                                    const Color.fromARGB(255, 142, 223, 144)),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        if (homeController.rangeTime != null) ...[
-                          Text(
-                            'Toplam (${homeController.rangeTime}) gün : '
-                            '\$'
-                            '${homeController.rangeTime! * 5}',
+                        const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Ürün Özellikleri',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                          )
-                        ],
-                        const SizedBox(
-                          height: 12,
-                        ),
-
-                        Text(
-                          'Teslimat adresi seçiniz. ',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade800),
+                                fontWeight: FontWeight.w600, fontSize: 22),
+                          ),
                         ),
                         const SizedBox(
-                          height: 12,
-                        ),
-                        AdressListWidget(),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Text(
-                          'Ödeme yapacağınız kartı seçiniz.',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey.shade800),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        CardListWidget(),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        TextButtonWidget(
-
-                          height: 55,
-
-                            onTap: () {
-                              sl<ProductController>().orderCreat();
-                            },
-                            iconRight: Icons.send,
-                            iconColor: Colors.white,
-                            text: 'Kiralama isteği gönder',
-                            textColor: Colors.white,
-                            fontSize: 20,
-                            color: Colors.green.shade800),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(widget.productFeatures.productDescription
-                            .toString()),
-                        Text(
-                            'Ürün özelliklerinin bulunduğu kısım '),
-                        const SizedBox(
-                          height: 12,
+                          height: 2,
                         ),
                         const Text(
-                          'Ürün yorumlarını görüntüle',
-                          style: TextStyle(fontWeight: FontWeight.w700),
+                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+                        Text(widget.productFeatures.productDescription
+                            .toString()),
+                        const SizedBox(
+                          height: 24,
                         ),
-                        const Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          size: 36,
-                        )
+                        AppButton.outline(
+                            onTap: () {
+                              Go.to.page(PageRoutes.productRentPage, arguments: widget.productFeatures);
+                            },
+                            buttonText: 'Kirala')
                       ],
                     ),
                   ),
@@ -195,4 +112,3 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 }
-

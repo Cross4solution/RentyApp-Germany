@@ -14,6 +14,7 @@ import 'core/_core_exports.dart';
 import 'features/auth/view/page/verify_page.dart';
 import 'features/bottom_navigation_bar/view/pages/bottom_navigation_page.dart';
 import 'features/home/view/page/all_products_page.dart';
+import 'features/home/view/page/product_rent_page.dart';
 import 'features/message/view/page/chat_page.dart';
 import 'features/message/view/page/message_box_page.dart';
 import 'features/profile/view/page/adress_page.dart';

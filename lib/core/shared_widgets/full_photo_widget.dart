@@ -65,14 +65,17 @@ class FullPhotoWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () => Go.to.back(),
               child: CircleAvatar(
+                radius: 20,
                 backgroundColor: Colors.grey.shade300,
                 child: const Padding(
                   padding: EdgeInsets.all(1.0),
                   child: CircleAvatar(
+                    radius: 19,
                     backgroundColor: Colors.white,
                     child: Center(
                       child: Icon(
-                        Icons.cancel_outlined,size: 28,
+                        size: 38,
+                        Icons.cancel,
                         color: Colors.grey,
                       ),
                     ),
@@ -83,11 +86,6 @@ class FullPhotoWidget extends StatelessWidget {
           ),
         ],
       ),
-    )
-
-        //  PhotoView(
-        //   imageProvider: NetworkImage( "https://api.testsoftware.site/${productFeatures.productImages!.images[0]}"),
-        // ),
-        );
+    ));
   }
 }

@@ -25,14 +25,15 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
           itemBuilder: (context, index, realIndex) {
             return Container(
               margin: const EdgeInsets.all(4),
-              height: 275,
+              height: 250,
               width: double.infinity,
               decoration: BoxDecoration(
                 // color: Colors.red,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.grey.shade300, width: 2)
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(16),
                 child: GestureDetector(
                   onTap: () {
                     Go.to.page(PageRoutes.fullPhotoWidget,
@@ -50,7 +51,7 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
             );
           },
           options: CarouselOptions(
-            height: 275,
+            height: 250,
             autoPlay: false,
             reverse: false,
             autoPlayInterval: const Duration(seconds: 4),

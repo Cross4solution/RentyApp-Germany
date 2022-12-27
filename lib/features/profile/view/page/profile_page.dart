@@ -16,43 +16,57 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: const ProfileAppBar(),
       body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            ProfileCard(),
-            Padding(
-              padding: EdgeInsets.only(left: 12, bottom: 8),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Beğendiklerim',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
+          child: Column( 
+            children:  [
+              ProfileCard(),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Kiralama İsteklerim', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),),
+
+                  Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey.shade500,size: 20 ,)
+                ],
+              ),
+
+              Divider(), 
+              const Padding( 
+                padding: EdgeInsets.only(left: 12, bottom: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Beğendiklerim',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
-            ),
-             FavoriteProducts(),
-            Padding(
-              padding: EdgeInsets.only(left: 12, bottom: 8, top: 8),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Kiraladıklarım',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+               FavoriteProducts(),
+              const Padding(
+                padding: EdgeInsets.only(left: 12, bottom: 8, top: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Kiraladıklarım',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
-            ),
-            RentedCard(),
-            Padding(
-              padding: EdgeInsets.only(left: 12, bottom: 8),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Kiralama Geçmişim',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+              RentedCard(),
+              Padding(
+                padding: EdgeInsets.only(left: 12, bottom: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Kiralama Geçmişim',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
-            ),
-            RentedHistoryCard()
-          ],
+              RentedHistoryCard()
+            ],
+          ),
         ),
       ),
     );

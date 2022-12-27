@@ -2,10 +2,10 @@ import '../../../../core/_core_exports.dart';
 import '../../../../core/entities/get_product_model.dart';
 
 class PriceInformationCard extends StatelessWidget {
-
- final ProductFeatures productFeatures;
+  final ProductFeatures productFeatures;
   const PriceInformationCard({
-    Key? key, required this.productFeatures,
+    Key? key,
+    required this.productFeatures,
   }) : super(key: key);
 
   @override
@@ -29,15 +29,16 @@ class PriceInformationCard extends StatelessWidget {
                     right: BorderSide(width: 1, color: Colors.grey.shade400))),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-               Text(
-                '\$''${productFeatures.rentalPrice}',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              Text(
+                '\$' '${productFeatures.rentalPrice}',
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 3,
               ),
               Text(
-                'hourly',
+                'daily',
                 style: TextStyle(color: Colors.grey.shade600),
               ),
             ]),
@@ -51,9 +52,10 @@ class PriceInformationCard extends StatelessWidget {
                     right: BorderSide(width: 1, color: Colors.grey.shade400))),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-               Text(
-                '\$''${productFeatures.price}',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              Text(
+                '\$' '${productFeatures.rentalPrice! * 7}',
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 3,
@@ -70,9 +72,10 @@ class PriceInformationCard extends StatelessWidget {
             width: ScreenSize().getWidthPercent(1) / 3.5,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              const Text(
-                '\$110.00',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              Text(
+                '\$' '${productFeatures.rentalPrice! * 30}',
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 3,

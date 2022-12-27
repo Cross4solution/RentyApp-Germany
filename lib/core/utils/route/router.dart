@@ -14,6 +14,7 @@ import 'package:rent_app_germany/features/profile/view/page/profile_page.dart';
 import 'package:rent_app_germany/features/search/view/page/search_page.dart';
 
 import '../../../features/home/view/page/all_products_page.dart';
+import '../../../features/home/view/page/product_rent_page.dart';
 import '../../../features/profile/view/page/adress_page.dart';
 import '../../../features/profile/view/page/credit_card_add_page.dart';
 import '../../../features/profile/view/page/credit_card_show_page.dart';
@@ -41,6 +42,7 @@ class PageRoutes {
   static const String adressPage = "/adressPage";
   static const String addCreditCardPage = "/addCreditCardPage";
   static const String creditCardShowPage = "/creditCardShowPage";
+  static const String productRentPage = "/productRentPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -98,6 +100,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const AddCreditCardPage());
     case PageRoutes.creditCardShowPage:
       return CupertinoPageRoute(builder: (_) => const CreditCardShowPage());
+
+    case PageRoutes.productRentPage:
+      final ProductFeatures productFeatures =
+          settings.arguments as ProductFeatures;
+      return CupertinoPageRoute(
+          builder: (_) => ProductRentPage(
+                productFeatures: productFeatures,
+              ));
+
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());
   }

@@ -36,6 +36,7 @@ class AddProductPicture extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
+                physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: productController.imageFileList!.length,
                   scrollDirection: Axis.horizontal,

@@ -22,6 +22,7 @@ class AddProductPage extends StatelessWidget {
         appBar: const AddProductAppBar(),
         body: !sl<AuthController>().isSeller
             ? SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
                 child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(

@@ -20,8 +20,10 @@ import '../../../features/profile/view/page/credit_card_add_page.dart';
 import '../../../features/profile/view/page/credit_card_show_page.dart';
 import '../../../features/profile/view/page/my_favorites.dart';
 import '../../../features/profile/view/page/my_order_list_detail_page.dart';
+import '../../../features/profile/view/page/my_order_list_page.dart';
 import '../../../features/profile/view/page/profile_edit_page.dart';
 import '../../../features/profile/view/page/adress_add_page.dart';
+import '../../../features/profile/view/page/seller_orders_page.dart';
 import '../../entities/get_product_model.dart';
 
 class PageRoutes {
@@ -46,7 +48,9 @@ class PageRoutes {
   static const String creditCardShowPage = "/creditCardShowPage";
   static const String productRentPage = "/productRentPage";
   static const String myFavoritesPage = "/myFavoritesPage";
+  static const String orderListPage = "/orderListPage";
   static const String myOrderListDetailPage = "/myOrderListDetailPage";
+  static const String sellerOrdersPage = "/sellerOrdersPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -117,6 +121,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return CupertinoPageRoute(builder: (_) => const MyFavoritesPage());
     case PageRoutes.myOrderListDetailPage:
       return CupertinoPageRoute(builder: (_) => const MyOrderListDetailPage());
+    case PageRoutes.orderListPage:
+      return CupertinoPageRoute(builder: (_) => const OrderListPage());
+    case PageRoutes.sellerOrdersPage:
+      return CupertinoPageRoute(builder: (_) => const SellerOrdersPage());
 
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());

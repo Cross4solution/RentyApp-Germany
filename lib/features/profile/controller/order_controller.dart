@@ -3,6 +3,7 @@ import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/entities/order_creat.dart';
 import '../../../core/entities/my_order_list_detail_model.dart';
 import '../../../core/entities/my_order_list_model.dart';
+import '../../../core/entities/seller_orders_model.dart';
 import '../repo/profile_repo.dart';
 
 class OrderController extends ChangeNotifier {
@@ -35,6 +36,7 @@ class OrderController extends ChangeNotifier {
   MyOrderDetailsModel? myOrderDetails;
 
   Future<void> getOrdersDetails() async {
+    // myOrderDetails = MyOrderDetailsModel();
     try {
       final getOrderDetails = await profileRepository.getMyOrderDetails();
 
@@ -48,11 +50,43 @@ class OrderController extends ChangeNotifier {
     }
   }
 
-late DateTime rentEndDate = myOrderDetails!.order!.orderDetalis.rentEndDate;
-late DateTime rentStartDate = myOrderDetails!.order!.orderDetalis.rentStartDate;
+    late String sellerOrderId;
 
- late int rangeTime = rentEndDate.difference( rentStartDate).inDays;
+  List<OrderSellerDetails> sellerOrderList = [];
+
+  Future<void> getSellerOrders() async {
+    orderList.clear();
+    try {
+      final getOrders = await profileRepository.getSellerOrdes();
+
+      getOrders.fold((l) => Left(l), (data) {
+        sellerOrderList.addAll(data.orders.orders);
+
+        notifyListeners();
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
 
-  // endDate.difference(startDate)
+    late String updateSellerOrderId;
+
+   late int isOrder;
+
+    Future<void> updateSellerOrdes() async {
+    try {
+      await profileRepository.updateSellerOrdes(status: isOrder);
+
+      if(isOrder == 1){
+         showCustomMessenger(CustomMessengerState.SUCCESS, 'Sipariş kabul edildi');
+      }
+
+      if(isOrder == -1){
+         showCustomMessenger(CustomMessengerState.ERROR, 'Sipariş reddedildi');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

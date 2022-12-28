@@ -3,6 +3,7 @@ import 'package:rent_app_germany/core/entities/adress_model.dart';
 import 'package:rent_app_germany/core/entities/credit_cards_model.dart';
 import 'package:rent_app_germany/core/entities/my_order_list_detail_model.dart';
 import 'package:rent_app_germany/core/entities/my_order_list_model.dart';
+import 'package:rent_app_germany/core/entities/seller_orders_model.dart';
 import 'package:rent_app_germany/core/error/failures/failure.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:dartz/dartz.dart';
@@ -254,9 +255,6 @@ class ProfileRepoImpl implements ProfileRepository {
         return getOrderDetailsInfo.fold((l) {
           return Left(l);
         }, (data) {
-
-
-       
           MyOrderDetailsModel myOrderDetailsModel =
               MyOrderDetailsModel.fromJson(data);
 
@@ -265,6 +263,53 @@ class ProfileRepoImpl implements ProfileRepository {
       } on Failure catch (failure) {
         return Left(failure);
       }
+    }
+  }
+
+  @override
+  Future<Either<Failure, SellerOrdersModel>> getSellerOrdes() async {
+    {
+      try {
+        final getSellerOrdersInfo = await sl<INetworkManager>().baseGet(
+          endPoint: MainEndpoints.sellerOrders,
+        );
+
+        return getSellerOrdersInfo.fold((l) {
+          return Left(l);
+        }, (data) {
+          SellerOrdersModel sellerOrdersModel =
+              SellerOrdersModel.fromJson(data);
+
+          return Right(sellerOrdersModel);
+        });
+      } on Failure catch (failure) {
+        return Left(failure);
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateSellerOrdes({
+    required int status
+  }) async {
+    try {
+      final updateSellerOrder = await sl<INetworkManager>().basePost(
+        endPoint: MainEndpoints.sellerOrdersUpdate,
+        requestBody: {
+          "status": status,
+        }
+      );
+
+      return updateSellerOrder.fold((l) {
+        showCustomMessenger(CustomMessengerState.ERROR, 'Hata');
+        return Left(l);
+      }, (data) {
+      
+        
+        return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
     }
   }
 }

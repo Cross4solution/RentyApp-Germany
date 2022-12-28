@@ -13,7 +13,9 @@ class OrderListPage extends StatefulWidget {
 class _OrderListPageState extends State<OrderListPage> {
   @override
   void initState() {
-    sl<OrderController>().getOrders();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      sl<OrderController>().getOrders();
+    });
 
     super.initState();
   }
@@ -36,6 +38,8 @@ class _OrderListPageState extends State<OrderListPage> {
                 onTap: () {
                   orderController.orderId =
                       orderController.orderList[index].orderId;
+
+                       sl<OrderController>().getOrdersDetails();
 
                   Go.to.page(PageRoutes.myOrderListDetailPage);
                 },
@@ -106,16 +110,47 @@ class _OrderListPageState extends State<OrderListPage> {
                           height: 12,
                         ),
                         Row(
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               'Sipariş durumu : ',
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w500),
                             ),
-                            Text(
-                              'Onay bekliyor',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            Visibility(
+                              visible: orderController
+                                      .orderList[index].orderStatus ==
+                                  1,
+                              child: Text(
+                                "Sipariş onaylandı",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.green.shade500),
+                              ),
+                            ),
+                            Visibility(
+                              visible: orderController
+                                      .orderList[index].orderStatus ==
+                                  0,
+                              child: const Text(
+                                "Onay bekliyor",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.orange),
+                              ),
+                            ),
+                            Visibility(
+                              visible: orderController
+                                      .orderList[index].orderStatus ==
+                                  -1,
+                              child: const Text(
+                                "Reddedildi",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.red),
+                              ),
                             ),
                           ],
                         ),

@@ -23,8 +23,16 @@ class ProfilePage extends StatelessWidget {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               const ProfileCard(),
-              const ProfileTitleWidget(text: 'Kiralama İsteklerim'),
-              const ProfileTitleWidget(text: 'Siparişlerim'),
+               ProfileTitleWidget(text: 'Alıcı İsteklerim',onTap: () {
+
+                Go.to.page(PageRoutes.sellerOrdersPage);
+                
+              },),
+               ProfileTitleWidget(text: 'Siparişlerim', onTap: () {
+
+                Go.to.page(PageRoutes.orderListPage);
+                
+              },),
               ProfileTitleWidget(
                 text: 'Beğendiklerim',
                 onTap: () {

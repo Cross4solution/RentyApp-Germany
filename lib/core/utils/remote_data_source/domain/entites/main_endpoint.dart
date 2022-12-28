@@ -26,6 +26,8 @@ enum MainEndpoints {
   orderCreat,
   myOrders,
   myOrdersDetail,
+  sellerOrders,
+  sellerOrdersUpdate,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -75,6 +77,12 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/order/my-orders';
       case MainEndpoints.myOrdersDetail:
         return 'api/order/my-order/${sl<OrderController>().orderId}';
+
+      case MainEndpoints.sellerOrders:
+        return 'api/order/seller-orders';
+
+      case MainEndpoints.sellerOrdersUpdate:
+        return 'api/order/update/${sl<OrderController>().updateSellerOrderId}';
     }
   }
 }

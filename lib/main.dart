@@ -24,6 +24,7 @@ import 'features/profile/view/page/credit_card_add_page.dart';
 import 'features/profile/view/page/my_order_list_page.dart';
 import 'features/profile/view/page/profile_edit_page.dart';
 import 'features/profile/view/page/adress_add_page.dart';
+import 'features/profile/view/page/seller_orders_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -58,7 +59,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home: OrderListPage(),
+      home: SplashPage(),
     );
   }
 }

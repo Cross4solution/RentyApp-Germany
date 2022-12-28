@@ -5,6 +5,7 @@ import '../../../core/entities/favorite_products.dart';
 import '../../../core/entities/get_product_model.dart';
 import '../../../core/entities/my_order_list_detail_model.dart';
 import '../../../core/entities/my_order_list_model.dart';
+import '../../../core/entities/seller_orders_model.dart';
 import '../../../core/error/failures/failure.dart';
 
 abstract class ProfileRepository {
@@ -37,9 +38,17 @@ abstract class ProfileRepository {
 
   Future<Either<Failure, void>> removeCreditCard();
 
-  // ORDER
+  //USER ORDERS
 
   Future<Either<Failure, MyOrderModel>> getMyOrders();
 
   Future<Either<Failure, MyOrderDetailsModel>> getMyOrderDetails();
+
+  //SELLER ORDERS
+
+  Future<Either<Failure, SellerOrdersModel>> getSellerOrdes();
+
+  Future<Either<Failure, void>> updateSellerOrdes({
+    required int status,
+  });
 }

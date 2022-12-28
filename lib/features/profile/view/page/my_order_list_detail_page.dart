@@ -11,13 +11,6 @@ class MyOrderListDetailPage extends StatefulWidget {
 
 class _MyOrderListDetailPageState extends State<MyOrderListDetailPage> {
   @override
-  void initState() {
-    sl<OrderController>().getOrdersDetails();
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
@@ -122,38 +115,42 @@ class _MyOrderListDetailPageState extends State<MyOrderListDetailPage> {
                               "Sipariş Durumu: ",
                               style: TextStyle(fontSize: 18),
                             ),
-                            if (orderController.myOrderDetails!.order!
-                                    .orderDetalis.orderStatus ==
-                                1) ...[
-                              Text(
+                            Visibility(
+                              visible: orderController.myOrderDetails!.order!
+                                      .orderDetalis.orderStatus ==
+                                  1,
+                              child: Text(
                                 "Sipariş onaylandı",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.green.shade500),
                               ),
-                            ],
-                            if (orderController.myOrderDetails!.order!
-                                    .orderDetalis.orderStatus ==
-                                0) ...[
-                              const Text(
+                            ),
+                            Visibility(
+                              visible: orderController.myOrderDetails!.order!
+                                      .orderDetalis.orderStatus ==
+                                  0,
+                              child: const Text(
                                 "Onay bekliyor",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.orange),
                               ),
-                            ],
-                            if (orderController.myOrderDetails!.order!
-                                    .orderDetalis.orderStatus ==
-                                0) ...[
-                              const Text("Satıcı tarafında reddedildi",
-                                  style: TextStyle(
+                            ),
+                            Visibility(
+                              visible: orderController.myOrderDetails!.order!
+                                      .orderDetalis.orderStatus ==
+                                  -1,
+                              child: const Text(
+                                "Reddedildi",
+                                style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.red,
-                                  )),
-                            ],
+                                    color: Colors.red),
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(

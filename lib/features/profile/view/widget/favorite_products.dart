@@ -21,137 +21,138 @@ class _FavoriteProductsState extends State<FavoriteProducts> {
   }
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Consumer(
-        builder: (context, ProfileController profileController, child) {
-          return profileController.favoriteList.isEmpty
-              ? Column(
-                  children: [
-                    SvgPicture.asset(
-                      AssetsPath().emptyFavoriteSVG,
-                      height: 200,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    const Text(
-                      'Beğendiğiniz bir ürün bulunmamaktadır',
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                )
-              : SizedBox(
-                  height: 210,
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: profileController.favoriteList.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Go.to.page(PageRoutes.productPage,
-                              arguments: profileController.favoriteList[index]);
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                          ),
-                          height: 150,
-                          width: 175,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(24),
-                            border: Border.all(
-                                color: Colors.grey.shade300, width: 2),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+    return Consumer(
+      builder: (context, ProfileController profileController, child) {
+        return profileController.favoriteList.isEmpty
+            ? Column(
+                children: [
+                  SvgPicture.asset(
+                    AssetsPath().emptyFavoriteSVG,
+                    height: 200,
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Text(
+                    'Beğendiğiniz bir ürün bulunmamaktadır',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              )
+            : Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, ),
+              child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+         
+              crossAxisCount: 2, childAspectRatio: 0.8),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount:profileController.favoriteList.length,
+       
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Go.to.page(PageRoutes.productPage,
+                          arguments: profileController.favoriteList[index]);
+                    },
+                    child: Container(
+                     
+                      height: 150,
+                      width: 175,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(
+                            color: Colors.grey.shade300, width: 2),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
                               children: [
-                                Stack(
-                                  children: [
-                                    const SizedBox(
-                                      height: 120,
-                                      width: 175,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16),
-                                          topRight: Radius.circular(16),
-                                        ),
-                                        // child: CachedNetworkImage( //TODO: shared widgetsa taşınacak
-                                        //   imageUrl: productController
-                                        //       .favoriteList[index].imageURL,
-                                        //   fit: BoxFit.cover,
-                                        // ),
-                                      ),
+                                const SizedBox(
+                                  height: 120,
+                                  width: 175,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      topRight: Radius.circular(16),
                                     ),
-                                    Positioned(
-                                      right: 0,
-                                      child: InkWell(
-                                        onTap: () {
-                                          profileController.removeFavoriteId =
-                                              profileController
-                                                  .favoriteList[index].id!;
-
+                                    // child: CachedNetworkImage( //TODO: shared widgetsa taşınacak
+                                    //   imageUrl: productController
+                                    //       .favoriteList[index].imageURL,
+                                    //   fit: BoxFit.cover,
+                                    // ),
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 0,
+                                  child: InkWell(
+                                    onTap: () {
+                                      profileController.removeFavoriteId =
                                           profileController
-                                              .removeFavorites(index);
-                                        },
-                                        child: Container(
-                                          margin: const EdgeInsets.all(6.0),
-                                          alignment: Alignment.center,
-                                          height: 25,
-                                          width: 25,
-                                          decoration: BoxDecoration(
-                                              color: Colors.red,
-                                              shape: BoxShape.circle),
-                                          child: Icon(Icons.cancel,
-                                              size: 25, color: Colors.white),
-                                        ),
-                                      ),
+                                              .favoriteList[index].id!;
+
+                                      profileController
+                                          .removeFavorites(index);
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.all(6.0),
+                                      alignment: Alignment.center,
+                                      height: 25,
+                                      width: 25,
+                                      decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          shape: BoxShape.circle),
+                                      child: Icon(Icons.cancel,
+                                          size: 25, color: Colors.white),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                                Text(
-                                  profileController
-                                      .favoriteList[index].product!.name,
-                                  style: const TextStyle(fontSize: 15),
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.location_on,
-                                      size: 18,
-                                    ),
-                                    Text(
-                                      'İstanbul / Kadıköy',
-                                      style: TextStyle(
-                                          color: Colors.grey.shade700,
-                                          fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                                Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(profileController
-                                        .favoriteList[index]
-                                        .product!
-                                        .rentalPrice
-                                        .toString()))
                               ],
                             ),
-                          ),
+                            Text(
+                              profileController
+                                  .favoriteList[index].product!.name,
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on,
+                                  size: 18,
+                                ),
+                                Text(
+                                  'İstanbul / Kadıköy',
+                                  style: TextStyle(
+                                      color: Colors.grey.shade700,
+                                      fontSize: 12),
+                                ),
+                              ],
+                            ),
+                            Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(profileController
+                                    .favoriteList[index]
+                                    .product!
+                                    .rentalPrice
+                                    .toString()))
+                          ],
                         ),
-                      );
-                    },
-                  ),
-                );
-        },
-      ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+      },
     );
   }
 }

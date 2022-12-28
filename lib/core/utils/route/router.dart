@@ -18,6 +18,8 @@ import '../../../features/home/view/page/product_rent_page.dart';
 import '../../../features/profile/view/page/adress_page.dart';
 import '../../../features/profile/view/page/credit_card_add_page.dart';
 import '../../../features/profile/view/page/credit_card_show_page.dart';
+import '../../../features/profile/view/page/my_favorites.dart';
+import '../../../features/profile/view/page/my_order_list_detail_page.dart';
 import '../../../features/profile/view/page/profile_edit_page.dart';
 import '../../../features/profile/view/page/adress_add_page.dart';
 import '../../entities/get_product_model.dart';
@@ -43,6 +45,8 @@ class PageRoutes {
   static const String addCreditCardPage = "/addCreditCardPage";
   static const String creditCardShowPage = "/creditCardShowPage";
   static const String productRentPage = "/productRentPage";
+  static const String myFavoritesPage = "/myFavoritesPage";
+  static const String myOrderListDetailPage = "/myOrderListDetailPage";
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -108,6 +112,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (_) => ProductRentPage(
                 productFeatures: productFeatures,
               ));
+
+    case PageRoutes.myFavoritesPage:
+      return CupertinoPageRoute(builder: (_) => const MyFavoritesPage());
+    case PageRoutes.myOrderListDetailPage:
+      return CupertinoPageRoute(builder: (_) => const MyOrderListDetailPage());
 
     default:
       return CupertinoPageRoute(builder: (_) => const LoginPage());

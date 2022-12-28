@@ -19,6 +19,7 @@ import '../../features/bottom_navigation_bar/view_model/bottom_navigation_bar_co
 import '../../features/home/repo/home_repository.dart';
 import '../../features/message/controller/message_controller.dart';
 import '../../features/profile/controller/credit_card_controller.dart';
+import '../../features/profile/controller/order_controller.dart';
 import '../../features/profile/controller/profile_controller.dart';
 import '../../features/search/controller/search_controller.dart';
 import '../_core_exports.dart';
@@ -87,8 +88,11 @@ Future<void> init() async {
 
   sl.registerLazySingleton(
       () => ProfileController(profileRepository: sl<ProfileRepository>()));
+  sl.registerLazySingleton(
+      () => OrderController(profileRepository: sl<ProfileRepository>()));
 
   sl.registerLazySingleton(
       () => ProductController(productRepository: sl<ProductRepository>()));
+
   sl.registerLazySingleton(() => MessageController());
 }

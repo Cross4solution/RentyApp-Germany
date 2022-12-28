@@ -25,8 +25,6 @@ class NetworkManager extends INetworkManager {
         ),
       );
 
-
-
       final statusCode =
           StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
 
@@ -51,10 +49,7 @@ class NetworkManager extends INetworkManager {
         queryParameters: queryParameters,
         data: jsonEncode(requestBody),
         options: Options(
-          headers: {
-            "Authorization":
-                "Bearer ${sl<UserModel>().accessToken}"
-          },
+          headers: {"Authorization": "Bearer ${sl<UserModel>().accessToken}"},
         ),
       );
 
@@ -90,10 +85,7 @@ class NetworkManager extends INetworkManager {
         endPoint.path,
         queryParameters: queryParameters,
         options: Options(
-          headers: {
-            "Authorization":
-                "Bearer ${sl<UserModel>().accessToken}"
-          },
+          headers: {"Authorization": "Bearer ${sl<UserModel>().accessToken}"},
         ),
       );
 

@@ -7,6 +7,7 @@ import '../../features/auth/controller/auth_controller.dart';
 import '../../features/bottom_navigation_bar/view_model/bottom_navigation_bar_controller.dart';
 import '../../features/message/controller/message_controller.dart';
 import '../../features/profile/controller/credit_card_controller.dart';
+import '../../features/profile/controller/order_controller.dart';
 import '../../features/profile/controller/profile_controller.dart';
 import '../../features/search/controller/search_controller.dart';
 import '../init/injection_container.dart';
@@ -22,6 +23,7 @@ class MainProviderList {
     ChangeNotifierProvider(create: (_) => sl<ProfileController>()),
     ChangeNotifierProvider(create: (_) => sl<SearchController>()),
     ChangeNotifierProvider(create: (_) => sl<CreditCardController>()),
+    ChangeNotifierProvider(create: (_) => sl<OrderController>()),
     // ChangeNotifierProvider(create: (_) => sl<AuthController>()),
   ];
 

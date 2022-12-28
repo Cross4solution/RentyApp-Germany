@@ -1,6 +1,8 @@
 import 'package:rent_app_germany/core/_core_exports.dart';
 import 'package:rent_app_germany/core/entities/adress_model.dart';
 import 'package:rent_app_germany/core/entities/credit_cards_model.dart';
+import 'package:rent_app_germany/core/entities/my_order_list_detail_model.dart';
+import 'package:rent_app_germany/core/entities/my_order_list_model.dart';
 import 'package:rent_app_germany/core/error/failures/failure.dart';
 import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:dartz/dartz.dart';
@@ -162,8 +164,8 @@ class ProfileRepoImpl implements ProfileRepository {
           return Left(l);
         }, (data) {
           if (jsonDecode(data)["error_code"] == 422) {
-            showCustomMessenger(
-                CustomMessengerState.ERROR, '3 taneden daha fazla kart ekleyemezsiniz.');
+            showCustomMessenger(CustomMessengerState.ERROR,
+                '3 taneden daha fazla kart ekleyemezsiniz.');
           }
           if (jsonDecode(data)["error_code"] == 0) {
             showCustomMessenger(
@@ -198,10 +200,10 @@ class ProfileRepoImpl implements ProfileRepository {
       }
     }
   }
-  
+
   @override
-  Future<Either<Failure, void>> removeCreditCard() async{
-  try {
+  Future<Either<Failure, void>> removeCreditCard() async {
+    try {
       final removeCreditCard = await sl<INetworkManager>().baseDelete(
         endPoint: MainEndpoints.deleteCreditCard,
       );
@@ -210,12 +212,59 @@ class ProfileRepoImpl implements ProfileRepository {
         showCustomMessenger(CustomMessengerState.ERROR, 'hata');
         return Left(l);
       }, (data) {
-        showCustomMessenger(CustomMessengerState.SUCCESS, 'Kredi kartı kaldırıldı.');
+        showCustomMessenger(
+            CustomMessengerState.SUCCESS, 'Kredi kartı kaldırıldı.');
 
         return const Right(null);
       });
     } on Failure catch (failure) {
       return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, MyOrderModel>> getMyOrders() async {
+    {
+      try {
+        final getOrderInfo = await sl<INetworkManager>().baseGet(
+          endPoint: MainEndpoints.myOrders,
+        );
+
+        return getOrderInfo.fold((l) {
+          return Left(l);
+        }, (data) {
+          MyOrderModel myOrderModel = MyOrderModel.fromJson(data);
+
+          return Right(myOrderModel);
+        });
+      } on Failure catch (failure) {
+        return Left(failure);
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, MyOrderDetailsModel>> getMyOrderDetails() async {
+    {
+      try {
+        final getOrderDetailsInfo = await sl<INetworkManager>().baseGet(
+          endPoint: MainEndpoints.myOrdersDetail,
+        );
+
+        return getOrderDetailsInfo.fold((l) {
+          return Left(l);
+        }, (data) {
+
+
+       
+          MyOrderDetailsModel myOrderDetailsModel =
+              MyOrderDetailsModel.fromJson(data);
+
+          return Right(myOrderDetailsModel);
+        });
+      } on Failure catch (failure) {
+        return Left(failure);
+      }
     }
   }
 }

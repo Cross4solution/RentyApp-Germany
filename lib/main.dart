@@ -21,6 +21,7 @@ import 'features/profile/view/page/adress_page.dart';
 
 import 'features/profile/view/page/credit_card_show_page.dart';
 import 'features/profile/view/page/credit_card_add_page.dart';
+import 'features/profile/view/page/my_order_list_page.dart';
 import 'features/profile/view/page/profile_edit_page.dart';
 import 'features/profile/view/page/adress_add_page.dart';
 
@@ -57,7 +58,7 @@ class RentyApp extends StatelessWidget {
         Locale('tr', ''),
         Locale('de', ''),
       ],
-      home: SplashPage(),
+      home: OrderListPage(),
     );
   }
 }

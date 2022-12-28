@@ -1,6 +1,7 @@
 import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 
 import '../../../../../features/profile/controller/credit_card_controller.dart';
+import '../../../../../features/profile/controller/order_controller.dart';
 import '../../../../init/injection_container.dart';
 
 enum MainEndpoints {
@@ -23,6 +24,8 @@ enum MainEndpoints {
   showCreditCard,
   deleteCreditCard,
   orderCreat,
+  myOrders,
+  myOrdersDetail,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -68,6 +71,10 @@ extension MainEndPointExtension on MainEndpoints {
 
       case MainEndpoints.orderCreat:
         return 'api/order/creat';
+      case MainEndpoints.myOrders:
+        return 'api/order/my-orders';
+      case MainEndpoints.myOrdersDetail:
+        return 'api/order/my-order/${sl<OrderController>().orderId}';
     }
   }
 }

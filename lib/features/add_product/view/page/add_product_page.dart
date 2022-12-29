@@ -21,7 +21,7 @@ class AddProductPage extends StatelessWidget {
     return AppContainer(
       child: Scaffold(
         appBar: const AddProductAppBar(),
-        body: sl<ProfileController>().userInfo!.isSeller == true
+        body: sl<UserModel>().user?.isSeller == true
             ? SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Padding(

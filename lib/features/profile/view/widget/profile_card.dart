@@ -22,7 +22,7 @@ class ProfileCard extends StatelessWidget {
             radius: 48,
             backgroundColor: Colors.red,
             child: Text(
-              "${sl<ProfileController>().userInfo!.name!.substring(0, 1).toUpperCase()} ${sl<ProfileController>().userInfo!.name!.substring(1, 2).toUpperCase()}",
+              "${sl<UserModel>().user?.name!.substring(0, 1).toUpperCase()} ${sl<UserModel>().user?.name!.substring(1, 2).toUpperCase()}",
               style: const TextStyle(fontSize: 36, color: Colors.white),
             ),
           ),
@@ -30,7 +30,7 @@ class ProfileCard extends StatelessWidget {
             height: 16,
           ),
           Text(
-           sl<ProfileController>().userInfo!.name!.toString() ,
+           sl<UserModel>().user!.name!.toString() ,
             style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
           ),
           const SizedBox(

@@ -25,4 +25,11 @@ abstract class INetworkManager {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? requestBody,
   });
+
+
+      Future<Either<Failure, String>> basePut({
+    required MainEndpoints endPoint,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? requestBody,
+  });
 }

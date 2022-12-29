@@ -8,6 +8,7 @@ enum MainEndpoints {
   register,
   verifyEmail,
   login,
+  fetchUserInfo,
   getAllProducts,
   category,
   addProduct,
@@ -28,6 +29,7 @@ enum MainEndpoints {
   myOrdersDetail,
   sellerOrders,
   sellerOrdersUpdate,
+  putSellerInfo,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -41,6 +43,8 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/user/login';
       case MainEndpoints.logout:
         return 'api/user/logout';
+      case MainEndpoints.fetchUserInfo:
+        return 'api/user/show';
       case MainEndpoints.getAllProducts:
         return 'api/product/all';
       case MainEndpoints.category:
@@ -83,6 +87,9 @@ extension MainEndPointExtension on MainEndpoints {
 
       case MainEndpoints.sellerOrdersUpdate:
         return 'api/order/update/${sl<OrderController>().updateSellerOrderId}';
+
+      case MainEndpoints.putSellerInfo:
+        return 'api/user/update-seller';
     }
   }
 }

@@ -289,24 +289,66 @@ class ProfileRepoImpl implements ProfileRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateSellerOrdes({
-    required int status
-  }) async {
+  Future<Either<Failure, void>> updateSellerOrdes({required int status}) async {
     try {
-      final updateSellerOrder = await sl<INetworkManager>().basePost(
-        endPoint: MainEndpoints.sellerOrdersUpdate,
-        requestBody: {
-          "status": status,
-        }
+      final updateSellerOrder = await sl<INetworkManager>()
+          .basePost(endPoint: MainEndpoints.sellerOrdersUpdate, requestBody: {
+        "status": status,
+      });
+
+      return updateSellerOrder.fold((l) {
+        showCustomMessenger(CustomMessengerState.ERROR, 'Hata');
+        return Left(l);
+      }, (data) {
+        return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateSellerInfo() async {
+    try {
+      final updateSellerOrder = await sl<INetworkManager>().basePut(
+        endPoint: MainEndpoints.putSellerInfo,
       );
 
       return updateSellerOrder.fold((l) {
         showCustomMessenger(CustomMessengerState.ERROR, 'Hata');
         return Left(l);
       }, (data) {
-      
-        
+        if (jsonDecode(data)["error_code"] == 1) {
+          showCustomMessenger(
+              CustomMessengerState.ERROR, 'Siz zaten satıcısınız.');
+        }
+
+        if (jsonDecode(data)["error_code"] == 0) {
+          showCustomMessenger(CustomMessengerState.SUCCESS,
+              'Satıcı olma işlemleriniz başarıyla tamamlandı.');
+        }
+
         return const Right(null);
+      });
+    } on Failure catch (failure) {
+      return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> fetchUserInfo() async {
+    try {
+      final fetchUser = await sl<INetworkManager>().baseGet(
+        endPoint: MainEndpoints.fetchUserInfo,
+      );
+
+      return fetchUser.fold((l) {
+        showCustomMessenger(CustomMessengerState.ERROR, 'hata');
+        return Left(l);
+      }, (data) {
+        User userInfo = User.fromJson(data);
+
+        return Right(userInfo);
       });
     } on Failure catch (failure) {
       return Left(failure);

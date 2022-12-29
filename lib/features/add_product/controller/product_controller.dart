@@ -75,12 +75,13 @@ class ProductController extends ChangeNotifier {
     }
 
     ProductFeatures productFeatures = ProductFeatures(
-      productName: 'deneme',
-      productDescription: 'deneme',
+      productName: productNameController.text,
+      productDescription: productFeaturesController.text,
       price: 500,
-      rentalPrice: 50,
+      rentalPrice: int.parse(productRentalPriceController.text),
       categoryId: '1', // bottom sheet alanındaki kategoriyi alıcak
-      productFeatures: 'productFeaturesController.text',
+      productFeatures: productFeaturesController.text,
+      isDamaged: damageStatusInfo
       // productImages: ProductImages(images: imageFileList!),
     );
 
@@ -118,6 +119,13 @@ class ProductController extends ChangeNotifier {
             //  contentType: "multipart/form-data",
           ));
 
+          if( response.statusCode == 200){
+
+              showCustomMessenger(CustomMessengerState.SUCCESS, 'Ürününüz başarıyla eklendi.');
+            
+          }
+         
+
       print(response);
 
       print(sl<UserModel>().accessToken);
@@ -131,8 +139,8 @@ class ProductController extends ChangeNotifier {
   late int productId;
   String startDate = '';
   String endDate = '';
-   String adressId = '';
-   String cardId = '';
+  String adressId = '';
+  String cardId = '';
 
   Future<void> orderCreat() async {
     print("**************");
@@ -157,30 +165,73 @@ class ProductController extends ChangeNotifier {
     }
   }
 
-
-  void checkOrderItems(){
-    if(productId == null){
-       showCustomMessenger(CustomMessengerState.ERROR,
-              'Ürün id değeri eksik girilmiştir.');
+  void checkOrderItems() {
+    if (productId == null) {
+      showCustomMessenger(
+          CustomMessengerState.ERROR, 'Ürün id değeri eksik girilmiştir.');
     }
-    if(startDate == ''){
-       showCustomMessenger(CustomMessengerState.ERROR,
-              'Kiralama başlangıç tarihini giriniz.');
+    if (startDate == '') {
+      showCustomMessenger(
+          CustomMessengerState.ERROR, 'Kiralama başlangıç tarihini giriniz.');
     }
-    if(endDate == ''){
-       showCustomMessenger(CustomMessengerState.ERROR,
-              'Kiralama bitiş tarihini giriniz.');
+    if (endDate == '') {
+      showCustomMessenger(
+          CustomMessengerState.ERROR, 'Kiralama bitiş tarihini giriniz.');
     }
-    if(adressId == ''){
-       showCustomMessenger(CustomMessengerState.ERROR,
-              'Lütfen adresinizi seçiniz.');
+    if (adressId == '') {
+      showCustomMessenger(
+          CustomMessengerState.ERROR, 'Lütfen adresinizi seçiniz.');
     }
-    if(cardId == ''){
-       showCustomMessenger(CustomMessengerState.ERROR,
-              'Lütfen kredi kartı seçiniz.');
+    if (cardId == '') {
+      showCustomMessenger(
+          CustomMessengerState.ERROR, 'Lütfen kredi kartı seçiniz.');
     }
-    
-
-
   }
+
+  bool damageOne = false;
+  bool damageTwo = false;
+  bool damageThree = false;
+
+   int? damageStatusInfo;
+
+  void damageOneCheckbox(bool value) {
+    damageOne = value;
+
+     damageTwo = false;
+   damageThree = false;
+
+    damageStatusInfo = 1;
+print(damageStatusInfo);
+    notifyListeners();
+  }
+
+  void damageTwoCheckbox(bool value) {
+    damageTwo = value;
+
+     damageOne = false;
+   damageThree = false;
+
+   damageStatusInfo = 2;
+print(damageStatusInfo);
+    notifyListeners();
+  }
+
+  void damageThreeCheckbox(bool value) {
+    damageThree = value;
+
+     damageOne = false;
+   damageTwo = false;
+
+    damageStatusInfo = 3;
+
+    notifyListeners();
+
+    print(damageStatusInfo);
+  }
+
+
+
+
+
+   
 }

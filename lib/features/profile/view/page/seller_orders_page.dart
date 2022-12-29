@@ -95,24 +95,6 @@ class _SellerOrdersPageState extends State<SellerOrdersPage> {
                         ],
                       ),
                       const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Kullanıcı Adresi',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.orange.shade800),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        orderController.sellerOrderList[index].userAddress,
-                        style: const TextStyle(
-                            fontSize: 17, color: Color(0xFF686868)),
-                      ),
-                      const SizedBox(
                         height: 16,
                       ),
                       Row(

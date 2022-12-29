@@ -1,5 +1,6 @@
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:rent_app_germany/features/bottom_navigation_bar/_bottom_navigation_bar_exports.dart';
+import 'package:rent_app_germany/features/profile/controller/profile_controller.dart';
 
 import '../../../../core/_core_exports.dart';
 
@@ -19,6 +20,8 @@ class _SplashPageState extends State<SplashPage> {
       const Duration(seconds: 2),
       () {
         if (sl<UserModel>().user!.isLogin) {
+          sl<ProfileController>().fetchUserInfo();
+          print(sl<UserModel>().accessToken);
           Go.to.pageAndRemoveUntil(PageRoutes.bottomNavigationPage);
         } else {
           Go.to.pageAndRemoveUntil(PageRoutes.loginPage);

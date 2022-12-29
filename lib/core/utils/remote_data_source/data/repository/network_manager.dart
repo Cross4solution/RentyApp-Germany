@@ -101,4 +101,31 @@ class NetworkManager extends INetworkManager {
       return Left(NotFoundFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, String>> basePut(
+      {required MainEndpoints endPoint,
+      Map<String, dynamic>? queryParameters,
+      Map<String, dynamic>? requestBody}) async {
+    try {
+      Response response = await dio.put(
+        endPoint.path,
+        queryParameters: queryParameters,
+        options: Options(
+          headers: {"Authorization": "Bearer ${sl<UserModel>().accessToken}"},
+        ),
+      );
+
+      final statusCode =
+          StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
+
+      if (statusCode.isSuccess()) {
+        return Right(response.data);
+      } else {
+        return Left(statusCode.stateToFailure() ?? NotFoundFailure());
+      }
+    } catch (e) {
+      return Left(NotFoundFailure());
+    }
+  }
 }

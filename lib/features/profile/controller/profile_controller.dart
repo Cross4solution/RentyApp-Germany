@@ -5,6 +5,7 @@ import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:rent_app_germany/features/profile/repo/profile_repo.dart';
 
 import '../../../core/entities/adress_model.dart';
+import '../../auth/controller/auth_controller.dart';
 
 class ProfileController extends ChangeNotifier {
   ProfileRepository profileRepository;
@@ -17,6 +18,20 @@ class ProfileController extends ChangeNotifier {
   late int addFavoriteId;
   late int removeFavoriteId;
   late int removeAdressId;
+
+  User? userInfo;
+
+  Future<void> fetchUserInfo() async {
+    try {
+      final fetchUser = await profileRepository.fetchUserInfo();
+
+      fetchUser.fold((l) => Left(l), (data) {
+        userInfo = data;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   Future<void> addFavorites() async {
     try {
@@ -118,6 +133,20 @@ class ProfileController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateSellerInfo() async {
+    if (sl<AuthController>().isSeller == true) {
+      try {
+        final isSeller = await profileRepository.updateSellerInfo();
 
-
+        isSeller.fold((l) => Left(l), (data) {
+          notifyListeners();
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    } else {
+      showCustomMessenger(CustomMessengerState.ERROR,
+          'Satıcı olmak için sözleşmeyi kabul edin.');
+    }
+  }
 }

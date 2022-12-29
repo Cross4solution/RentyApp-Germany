@@ -2,6 +2,7 @@ import 'package:rent_app_germany/core/shared_widgets/app_text_form_field.dart';
 import 'package:rent_app_germany/features/auth/controller/auth_controller.dart';
 
 import '../../../../core/_core_exports.dart';
+import '../../../profile/controller/profile_controller.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -81,6 +82,8 @@ class LoginPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       sl<AuthController>().login();
+
+                        sl<ProfileController>().fetchUserInfo();
                     },
                     child: Container(
                       alignment: Alignment.center,

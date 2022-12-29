@@ -47,15 +47,15 @@ class Products {
 class ProductFeatures {
   ProductFeatures({
     this.id,
-     this.productName,
-     this.productDescription,
-     this.productFeatures,
-     this.price,
-     this.rentalPrice,
-     this.productImages,
-  
-     this.categoryId,
-     this.userUsername,
+    this.productName,
+    this.productDescription,
+    this.productFeatures,
+    this.price,
+    this.rentalPrice,
+    this.productImages,
+    this.categoryId,
+    this.userUsername,
+    this.isDamaged,
   });
 
   final int? id;
@@ -67,6 +67,7 @@ class ProductFeatures {
   final ProductImages? productImages;
   final String? categoryId;
   final String? userUsername;
+  final int? isDamaged;
 
   factory ProductFeatures.fromJson(String str) =>
       ProductFeatures.fromMap(json.decode(str));
@@ -83,6 +84,7 @@ class ProductFeatures {
         productImages: ProductImages.fromMap(json["product_images"]),
         categoryId: json["category_name"],
         userUsername: json["user_username"],
+        isDamaged: json["is_damaged"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -92,6 +94,7 @@ class ProductFeatures {
         "rental_price": rentalPrice,
         "category_id": categoryId,
         "features": productFeatures,
+        "is_damaged": isDamaged,
         // "images": productImages!.toMap(),
       };
 }

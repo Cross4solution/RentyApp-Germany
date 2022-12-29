@@ -35,15 +35,19 @@ class _VerifyPageState extends State<VerifyPage> {
         child: Consumer(
           builder: (context, AuthController registerController, child) {
             return Column(
+             
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
                   height: ScreenSize().getHeightPercent(.1),
                 ),
-                const Text(
-                  'Code has been sent to 123@gmail.com ', //${authController.phoneNumberController.text}
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
+                 Align(
+                  alignment: Alignment.topRight,
+                   child: Text(
+                    'Code has been sent to ${registerController.emailController.text} ', //${authController.phoneNumberController.text}
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                                 ),
+                 ),
                 const SizedBox(
                   height: 8,
                 ),

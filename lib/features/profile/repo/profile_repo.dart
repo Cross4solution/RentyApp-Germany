@@ -6,6 +6,7 @@ import '../../../core/entities/get_product_model.dart';
 import '../../../core/entities/my_order_list_detail_model.dart';
 import '../../../core/entities/my_order_list_model.dart';
 import '../../../core/entities/seller_orders_model.dart';
+import '../../../core/entities/user.dart';
 import '../../../core/error/failures/failure.dart';
 
 abstract class ProfileRepository {
@@ -51,4 +52,9 @@ abstract class ProfileRepository {
   Future<Either<Failure, void>> updateSellerOrdes({
     required int status,
   });
+
+  //UPDATE SELLER INFO
+
+    Future<Either<Failure, void>> updateSellerInfo();
+    Future<Either<Failure, User>> fetchUserInfo();
 }

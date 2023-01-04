@@ -85,15 +85,13 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<CategoryArticles> categories = [];
+  List<ProductCategoryModel> productCategories = [];
 
-  Future<void> fetchCategory() async {
-    final requestCategoryResult = await homeRepository.getCategories(
-        categoryModel: CategoryModel(categories: categories));
+  Future<void> fetchProductTopCategory() async {
+    final result = await homeRepository.getProductCategories();
 
-    requestCategoryResult.fold((failure) => failure, (data) {
-      categories = data.categories;
-
+    result.fold((l) => l, (data) {
+      productCategories.addAll(data);
       notifyListeners();
     });
   }

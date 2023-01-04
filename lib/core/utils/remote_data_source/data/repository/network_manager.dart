@@ -4,6 +4,9 @@ import 'package:dartz/dartz.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/domain/entites/main_endpoint.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/domain/entites/status_code_enums.dart';
 import 'package:rent_app_germany/core/utils/remote_data_source/domain/repository/i_network_manager.dart';
+import 'package:rent_app_germany/features/home/controller/home_controller.dart';
+
+import '../../../../entities/product_category.dart';
 
 class NetworkManager extends INetworkManager {
   NetworkManager(super.dio);
@@ -28,7 +31,10 @@ class NetworkManager extends INetworkManager {
       final statusCode =
           StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
 
+
+
       if (statusCode.isSuccess()) {
+ 
         return Right(response.data);
       } else {
         return Left(statusCode.stateToFailure() ?? NotFoundFailure());
@@ -53,23 +59,23 @@ class NetworkManager extends INetworkManager {
         ),
       );
 
-      final statusCode =
-          StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
+      // final statusCode =
+      //     StatusCodeEnumsExtension.statusCodeToEnum(response.statusCode);
 
-      if (statusCode.isSuccess()) {
+      // if (statusCode.isSuccess()) {
         return Right(response.data);
-      } else {
-        Failure result = statusCode.stateToFailure() ?? NotFoundFailure();
+      // } else {
+      //   Failure result = statusCode.stateToFailure() ?? NotFoundFailure();
 
-        if (statusCode == StatusCodeEnums.StatusCode401) {
-          result.errorMessage = 'Girdiğiniz bigiler hatalıdır';
-        }
+      //   // if (statusCode == StatusCodeEnums.StatusCode401) {
+      //   //   result.errorMessage = 'Girdiğiniz bigiler hatalıdır';
+      //   // }
 
-        if (statusCode == StatusCodeEnums.StatusCode200) {
-          showCustomMessenger(CustomMessengerState.SUCCESS, 'content');
-        }
-        return Left(result);
-      }
+      //   // if (statusCode == StatusCodeEnums.StatusCode200) {
+      //   //   showCustomMessenger(CustomMessengerState.SUCCESS, 'content');
+      //   // }
+      //   return Left(result);
+      // }
     } catch (e) {
       return Left(NotFoundFailure());
     }
@@ -128,4 +134,6 @@ class NetworkManager extends INetworkManager {
       return Left(NotFoundFailure());
     }
   }
+  
+
 }

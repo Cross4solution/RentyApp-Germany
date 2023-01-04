@@ -6,12 +6,9 @@ import '../../../core/entities/get_product_model.dart';
 import '../domain/entities/get_product_arguments.dart';
 
 abstract class HomeRepository {
-  Future<Either<Failure, CategoryModel>> getCategories({
-    required CategoryModel categoryModel,
-  });
+  Future<Either<Failure, List<ProductCategoryModel>>> getProductCategories();
 
-
-    Future<Either<Failure, GetProductModel>> getProducts({
+  Future<Either<Failure, GetProductModel>> getProducts({
     required GetProductModel getProductModel,
     required GetProductArguments getProductArguments,
   });

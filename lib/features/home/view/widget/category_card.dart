@@ -18,7 +18,7 @@ class _CategoryCardState extends State<CategoryCard> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      sl<HomeController>().fetchCategory();
+      sl<HomeController>().fetchProductTopCategory();
     });
     super.initState();
   }
@@ -33,7 +33,7 @@ class _CategoryCardState extends State<CategoryCard> {
             physics: const BouncingScrollPhysics(),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: homeController.categories.length,
+            itemCount: homeController.productCategories.length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -59,7 +59,7 @@ class _CategoryCardState extends State<CategoryCard> {
                     height: 4,
                   ),
                   Text(
-                    homeController.categories[index].name!,
+                    homeController.productCategories[index].name,
                   )
                 ],
               );

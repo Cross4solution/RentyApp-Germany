@@ -8,10 +8,12 @@ abstract class AuthRepository {
 
   Future<Either<Failure, void>> verifyEmail({
     required String email,
-    required String code,
   });
-  
-    Future<Either<Failure, UserModel>> login({
+  Future<Either<Failure, void>> sendResetPassword({
+    required String email,
+  });
+
+  Future<Either<Failure, UserModel>> login({
     required User user,
   });
 

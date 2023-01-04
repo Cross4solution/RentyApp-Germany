@@ -1,3 +1,5 @@
+import 'package:rent_app_germany/features/auth/controller/auth_controller.dart';
+
 import '../../../../core/_core_exports.dart';
 import '../../../../core/shared_widgets/app_button.dart';
 import '../../../../core/shared_widgets/app_text_form_field.dart';
@@ -18,7 +20,9 @@ class ForgotPasswordPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  SizedBox(height: ScreenSize().getHeightPercent(.2),),
+                  SizedBox(
+                    height: ScreenSize().getHeightPercent(.2),
+                  ),
                   SvgPicture.asset(AssetsPath().forgotPasswordSVG, height: 150),
                   const SizedBox(height: 60),
                   const Text(
@@ -31,14 +35,14 @@ class ForgotPasswordPage extends StatelessWidget {
                     hintText: 'Enter your email adress...',
                     prefixIcon: const Icon(
                       Icons.email,
-                     
                     ),
+                    controller: sl<AuthController>().emailController,
                   ),
                   const SizedBox(height: 25),
                   AppButton.standart(
                     buttonText: 'Continue',
                     onTap: () {
-                      Go.to.page(PageRoutes.loginPage);
+                      sl<AuthController>().sendResetPassword();
                     },
                   ),
                 ],

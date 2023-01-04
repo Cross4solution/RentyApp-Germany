@@ -30,14 +30,14 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> verifyEmail(
-      {required String email, required String code}) async {
+  Future<Either<Failure, void>> verifyEmail({
+    required String email,
+  }) async {
     try {
       final register = await sl<INetworkManager>().basePost(
         endPoint: MainEndpoints.verifyEmail,
         requestBody: {
-          'email': email,
-          'code': code,
+          "email": email,
         },
       );
 
@@ -65,6 +65,15 @@ class AuthRepositoryImpl implements AuthRepository {
     return register.fold((l) {
       return Left(l);
     }, (data) {
+      if (jsonDecode(data)["error_code"] == 1020) {
+        showCustomMessenger(CustomMessengerState.ERROR,
+            'Email adresiniz doğrulanmadığı için giriş yapamıyorsunuz. Lütfen mail adresinizi kontrol ediniz.');
+      }
+
+      if (jsonDecode(data)["error_code"] == 1010) {
+        showCustomMessenger(
+            CustomMessengerState.ERROR, 'Giriş bilgileriniz hatalıdır');
+      }
       final userInfo = UserModel.fromJson(data);
 
       return Right(userInfo);
@@ -83,6 +92,38 @@ class AuthRepositoryImpl implements AuthRepository {
       });
     } on Failure catch (failure) {
       return Left(failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendResetPassword(
+      {required String email}) async {
+    {
+      try {
+        final register = await sl<INetworkManager>().basePost(
+          endPoint: MainEndpoints.sendResetPassword,
+          requestBody: {
+            "email": email,
+          },
+        );
+
+        return register.fold((l) {
+          showCustomMessenger(CustomMessengerState.WARNING, 'content');
+          return Left(l);
+        }, (data) {
+          if (jsonDecode(data)["error_code"] == 1030) {
+            showCustomMessenger(
+                CustomMessengerState.ERROR, 'Girilen email adresi hatalıdır.');
+          }
+          if (jsonDecode(data)["error_code"] == 0) {
+            showCustomMessenger(CustomMessengerState.SUCCESS,
+                'Emial adresinize şifre yenileme bağlantısı gönderilmiştir.');
+          }
+          return const Right(null);
+        });
+      } on Failure catch (failure) {
+        return Left(failure);
+      }
     }
   }
 }

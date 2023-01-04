@@ -10,7 +10,7 @@ enum MainEndpoints {
   login,
   fetchUserInfo,
   getAllProducts,
-  category,
+  productCategory,
   addProduct,
   addFavorites,
   deleteFavorites,
@@ -30,6 +30,7 @@ enum MainEndpoints {
   sellerOrders,
   sellerOrdersUpdate,
   putSellerInfo,
+  sendResetPassword,
 }
 
 extension MainEndPointExtension on MainEndpoints {
@@ -38,7 +39,7 @@ extension MainEndPointExtension on MainEndpoints {
       case MainEndpoints.register:
         return 'api/user/register';
       case MainEndpoints.verifyEmail:
-        return 'api/user/email-verify';
+        return 'api/user/send-email-verify';
       case MainEndpoints.login:
         return 'api/user/login';
       case MainEndpoints.logout:
@@ -47,8 +48,8 @@ extension MainEndPointExtension on MainEndpoints {
         return 'api/user/show';
       case MainEndpoints.getAllProducts:
         return 'api/product/all';
-      case MainEndpoints.category:
-        return 'api/service/category/top-categories';
+      case MainEndpoints.productCategory:
+        return 'api/product/category/top-categories';
       case MainEndpoints.addProduct:
         return 'api/userproduct/add';
 
@@ -90,6 +91,8 @@ extension MainEndPointExtension on MainEndpoints {
 
       case MainEndpoints.putSellerInfo:
         return 'api/user/update-seller';
+      case MainEndpoints.sendResetPassword:
+        return 'api/user/send-password-reset';
     }
   }
 }

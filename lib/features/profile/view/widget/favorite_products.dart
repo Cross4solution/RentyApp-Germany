@@ -24,22 +24,26 @@ class _FavoriteProductsState extends State<FavoriteProducts> {
     return Consumer(
       builder: (context, ProfileController profileController, child) {
         return profileController.favoriteList.isEmpty
-            ? Column(
-                children: [
-                  SvgPicture.asset(
-                    AssetsPath().emptyFavoriteSVG,
-                    height: 200,
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Text(
-                    'Beğendiğiniz bir ürün bulunmamaktadır',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                ],
-              )
+            ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    SvgPicture.asset(
+                      AssetsPath().emptyFavoriteSVG,
+                      height: 200,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const Text(
+                      'Beğendiğiniz bir ürün bulunmamaktadır.',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+            )
             : Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, ),
               child: GridView.builder(

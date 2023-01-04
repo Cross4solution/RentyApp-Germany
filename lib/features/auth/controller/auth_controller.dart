@@ -38,40 +38,51 @@ class AuthController extends ChangeNotifier {
 
       await authRepository.register(userModel: userModel);
 
-      Go.to.page(PageRoutes.verifyPage);
+      verifyEmail();
+
+      // Go.to.page(PageRoutes.verifyPage);
     }
   }
 
   Future<void> verifyEmail() async {
     try {
       await authRepository.verifyEmail(
-          email: emailController.text, code: verifyCodeController.text);
+        email: emailController.text,
+      );
+      Go.to.page(PageRoutes.verifyPage);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> sendResetPassword() async {
+    try {
+      await authRepository.sendResetPassword(
+        email: emailController.text,
+      );
+     emailController.clear();
       Go.to.page(PageRoutes.loginPage);
     } catch (e) {
       print(e.toString());
     }
   }
 
-    Future<void> logout() async {
+  Future<void> logout() async {
     try {
-    final _status =  await authRepository.logout();
+      final _status = await authRepository.logout();
 
-    _status.fold((l) {
+      _status.fold((l) {
+        showCustomMessenger(CustomMessengerState.ERROR, 'Bir hata oluştu.');
+        l;
+      }, (data) async {
+        showCustomMessenger(CustomMessengerState.ERROR, 'Çıkış yapıldı.');
 
-       showCustomMessenger(CustomMessengerState.ERROR, 'Bir hata oluştu.');
-      l;
-    }, (data) async {
-       showCustomMessenger(CustomMessengerState.ERROR, 'Çıkış yapıldı.');
+        final removeDataFromKey = sl<RemoveDataFromKey>();
+        await removeDataFromKey(SharedPreferenceKeyParams(
+            key: SharedPreferencesKeys.CACHE_USER_INFO));
 
-
-       final removeDataFromKey = sl<RemoveDataFromKey>();
-       await removeDataFromKey(SharedPreferenceKeyParams(key: SharedPreferencesKeys.CACHE_USER_INFO));
-
-       Go.to.page(PageRoutes.loginPage);
-    });
-
-
-
+        Go.to.page(PageRoutes.loginPage);
+      });
 
       Go.to.page(PageRoutes.loginPage);
     } catch (e) {

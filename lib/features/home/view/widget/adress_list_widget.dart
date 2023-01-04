@@ -25,7 +25,25 @@ class _AdressListWidgetState extends State<AdressListWidget> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ProfileController profileController, child) {
-        return SizedBox(
+        return  profileController.adressList.isEmpty ? GestureDetector(
+                      onTap: () {
+                        Go.to.page(PageRoutes.adressPage);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 16),
+                        child: Container(
+                            alignment: Alignment.center,
+                            height: 46,
+                            width: 46,
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: const Icon(Icons.add)),
+                      ),
+                    ):
+        
+         SizedBox(
           height: 48,
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),

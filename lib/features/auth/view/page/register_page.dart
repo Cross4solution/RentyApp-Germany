@@ -119,6 +119,7 @@ class RegisterPage extends StatelessWidget {
                         onTap: () {
                           removeFocus(context);
                           registerController.register();
+                        
                           
                         },
                         child: Container(
@@ -130,7 +131,7 @@ class RegisterPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: const Text(
-                            'Login',
+                            'Register',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,

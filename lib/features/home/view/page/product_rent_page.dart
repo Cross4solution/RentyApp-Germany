@@ -70,10 +70,12 @@ class _ProductRentPageState extends State<ProductRentPage> {
                   const Divider(height: 50, indent: 50, endIndent: 50, ),
                   
                   if (homeController.rangeTime != null) ...[
+
+                   
                     Text(
                       'Toplam (${homeController.rangeTime}) gün : '
                       '\$'
-                      '${homeController.rangeTime! * widget.productFeatures.rentalPrice!}',
+                      '${homeController.rangeTime! *int.parse(widget.productFeatures.rentalPrice!) }',
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                     ), 
                      const Divider(height: 50, indent: 50, endIndent: 50, ),

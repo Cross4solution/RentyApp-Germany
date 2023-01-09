@@ -37,13 +37,13 @@ class FullPhotoWidget extends StatelessWidget {
             builder: (BuildContext context, int index) {
               return PhotoViewGalleryPageOptions(
                 imageProvider: NetworkImage(
-                  "https://api.testsoftware.site/${productFeatures.productImages!.images[index]}",
+                  "https://api.testsoftware.site/${productFeatures.productImages!.images![index]}",
                 ),
                 initialScale: PhotoViewComputedScale.contained * 1,
                 // heroAttributes: PhotoViewHeroAttributes(tag: galleryItems[index].id),
               );
             },
-            itemCount: productFeatures.productImages!.images.length,
+            itemCount: productFeatures.productImages!.images!.length,
             // loadingBuilder: (context, event) => Center(
             //   child: Container(
             //     width: 20.0,

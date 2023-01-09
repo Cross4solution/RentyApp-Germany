@@ -21,7 +21,7 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
     return Column(
       children: [
         CarouselSlider.builder(
-          itemCount: widget.productFeatures.productImages!.images.length,
+          itemCount: widget.productFeatures.productImages!.images!.length,
           itemBuilder: (context, index, realIndex) {
             return Container(
               margin: const EdgeInsets.all(4),
@@ -41,7 +41,7 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
                   },
                   child: CachedNetworkImage(
                       imageUrl:
-                          "https://api.testsoftware.site/${widget.productFeatures.productImages!.images[index]}",
+                          "https://api.testsoftware.site/${widget.productFeatures.productImages!.images![index]}",
                          
 
                       fit: BoxFit.cover,
@@ -76,7 +76,7 @@ class _ProductSlidableImagesState extends State<ProductSlidableImages> {
   Widget buildIndicator() {
     return AnimatedSmoothIndicator(
       activeIndex: activeIndex,
-      count: widget.productFeatures.productImages!.images.length,
+      count: widget.productFeatures.productImages!.images!.length,
       effect: const ExpandingDotsEffect(
           dotWidth: 10, dotHeight: 10, activeDotColor: Colors.red),
     );

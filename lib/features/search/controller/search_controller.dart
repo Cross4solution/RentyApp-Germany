@@ -39,7 +39,7 @@ class SearchController extends ChangeNotifier {
           Left(l);
         }, (data) {
           print('arama yapıldı');
-          searchList.addAll(data.products.data);
+          searchList.addAll(data);
           if (searchList.isNotEmpty) {
             _setSearchState(SearchState.loaded);
           }

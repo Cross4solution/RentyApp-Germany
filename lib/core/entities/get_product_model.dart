@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:image_picker/image_picker.dart';
-
 class GetProductModel {
   GetProductModel({
     required this.products,
@@ -9,7 +7,7 @@ class GetProductModel {
 
   final Products products;
 
-  factory GetProductModel.fromJson(String str) =>
+  factory GetProductModel.fromJson(dynamic str) =>
       GetProductModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
@@ -48,26 +46,30 @@ class ProductFeatures {
   ProductFeatures({
     this.id,
     this.productName,
-    this.productDescription,
-    this.productFeatures,
     this.price,
+    this.slug,
     this.rentalPrice,
     this.productImages,
-    this.categoryId,
-    this.userUsername,
     this.isDamaged,
+    this.categoryName,
+    this.userUsername,
+    this.rating,
+    this.ratingCount,
+    this.favorites,
   });
 
   final int? id;
   final String? productName;
-  final String? productDescription;
-  final String? productFeatures;
-  final int? price;
-  final int? rentalPrice;
+  final String? price;
+  final String? slug;
+  final String? rentalPrice;
   final ProductImages? productImages;
-  final String? categoryId;
+  final String? isDamaged;
+  final String? categoryName;
   final String? userUsername;
-  final int? isDamaged;
+  final dynamic rating;
+  final String? ratingCount;
+  final List<dynamic>? favorites;
 
   factory ProductFeatures.fromJson(String str) =>
       ProductFeatures.fromMap(json.decode(str));
@@ -78,33 +80,43 @@ class ProductFeatures {
         id: json["id"],
         productName: json["product_name"],
         price: json["price"],
+        slug: json["slug"],
         rentalPrice: json["rental_price"],
-        productFeatures: json["productFeatures"],
-        productDescription: json["productDescription"],
         productImages: ProductImages.fromMap(json["product_images"]),
-        categoryId: json["category_name"],
-        userUsername: json["user_username"],
         isDamaged: json["is_damaged"],
+        categoryName: json["category_name"],
+        userUsername: json["user_username"],
+        rating: json["rating"],
+        ratingCount: json["rating_count"],
+        favorites: json["favorites"] == null
+            ? []
+            : List<dynamic>.from(json["favorites"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toMap() => {
-        "name": productName,
-        "description": productDescription,
+        "id": id,
+        "product_name": productName,
         "price": price,
+        "slug": slug,
         "rental_price": rentalPrice,
-        "category_id": categoryId,
-        "features": productFeatures,
+        "product_images": productImages!.toMap(),
         "is_damaged": isDamaged,
-        // "images": productImages!.toMap(),
+        "category_name": categoryName,
+        "user_username": userUsername,
+        "rating": rating,
+        "rating_count": ratingCount,
+        "favorites": favorites == null
+            ? []
+            : List<dynamic>.from(favorites!.map((x) => x)),
       };
 }
 
 class ProductImages {
   ProductImages({
-    required this.images,
+    this.images,
   });
 
-  final List<String> images;
+  final List<String?>? images;
 
   factory ProductImages.fromJson(String str) =>
       ProductImages.fromMap(json.decode(str));
@@ -112,10 +124,13 @@ class ProductImages {
   String toJson() => json.encode(toMap());
 
   factory ProductImages.fromMap(Map<String, dynamic> json) => ProductImages(
-        images: List<String>.from(json["images"].map((x) => x) ?? []),
+        images: json["images"] == null
+            ? []
+            : List<String?>.from(json["images"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toMap() => {
-        "images": List<dynamic>.from(images.map((x) => x)),
+        "images":
+            images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
       };
 }

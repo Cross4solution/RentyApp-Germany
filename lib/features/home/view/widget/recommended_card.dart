@@ -46,6 +46,8 @@ class _RecommendedCardState extends State<RecommendedCard> {
 
             return GestureDetector(
               onTap: () {
+                homeController.isDamaged =
+                    int.parse(homeController.productFeatures[index].isDamaged!);
                 Go.to.page(PageRoutes.productPage, arguments: productFeatures);
                 sl<ProductController>().productId = productFeatures.id!;
               },
@@ -75,9 +77,11 @@ class _RecommendedCardState extends State<RecommendedCard> {
                                   topRight: Radius.circular(16),
                                 ),
                                 child: productFeatures
-                                        .productImages!.images.isEmpty
+                                        .productImages!.images!.isEmpty
                                     ? Image.network(
-                                        "https://api.testsoftware.site/${productFeatures.productImages!.images[0]}", fit: BoxFit.cover,)
+                                        "https://api.testsoftware.site/${productFeatures.productImages!.images![0]}",
+                                        fit: BoxFit.cover,
+                                      )
                                     : const SizedBox.shrink()),
                           ),
                           Positioned(

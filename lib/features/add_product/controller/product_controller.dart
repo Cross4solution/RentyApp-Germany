@@ -8,6 +8,8 @@ import 'package:rent_app_germany/features/add_product/repo/product_repo.dart';
 import 'package:rent_app_germany/features/home/domain/data/product_model.dart';
 
 import '../../../core/constants/product_list.dart';
+import '../../../core/entities/product_add_model.dart';
+import '../../home/controller/home_controller.dart';
 
 class ProductController extends ChangeNotifier {
   final ProductRepository productRepository;
@@ -17,6 +19,44 @@ class ProductController extends ChangeNotifier {
   List<XFile>? imageFileList = [];
 
   List<ProductModel> favoriteList = [];
+
+  String dropDownValue = sl<HomeController>().productCategories[0].name;
+  late String dropDownValueIndex = dropDownValue;
+
+  // List of items in our dropdown menu
+  var dropdownItems = [
+    sl<HomeController>().productCategories[0].name,
+    sl<HomeController>().productCategories[1].name,
+    sl<HomeController>().productCategories[2].name,
+    sl<HomeController>().productCategories[3].name,
+    sl<HomeController>().productCategories[4].name,
+    sl<HomeController>().productCategories[5].name,
+  ];
+
+  int productCategoryIndex() {
+    switch (dropDownValue) {
+      case "Elektronik":
+        return 1;
+
+      case "Spor":
+        return 2;
+
+      case "Müzik Aletleri":
+        return 3;
+
+      case "Yapı Market":
+        return 4;
+
+      case "Kıralık Kıyafet":
+        return 5;
+
+      case "Oyuncak":
+        return 6;
+
+      default:
+        return 1;
+    }
+  }
 
   Future<void> getPhotoFromGallery(BuildContext context) async {
     ImagePicker imagePicker = ImagePicker();
@@ -74,57 +114,32 @@ class ProductController extends ChangeNotifier {
       formData.files.add(MapEntry("images[]", multipartFile));
     }
 
-    ProductFeatures productFeatures = ProductFeatures(
-      productName: productNameController.text,
-      productDescription: productFeaturesController.text,
-      price: 500,
-      rentalPrice: int.parse(productRentalPriceController.text),
-      categoryId: '1', // bottom sheet alanındaki kategoriyi alıcak
-      productFeatures: productFeaturesController.text,
-      isDamaged: damageStatusInfo
-      // productImages: ProductImages(images: imageFileList!),
-    );
+    ProductAddModel productFeatures = ProductAddModel(
+        name: productNameController.text,
+        description: productFeaturesController.text,
+        price: 500,
+        rentalPrice: int.parse(productRentalPriceController.text),
+        categoryId:
+            productCategoryIndex(), // bottom sheet alanındaki kategoriyi alıcak
+        features: productFeaturesController.text,
+        isDamaged: damageStatusInfo);
 
     productFeatures.toMap().forEach((final key, final value) {
       formData.fields.add(MapEntry(key, value.toString()));
     });
 
-    // File file = File(imageFileList![0].path);
-
-    //  String fileName = file.path.split('/').last;
-
     try {
-      // await productRepository.addProduct(productModel: productFeatures);
-
-      // FormData formData = FormData.fromMap({
-      //   "name": "nisssdce",
-      //   "description": "deneme",
-      //   "price": 45,
-      //   "rental_price": 45,
-      //   "category_id": 1,
-      //   "features": "fsdfsdfsdf",
-
-      //     "images[]":
-      //       await MultipartFile.fromFile(file.path, filename: fileName)
-
-      // });
-
       Response response = await sl<Dio>().post(MainEndpoints.addProduct.path,
           data: formData,
           options: Options(
             headers: {"Authorization": "Bearer ${sl<UserModel>().accessToken}"},
-
             responseType: ResponseType.plain,
-
-            //  contentType: "multipart/form-data",
           ));
 
-          if( response.statusCode == 200){
-
-              showCustomMessenger(CustomMessengerState.SUCCESS, 'Ürününüz başarıyla eklendi.');
-            
-          }
-         
+      if (response.statusCode == 200) {
+        showCustomMessenger(
+            CustomMessengerState.SUCCESS, 'Ürününüz başarıyla eklendi.');
+      }
 
       print(response);
 
@@ -192,46 +207,38 @@ class ProductController extends ChangeNotifier {
   bool damageTwo = false;
   bool damageThree = false;
 
-   int? damageStatusInfo;
+  int? damageStatusInfo;
 
   void damageOneCheckbox(bool value) {
     damageOne = value;
 
-     damageTwo = false;
-   damageThree = false;
+    damageTwo = false;
+    damageThree = false;
 
     damageStatusInfo = 1;
-print(damageStatusInfo);
+
     notifyListeners();
   }
 
   void damageTwoCheckbox(bool value) {
     damageTwo = value;
 
-     damageOne = false;
-   damageThree = false;
+    damageOne = false;
+    damageThree = false;
 
-   damageStatusInfo = 2;
-print(damageStatusInfo);
+    damageStatusInfo = 2;
+
     notifyListeners();
   }
 
   void damageThreeCheckbox(bool value) {
     damageThree = value;
 
-     damageOne = false;
-   damageTwo = false;
+    damageOne = false;
+    damageTwo = false;
 
     damageStatusInfo = 3;
 
     notifyListeners();
-
-    print(damageStatusInfo);
   }
-
-
-
-
-
-   
 }

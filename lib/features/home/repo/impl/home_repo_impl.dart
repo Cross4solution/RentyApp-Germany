@@ -3,6 +3,7 @@ import 'package:rent_app_germany/core/entities/get_product_model.dart';
 import 'package:rent_app_germany/core/entities/product_category.dart';
 import 'package:dartz/dartz.dart';
 import 'package:rent_app_germany/features/home/controller/home_controller.dart';
+import '../../../../core/entities/product_add_model.dart';
 import '../../../../core/utils/remote_data_source/domain/entites/main_endpoint.dart';
 import '../../../../core/utils/remote_data_source/domain/repository/i_network_manager.dart';
 import '../../domain/entities/get_product_arguments.dart';
@@ -33,8 +34,7 @@ class HomeRepoImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, GetProductModel>> getProducts({
-    required GetProductModel getProductModel,
+  Future<Either<Failure, List<ProductFeatures>>> getProducts({
     required GetProductArguments getProductArguments,
   }) async {
     try {
@@ -44,10 +44,15 @@ class HomeRepoImpl implements HomeRepository {
       );
 
       return fetchCategory.fold((failure) => Left(failure), (data) {
-        GetProductModel getProductData = GetProductModel.fromJson(data);
+        final x = json.decode(data);
+        var result = x["products"]["data"];
+        // print(x["products"]["data"]);
 
-        // ignore: void_checks
-        return Right(getProductData);
+        final listGetProduct = (result as List).map((e) {
+          return ProductFeatures.fromMap(e);
+        }).toList();
+
+        return Right(listGetProduct);
       });
     } on Failure catch (failure) {
       return Left(failure);

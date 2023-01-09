@@ -1,4 +1,6 @@
 import '../../../../core/_core_exports.dart';
+import '../../../home/controller/home_controller.dart';
+import '../../controller/product_controller.dart';
 
 class DropdownCategory extends StatefulWidget {
   DropdownCategory({Key? key}) : super(key: key);
@@ -9,16 +11,7 @@ class DropdownCategory extends StatefulWidget {
 
 class _DropdownCategoryState extends State<DropdownCategory> {
   // Initial Selected Value
-  String dropdownvalue = 'Oyun Konsolu';
 
-  // List of items in our dropdown menu
-  var items = [
-    'Oyun Konsolu',
-    'Kitap',
-    'Kıyafet',
-    'Ayakkabı',
-    'Oyuncak',
-  ];
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -27,9 +20,9 @@ class _DropdownCategoryState extends State<DropdownCategory> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DropdownButton(
-            value: dropdownvalue,
+            value: sl<ProductController>().dropDownValue,
             icon: const Icon(Icons.keyboard_arrow_down),
-            items: items.map((String items) {
+            items: sl<ProductController>().dropdownItems.map((String items) {
               return DropdownMenuItem(
                 value: items,
                 child: Text(items),
@@ -37,7 +30,8 @@ class _DropdownCategoryState extends State<DropdownCategory> {
             }).toList(),
             onChanged: (String? newValue) {
               setState(() {
-                dropdownvalue = newValue!;
+                sl<ProductController>().dropDownValue = newValue!;
+               
               });
             },
           ),

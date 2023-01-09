@@ -5,7 +5,7 @@ import '../../../core/error/failures/failure.dart';
 import '../domain/arguments/search_arguments.dart';
 
 abstract class SearchRepository {
-  Future<Either<Failure, GetProductModel>> searchProduct({
+  Future<Either<Failure, List<ProductFeatures>>> searchProduct({
     // required GetProductModel products,
    required SearchArguments searchArguments,
   });

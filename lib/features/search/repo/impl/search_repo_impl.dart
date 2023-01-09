@@ -12,7 +12,7 @@ import '../../domain/arguments/search_arguments.dart';
 
 class SearchRepoImpl implements SearchRepository {
   @override
-  Future<Either<Failure, GetProductModel>> searchProduct({
+  Future<Either<Failure, List<ProductFeatures>>> searchProduct({
     required SearchArguments searchArguments,
     // required GetProductModel products,
   }) async {
@@ -25,13 +25,15 @@ class SearchRepoImpl implements SearchRepository {
       return getFavorites.fold((l) {
         return Left(l);
       }, (data) {
-        // final decodedData = jsonDecode(data)["products"]["data"];
-        final decodedData = GetProductModel.fromJson(data);
-        // print(decodedData);
+        final x = json.decode(data);
+        var result = x["products"]["data"];
+      
 
-        // final productsModel = Products.fromJson(decodedData);
+        final listGetProduct = (result as List).map((e) {
+          return ProductFeatures.fromMap(e);
+        }).toList();
 
-        return Right(decodedData);
+        return Right(listGetProduct);
       });
     } on Failure catch (failure) {
       return Left(failure);

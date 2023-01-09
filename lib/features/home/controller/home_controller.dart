@@ -12,10 +12,7 @@ class HomeController extends ChangeNotifier {
 
   HomeController({
     required this.homeRepository,
-  }) {
-    // fecthNextProductsPage();
-    // loadingController();
-  }
+  });
 
   final GetProductArguments getProductArguments = GetProductArguments();
 
@@ -102,7 +99,7 @@ class HomeController extends ChangeNotifier {
 
   Future<void> refreshProductsPage() async {
     productFeatures.clear();
-    getProductArguments.page = 4;
+    getProductArguments.page = 3;
 
     isLastPage = false;
 
@@ -116,9 +113,7 @@ class HomeController extends ChangeNotifier {
   Future<void> fecthNextProductsPage() async {
     if (!isLastPage) {
       final requestFetchProducts = await homeRepository.getProducts(
-        getProductModel: GetProductModel(
-          products: Products(data: productFeatures),
-        ),
+       
         getProductArguments: getProductArguments,
       );
 
@@ -129,7 +124,8 @@ class HomeController extends ChangeNotifier {
 
         isLastPage = true;
       }, (data) {
-        productFeatures.addAll(data.products.data);
+        
+        productFeatures.addAll(data);
 
         productFeatures = productFeatures.reversed.toList();
 
@@ -141,6 +137,24 @@ class HomeController extends ChangeNotifier {
         notifyListeners();
       });
       notifyListeners();
+    }
+  }
+
+  int isDamaged = 1;
+
+  String productDamageInfo() {
+    switch (isDamaged) {
+      case 1:
+        return "Hasarsız";
+
+      case 2:
+        return "Az Hasarlı";
+
+      case 3:
+        return "Hasarlı";
+
+      default:
+        return "Hasarsız";
     }
   }
 }

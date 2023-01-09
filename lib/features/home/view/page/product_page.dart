@@ -73,8 +73,18 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(
                           height: 8,
                         ),
-                        ProductSellerPerson(
-                            productFeatures: widget.productFeatures),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: CircleAvatar(
+                            radius: 24,
+                            backgroundColor: Colors.red,
+                            child: Text(
+                              "${"${widget.productFeatures.userUsername!.substring(0, 1).toUpperCase()} "}${widget.productFeatures.userUsername!.substring(1, 2).toUpperCase()}",
+                              style: const TextStyle(
+                                  fontSize: 22, color: Colors.white),
+                            ),
+                          ),
+                        ),
                         PriceInformationCard(
                             productFeatures: widget.productFeatures),
                         const Align(
@@ -88,16 +98,25 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(
                           height: 2,
                         ),
+                        Row(
+                          children: [
+                            Text("Hasar Bilgisi: ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black.withOpacity(.7)),),
+                            Text(sl<HomeController>().productDamageInfo(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
                         const Text(
                             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-                        Text(widget.productFeatures.productFeatures
-                            .toString()),
+                        // Text(widget.productFeatures.productFeatures.toString()),
                         const SizedBox(
                           height: 24,
                         ),
                         AppButton.outline(
                             onTap: () {
-                              Go.to.page(PageRoutes.productRentPage, arguments: widget.productFeatures);
+                              Go.to.page(PageRoutes.productRentPage,
+                                  arguments: widget.productFeatures);
                             },
                             buttonText: 'Kirala')
                       ],
